@@ -6,7 +6,12 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "dev": "run-p ng:serve be:serve",
+    "doc": "npx @compodoc/compodoc -p tsconfig.doc.json",
+    "doc:serve": "npx @compodoc/compodoc -s",
+    "ng:serve": "ng serve -c development -o --ssl --ssl-key $HOME/Lethean/conf/private.pem --ssl-cert $HOME/Lethean/conf/public.pem",
+    "be:serve": "cd ../lthn && $HOME/.deno/bin/deno run --allow-net --allow-env --allow-run --allow-read --allow-write --unstable src/server.ts backend start --home-dir=/Users/snider/Lethean"
   },
   "main": "src/app/main.ts",
   "private": true,
