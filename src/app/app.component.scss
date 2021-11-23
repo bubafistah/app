@@ -1,0 +1,37 @@
+:host {
+  .main-container {
+    height: 100vh;
+    width: 100%;
+    min-height: calc(99vh - 54px);
+    overflow: hidden;
+    background: radial-gradient(circle, rgba(8, 242, 181, 1) 0%, rgba(21, 130, 151, 1) 100%);
+
+    mat-card {
+      mat-card-content {
+        img {
+          height: 30vh;
+        }
+      }
+    }
+  }
+
+  .mat-toolbar-row, .mat-toolbar-single-row {
+    height: 64px;
+  }
+
+  mat-sidenav {
+    width: 298px;
+
+    .logo {
+      border: 0;
+      padding: 9px;
+      width: 210px;
+    }
+  }
+
+  html.dark-theme .made-by {
+    --active-background-color: #242628;
+    color: #838488;
+  }
+
+}

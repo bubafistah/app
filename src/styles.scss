@@ -1,1 +1,23 @@
+@import "styles/material-lethean-theme";
+/* Google Material Icons */
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Raleway&display=swap');
+
 /* You can add global styles to this file, and also import other style files */
+html, body {
+  margin: 0;
+  padding: 0;
+
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /*  make scrollbar invisible */
+}
+
+
+.flex-spacer {
+  flex: 1 1 auto;
+}

@@ -1,0 +1,14 @@
+:host {
+
+}
+
+@mixin vertical-fill {
+	box-sizing: border-box;
+	height: 100%;
+}
+
+.vertically-filled-mat-card-container {
+	mat-card {
+		@include vertical-fill;
+	}
+}

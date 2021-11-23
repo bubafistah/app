@@ -1,0 +1,170 @@
+@use '../../node_modules/@angular/material/index' as mat;
+
+$lethean-typography: mat.define-typography-config(
+        $font-family: "'Montserrat', sans-serif",
+        $display-4: mat.define-typography-level(112px, 112px, 300, $letter-spacing: -0.05em),
+        $display-3: mat.define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
+        $display-2: mat.define-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),
+        $display-1: mat.define-typography-level(24px, 22px, 400),
+        $headline: mat.define-typography-level(24px, 34px, 600, "'Raleway', sans-serif"),
+        $title: mat.define-typography-level(20px, 34px, 600, "'Raleway', sans-serif"),
+        $subheading-2: mat.define-typography-level(18px, 30px, 400),
+        $subheading-1: mat.define-typography-level(17px, 26px, 400),
+        $body-2: mat.define-typography-level(16px, 26px, 500),
+        $body-1: mat.define-typography-level(16px, 20px, 400),
+        $caption: mat.define-typography-level(14px, 22px, 400),
+        $button: mat.define-typography-level(16px, 16px, 500),
+          // Line-height must be unit-less fraction of the font-size.
+        $input: mat.define-typography-level(inherit, 1.125, 400)
+);
+
+@include mat.core($lethean-typography);
+
+// http://mcg.mbitson.com/
+$md-lethean: (
+        50 : #e8f8f8,
+        100 : #c6ecee,
+        200 : #a0e0e2,
+        300 : #79d4d6,
+        400 : #5dcace,
+        500 : #40c1c5,
+        600 : #3abbbf,
+        700 : #32b3b8,
+        800 : #2aabb0,
+        900 : #1c9ea3,
+        A100 : #dbfdff,
+        A200 : #a8fbff,
+        A400 : #75f9ff,
+        A700 : #5cf8ff,
+        contrast: (
+                50 : #000000,
+                100 : #000000,
+                200 : #000000,
+                300 : #000000,
+                400 : #000000,
+                500 : #000000,
+                600 : #000000,
+                700 : #000000,
+                800 : #000000,
+                900 : #ffffff,
+                A100 : #000000,
+                A200 : #000000,
+                A400 : #000000,
+                A700 : #000000,
+        )
+);
+
+/* For use in src/lib/core/theming/_palette.scss */
+$md-lthn2nd: (
+        50 : #e8eaf6,
+        100 : #c5cbe9,
+        200 : #9fa8da,
+        300 : #7985cb,
+        400 : #5c6ac0,
+        500 : #3f50b5,
+        600 : #3949ae,
+        700 : #3140a5,
+        800 : #29379d,
+        900 : #1b278d,
+        A100 : #c6cbff,
+        A200 : #939dff,
+        A400 : #606eff,
+        A700 : #4757ff,
+        contrast: (
+                50 : #000000,
+                100 : #000000,
+                200 : #000000,
+                300 : #000000,
+                400 : #ffffff,
+                500 : #ffffff,
+                600 : #ffffff,
+                700 : #ffffff,
+                800 : #ffffff,
+                900 : #ffffff,
+                A100 : #000000,
+                A200 : #000000,
+                A400 : #ffffff,
+                A700 : #ffffff,
+        )
+);
+
+/* For use in src/lib/core/theming/_palette.scss */
+$lethean-dark: (
+        50 : #e1e1e3,
+        100 : #b3b5b8,
+        200 : #818489,
+        300 : #4f525a,
+        400 : #292d36,
+        500 : #030813,
+        600 : #030711,
+        700 : #02060e,
+        800 : #02040b,
+        900 : #010206,
+        A100 : #4d4dff,
+        A200 : #1a1aff,
+        A400 : #0000e6,
+        A700 : #0000cd,
+        contrast: (
+                50 : #000000,
+                100 : #000000,
+                200 : #000000,
+                300 : #ffffff,
+                400 : #ffffff,
+                500 : #ffffff,
+                600 : #ffffff,
+                700 : #ffffff,
+                800 : #ffffff,
+                900 : #ffffff,
+                A100 : #ffffff,
+                A200 : #ffffff,
+                A400 : #ffffff,
+                A700 : #ffffff,
+        )
+);
+
+
+$lethean-primary: mat.define-palette($lethean-dark);
+$lethean-accent: mat.define-palette($md-lethean, 800);
+
+$lethean-theme: mat.define-dark-theme((
+        color:(
+                primary: $lethean-primary,
+                accent: $lethean-accent
+        ),
+));
+
+
+@include mat.all-component-themes($lethean-theme);
+
+
+.mat-card {
+  background: rgba(33, 33, 33);
+}
+
+.mat-drawer {
+  background: rgba(33, 33, 33);
+}
+
+.mat-toolbar, .mat-tab-list {
+  background-color: rgb(33, 33, 33);
+
+}
+
+.lthn-brand {
+  color: map_get($md-lethean, 900);
+}
+
+.mat-card-title, .mat-tab-title {
+  color: map_get($md-lethean, 800);
+  text-transform: uppercase;
+}
+
+.mat-nav-list {
+  .mat-list-item {
+    color: map_get($md-lethean, 800);
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+}
+
+

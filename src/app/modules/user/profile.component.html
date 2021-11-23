@@ -1,0 +1,64 @@
+<div class="container" fxLayout="column">
+  <div fxFlex="100" style="padding: 12px 12px 3px 12px;">
+    <div fxLayout="row">
+      <mat-toolbar>
+        <mat-toolbar-row>
+          <mat-form-field>
+            <mat-label>Profiles</mat-label>
+            <mat-select>
+              <mat-option>Profile 1</mat-option>
+              <!--                            <mat-option *ngFor="let food of foods" [value]="food.value">-->
+              <!--                                {{food.viewValue}}-->
+              <!--                            </mat-option>-->
+            </mat-select>
+          </mat-form-field>
+
+          <span class="flex-spacer"></span>
+          <button [routerLink]="['/', 'user', 'profile', 'new']" aria-hidden="false" aria-label="New Profile"
+                  mat-icon-button>
+            <mat-icon>
+              person_add
+            </mat-icon>
+          </button>
+          <button [routerLink]="['/', 'user', 'profile', 'edit', 1]" aria-hidden="false"
+                  aria-label="Edit Profile"
+                  mat-icon-button>
+            <mat-icon>engineering</mat-icon>
+          </button>
+        </mat-toolbar-row>
+      </mat-toolbar>
+
+
+    </div>
+    <mat-divider></mat-divider>
+    <div fxLayout="row" fxLayoutGap="2px">
+      <mat-card fxFlex="40">
+        <mat-card-title>Profile</mat-card-title>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item>Name</mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+      <mat-card fxFlex="30">
+        <mat-card-title>Blockchain Settings</mat-card-title>
+        <mat-card-content>
+          <h2>Run Lethean Chain Daemon</h2>
+          <p>yes/no</p>
+          <h2>Use Remote Nodes</h2>
+          <p>yes/no</p>
+        </mat-card-content>
+      </mat-card>
+      <mat-card fxFlex="30">
+        <mat-card-title>Wallets</mat-card-title>
+        <mat-card-content>
+          <h2>Run Lethean Chain Daemon</h2>
+          <p>yes/no</p>
+          <h2>Use Remote Nodes</h2>
+          <p>yes/no</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+

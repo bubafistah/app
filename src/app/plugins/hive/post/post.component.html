@@ -1,0 +1,14 @@
+<div style="padding: 16px;">
+  <mat-card *ngIf="author.length>0">
+    <mat-card-header>
+      <div mat-card-avatar
+           style="background-size: cover;background-image: url(https://images.hive.blog/u/{{author}}/avatar);"></div>
+      <mat-card-title>{{title}}</mat-card-title>
+      <mat-card-subtitle>{{author}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p [innerHTML]="content | markdown"></p>
+    </mat-card-content>
+  </mat-card>
+</div>
+

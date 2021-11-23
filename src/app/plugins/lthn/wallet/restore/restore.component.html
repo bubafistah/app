@@ -1,0 +1,41 @@
+<div class="container" fxLayout="column">
+  <div fxFlex="100" style="padding: 12px 12px 3px 12px;">
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <span class="lthn-brand">Wallet Manager</span>
+        <span class="flex-spacer"></span>
+        <button [routerLink]="['/', 'wallet', 'new']" mat-button matTooltip="New Wallet">
+          <mat-icon>account_balance_wallet</mat-icon>
+        </button>
+        <button [routerLink]="['/', 'wallet', 'backup']" mat-button matTooltip="Backup">
+          <mat-icon>cloud_download</mat-icon>
+        </button>
+        <button [routerLink]="['/', 'wallet', 'restore']" mat-button matTooltip="Restore">
+          <mat-icon>cloud_upload</mat-icon>
+        </button>
+        <button [routerLink]="['/', 'wallet', 'settings']" mat-button matTooltip="Settings">
+          <mat-icon>settings</mat-icon>
+        </button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <div fxLayout="row">
+      <div fxFlex="20" style="padding: 6px 3px 6px 0;">
+        <mat-card>
+          <mat-card-title>Wallets</mat-card-title>
+          <mat-card-content>
+            <mat-nav-list>
+              <a mat-list-item>Mine</a>
+              <a mat-list-item>Rick's</a>
+              <a mat-list-item>My other</a>
+            </mat-nav-list>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div fxFlex="80" style="padding: 6px 0 6px 3px;">
+        <mat-card>
+          <mat-card-title>Options</mat-card-title>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
