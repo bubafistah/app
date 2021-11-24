@@ -13,10 +13,14 @@ export class CryptService {
 	}
 
 	/**
-	 * Takes the string and uses l337 speak conventions
-	 * to create a reproducible salt unique to the input
+	 * Transforms the input string with a lite l337 conversion
+	 * this will always give you the same salt, im aware of the issues here
+	 * Please start a GitHub issue if you have a good idea for knowledge-less reproducible salts
 	 *
-	 * @param input String to create a salt for
+	 * Maybe allow people to set a custom salter? something for later.
+	 *
+	 * @param {string} input
+	 * @returns {string}
 	 */
 	createSalt(input: string): string {
 		if (!input) {
@@ -32,10 +36,10 @@ export class CryptService {
 	}
 
 	/**
-	 * performs a sha256 hash but uses the input to create a reproducible salt
+	 * sha256 hash that uses itself converted as a reproducable salt
 	 *
 	 * @param input
-	 * @returns
+	 * @returns {string}
 	 */
 	sha256Salty(input): string {
 		return this.appService.crypto
@@ -43,6 +47,12 @@ export class CryptService {
 			.toString();
 	}
 
+	/**
+	 * Create a salted PBKDF2 key for encryption purposes using a random word array
+	 *
+	 * @param input
+	 * @returns {any}
+	 */
 	generateKey(input) {
 		const salt = this.appService.crypto.lib.WordArray.random(128 / 8);
 		return this.appService.crypto.PBKDF2(input, salt, {
@@ -50,11 +60,13 @@ export class CryptService {
 		});
 	}
 
+
 	/**
-	 * Creates a armoured OpenPGP key pair with revoke cert
+	 * Creates a Armoured OpenPGP key for the username protected with the password supplied
 	 *
 	 * @param username
 	 * @param password
+	 * @returns {Promise<any>}
 	 */
 	async createOpenPGP(username, password) {
 		return await this.appService.openpgp.generateKey({
@@ -66,12 +78,16 @@ export class CryptService {
 		});
 	}
 
+
 	/**
-	 * Takes a ID and the string data, returns the string encrypted.
+	 * Using a Lethean user public key, encrypt the supplied data
 	 *
-	 * @param id
-	 * @param data
-	 * @returns
+	 * Bigger the string, longer it'll take on slow devices... please provide UI feedback even if its
+	 * "quick for you" it wont be on a Pi4 under load
+	 *
+	 * @param {string} id cryptService.sha256Salty(username)
+	 * @param {string} data
+	 * @returns {Promise<any>}
 	 */
 	async encryptPGPSingle(id: string, data: string) {
 		const encryptionKey = await this.fileSystem.readFile(
@@ -93,37 +109,42 @@ export class CryptService {
 		return encrypted;
 	}
 
-	async dencryptPGPSingle(id: string, passphrase: string, encrypted: string) {
-		const encryptionKey = await this.fileSystem.readFile(
+	/**
+	 * Requires the users password, for this reason, you might want to make or interact with profiles
+	 * they are like sub accounts, but not, multiple personality syndrome with split brain describes it well.
+	 *
+	 * @param {string} id cryptService.sha256Salty(username)
+	 * @param {string} passphrase
+	 * @param {string} encrypted
+	 * @returns {Promise<any>}
+	 */
+	async decryptPGPSingle(id: string, passphrase: string, encrypted: string) {
+		/**
+		 * @type string OpenPGP Armoured private key
+		 */
+		let encryptionKey = await this.fileSystem.readFile(
 			`users/${id}.lthn.private.asc`
 		);
-
-		const privateKey = await this.appService.openpgp.decryptKey({
+		// decrypt the private key
+		let privateKey = await this.appService.openpgp.decryptKey({
 			privateKey: await this.appService.openpgp.readPrivateKey({
 				armoredKey: encryptionKey
 			}),
 			passphrase
 		});
-		const message = await this.appService.openpgp.readMessage({
-			armoredMessage: encrypted // parse armored message
-		});
+
 		const {data: decrypted, signatures} =
 			await this.appService.openpgp.decrypt({
-				message,
+				await this.appService.openpgp.readMessage({
+					armoredMessage: encrypted // parse armored message
+				}),
 				decryptionKeys: privateKey
 			});
-		console.log(decrypted);
+		// Leave nothing to chance
+		privateKey = null
+		encryptionKey = null
 
 		return decrypted;
 	}
 
-	/**
-	 * This function is for paranoia sakes, do not use for crypto graphic seeds.
-	 * the only purpose of this is to adjust memory values of sensitive data
-	 *
-	 * @returns {string}
-	 */
-	randString(length: number): string {
-		return ''.padEnd(length, '1');
-	}
 }
