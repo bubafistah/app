@@ -1,36 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {request} from '../../../services/json-rpc';
+import {request} from '@service/json-rpc';
 import {Observable} from 'rxjs';
-import {CreateWallet, OpenWallet, TransferSplitIn} from './interfaces/wallet';
-import {Address} from './interfaces/types/address';
-import {Balance} from './interfaces/types/balance';
-import {Height} from './interfaces/types/height';
-import {Transfer} from './interfaces/types/transfer';
-import {IntegratedAddress} from './interfaces/types/integratedAddress';
-import {Uri} from './interfaces/types/uri';
-import {AddAddressBook} from './interfaces/types/addAddressBook';
-import {TransferIn} from './interfaces/dto/transferIn';
-import {TransferOut} from './interfaces/dto/transferOut';
-import {TransferSplitOut} from './interfaces/dto/transferSplitOut';
-import {StoreOut} from './interfaces/dto/storeOut';
-import {GetPaymentsIn} from './interfaces/dto/getPaymentsIn';
-import {GetBulkPaymentsIn} from './interfaces/dto/getBulkPaymentsIn';
-import {GetTransfersIn} from './interfaces/dto/getTransfersIn';
-import {GetPaymentsOut} from './interfaces/dto/getPaymentsOut';
-import {GetTransfersOut} from './interfaces/dto/getTransfersOut';
-import {IncomingTransfersOut} from './interfaces/dto/incomingTransfersOut';
-import {QueryKeyIn} from './interfaces/dto/queryKeyIn';
-import {QueryKeyOut} from './interfaces/dto/queryKeyOut';
-import {IncomingTransfersIn} from './interfaces/dto/incomingTransfersIn';
-import {GetBulkPaymentsOut} from './interfaces/dto/getBulkPaymentsOut';
-import {MakeIntegratedAddressIn} from './interfaces/dto/makeIntegratedAddressIn';
-import {SplitIntegratedAddressOut} from './interfaces/dto/splitIntegratedAddressOut';
-import {MakeUriIn} from './interfaces/dto/makeUriIn';
-import {SweepAllIn} from './interfaces/dto/sweepAllIn';
-import {GetAddressBookOut} from './interfaces/dto/getAddressBookOut';
-import {SweepAllOut} from './interfaces/dto/sweepAllOut';
-
+import {AddAddressBook, Address, Balance, CreateWallet, GetAddressBookOut, GetBulkPaymentsIn,
+	GetBulkPaymentsOut, GetPaymentsIn, GetPaymentsOut, GetTransfersIn, GetTransfersOut, Height, IncomingTransfersIn,
+	IncomingTransfersOut, IntegratedAddress, MakeIntegratedAddressIn, MakeUriIn, OpenWallet, QueryKeyIn, QueryKeyOut,
+	SplitIntegratedAddressOut, StoreOut, SweepAllIn, SweepAllOut, Transfer, TransferIn, TransferOut, TransferSplitIn,
+	TransferSplitOut, Uri} from '@plugin/lthn/wallet/interfaces';
 
 const axios = require('axios').default;
 
