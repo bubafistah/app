@@ -1,11 +1,13 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgTerminal } from 'ng-terminal';
 import { AppService } from '../../app.service';
 
 @Component({
 	selector: 'lthn-app-console',
 	templateUrl: './console.component.html',
-	styleUrls: ['./console.component.scss']
+	styleUrls: ['./console.component.scss'],
+	encapsulation: ViewEncapsulation.None
+
 })
 export class ConsoleComponent implements AfterViewInit {
 	@ViewChild('term', { static: true }) child: NgTerminal;
