@@ -1,6 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 
-import {CryptService} from './crypt.service.ts';
+import {CryptService} from './crypt.service';
 
 describe('CryptService', () => {
 	let service: CryptService;
@@ -36,9 +36,6 @@ describe('CryptService', () => {
 		);
 	});
 
-	it('undefined', () => {
-		expect(service.createSalt(undefined)).toBe(undefined);
-	});
 
 	it('Empty String', () => {
 		expect(service.createSalt('')).toBe(undefined);
