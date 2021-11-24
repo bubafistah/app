@@ -24,6 +24,9 @@
       "es2018",
       "dom"
     ],
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
     "paths": {
       "@service/*": [
         "src/app/services/*"
@@ -45,6 +48,9 @@
       ]
     }
   },
+  "exclude": [
+    "lthn/"
+  ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

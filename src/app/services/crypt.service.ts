@@ -133,16 +133,19 @@ export class CryptService {
 			passphrase
 		});
 
+		let message = await this.appService.openpgp.readMessage({
+			armoredMessage: encrypted
+		})
+
 		const {data: decrypted, signatures} =
 			await this.appService.openpgp.decrypt({
-				await this.appService.openpgp.readMessage({
-					armoredMessage: encrypted // parse armored message
-				}),
+				message,
 				decryptionKeys: privateKey
 			});
 		// Leave nothing to chance
 		privateKey = null
 		encryptionKey = null
+		message = null
 
 		return decrypted;
 	}

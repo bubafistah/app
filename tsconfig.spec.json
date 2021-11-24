@@ -5,6 +5,9 @@
     "outDir": "./out-tsc/spec",
     "types": [
       "jasmine"
+    ],
+    "typeRoots": [
+      "./node_modules/@types"
     ]
   },
   "files": [
@@ -14,5 +17,6 @@
   "include": [
     "src/**/*.spec.ts",
     "src/**/*.d.ts"
-  ]
+  ],
+
 }
