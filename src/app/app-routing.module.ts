@@ -2,11 +2,11 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {PostRoutingModule} from '@plugin/hive/post/post-routing.module';
 import {BlockchainRoutingModule} from '@plugin/lthn/chain/blockchain-routing.module';
-import {UserRoutingModule} from './modules/user/user-routing.module';
-import {RootRoutingModule} from './modules/root-routing.module';
-import {SettingsRoutingModule} from './modules/settings/settings-routing.module';
+import {UserRoutingModule} from '@module/user/user-routing.module';
+import {RootRoutingModule} from '@module/root-routing.module';
+import {SettingsRoutingModule} from '@module/settings/settings-routing.module';
 import {WalletRoutingModule} from '@plugin/lthn/wallet/wallet-routing.module';
-import {LoginComponent} from './auth/login.component';
+import {LoginComponent} from '@module/auth/login.component';
 import {ConsoleRoutingModule} from '@plugin/console/console-routing.module';
 
 const routes: Routes = [

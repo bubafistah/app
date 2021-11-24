@@ -4,8 +4,9 @@ import {RouterModule, Routes} from '@angular/router';
 import {RootComponent} from './root.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
-import {AuthGuard} from '../auth/route.guard';
+import {AuthGuard} from './auth/route.guard';
 import {FlexModule} from '@angular/flex-layout';
+
 
 const routes: Routes = [
 	{

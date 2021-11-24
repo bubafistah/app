@@ -1,5 +1,7 @@
 # Lethean Desktop Interface
 
+This is the application that is run within the lethean desktop, the API refrence for the HTTPS endpoints is here:
+
 ## Development Build
 
 ```shell
