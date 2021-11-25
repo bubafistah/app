@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ConsoleComponent } from './console.component';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import * as NgTerminal from 'ng-terminal';
 
 describe('ConsoleComponent', () => {
 	let component: ConsoleComponent;
@@ -8,7 +10,8 @@ describe('ConsoleComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [ConsoleComponent]
+			declarations: [ConsoleComponent],
+			imports: [HttpClientTestingModule]
 		}).compileComponents();
 	});
 
@@ -19,6 +22,7 @@ describe('ConsoleComponent', () => {
 	});
 
 	it('should create', () => {
-		expect(component).toBeTruthy();
+		const app = fixture.debugElement.componentInstance;
+		expect(app).toBeTruthy();
 	});
 });
