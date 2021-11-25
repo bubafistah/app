@@ -1,12 +1,17 @@
 import {TestBed} from '@angular/core/testing';
 
 import {CryptService} from './crypt.service';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {AppService} from '../app.service';
 
 describe('CryptService', () => {
 	let service: CryptService;
 
 	beforeEach(() => {
-		TestBed.configureTestingModule({});
+		TestBed.configureTestingModule({
+			imports: [HttpClientTestingModule],
+			providers: [ AppService]
+		});
 		service = TestBed.inject(CryptService);
 	});
 
@@ -38,6 +43,6 @@ describe('CryptService', () => {
 
 
 	it('Empty String', () => {
-		expect(service.createSalt('')).toBe(undefined);
+		expect(service.createSalt('')).toBe("");
 	});
 });
