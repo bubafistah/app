@@ -21,7 +21,8 @@ jobs:
         cache: 'npm'
     - run: npm install
     - run: npm run ng test --coverage
-    - uses: artiomtr/jest-coverage-report-action@v2.0-rc.5
+    - uses: mattallty/jest-github-action@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        coverage-file: ./coverage/coverage-final.json
+        test-command: "npm run ng test --coverage"
