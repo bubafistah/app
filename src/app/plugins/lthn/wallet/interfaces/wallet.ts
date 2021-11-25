@@ -1,4 +1,4 @@
-import * as Big from 'big.js';
+import Big from 'big.js';
 import {Destination} from './types/destination';
 import {MakeUriIn} from './dto/makeUriIn';
 
