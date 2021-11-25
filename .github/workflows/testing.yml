@@ -20,4 +20,4 @@ jobs:
         node-version: 16.x
         cache: 'npm'
     - run: npm install
-    - run: ng jest
+    - run: ng test
