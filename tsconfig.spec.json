@@ -1,45 +1,8 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
-    "types": [
-      "jest",
-      "node"
-    ],
-    "typeRoots": [
-      "./node_modules/@types"
-    ],
-    "paths": {
-      "@service/*": [
-        "src/app/services/*"
-      ],
-      "@module/*": [
-        "src/app/modules/*"
-      ],
-      "@plugin/*": [
-        "src/app/plugins/*"
-      ],
-      "@interface/*": [
-        "src/app/interfaces/*"
-      ],
-      "@data/*": [
-        "src/app/data/*"
-      ],
-      "@env/*": [
-        "src/environments/*"
-      ]
-    },
-
-    "esModuleInterop": true,
-    "experimentalDecorators": true
+    "types": ["jest", "node"]
   },
-  "files": [
-    "src/polyfills.ts"
-  ],
-  "include": [
-    "src/**/*.spec.ts",
-    "src/**/*.d.ts"
-  ],
-
+  "include": ["src/**/*.spec.ts", "src/**/*.d.ts"]
 }
