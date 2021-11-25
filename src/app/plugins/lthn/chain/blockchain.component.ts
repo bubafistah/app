@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {ChartService} from '../../../modules/chart/chart.service';
-import {APP_CONFIG} from '../../../../environments/environment';
+import {ChartService} from '@module/chart/chart.service';
+import {APP_CONFIG} from '@env/environment';
 
 @Component({
 	selector: 'lthn-chain',

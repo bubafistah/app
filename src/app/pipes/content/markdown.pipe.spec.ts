@@ -1,4 +1,4 @@
-import {MarkdownPipe} from './markdown.pipe.ts';
+import {MarkdownPipe} from './markdown.pipe';
 
 describe('MarkdownPipe', () => {
 	it('create an instance', () => {

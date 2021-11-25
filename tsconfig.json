@@ -15,6 +15,7 @@
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
+    "esModuleInterop": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
@@ -23,6 +24,9 @@
     "lib": [
       "es2018",
       "dom"
+    ],
+    "types": [
+      "jest"
     ],
     "typeRoots": [
       "./node_modules/@types"
