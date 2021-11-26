@@ -1,47 +1,46 @@
-import { Injectable } from '@angular/core';
-import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
-import { Observable } from 'rxjs';
-
-export const WS_ENDPOINT = 'ws://127.0.0.1:36911/';
-
-export interface Message {
-	author: string;
-	message: string;
-}
+import { Injectable, Inject } from '@angular/core';
+export const WS_ENDPOINT = 'ws://localhost:36909';
+import { Socket } from 'ngx-socket-io';
+import {map} from 'rxjs/operators';
+import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class WebsocketService {
-	static connection$: WebSocketSubject<any>;
-	RETRY_SECONDS = 10;
 
-	connect(): Observable<any> {
-		if (WebsocketService.connection$) {
-			return WebsocketService.connection$;
-		} else {
-			WebsocketService.connection$ = webSocket({
-				url: WS_ENDPOINT,
-				deserializer: ({ data }) => data
-			});
-			return WebsocketService.connection$;
+	private socket$: WebSocketSubject<any>;
+
+	constructor() {}
+
+	public connect(): WebSocketSubject<any> {
+		if (!this.socket$ || this.socket$.closed) {
+			this.socket$ = webSocket(WS_ENDPOINT);
 		}
+		return this.socket$;
 	}
 
-	//
-	// send(data: any) {
-	//   if (this.connection$) {
-	//     this.connection$.next(data);
-	//   } else {
-	//     console.error('Did not send data, open a connection first');
-	//   }
-	// }
+	public dataUpdates$() {
+		return this.connect().asObservable();
+	}
 
 	closeConnection() {
-		if (WebsocketService.connection$) {
-			console.log('close');
-			WebsocketService.connection$.complete();
-			WebsocketService.connection$ = null;
-		}
+		this.connect().complete();
 	}
+
+	sendMessage(msg: string) {
+		this.socket$.next(msg);
+	}
+
+
+	/**
+	import { webSocket } from "rxjs/webSocket";
+const subject = webSocket("ws://localhost:8081");
+
+subject.subscribe(
+   msg => console.log('message received: ' + msg), // Called whenever there is a message from the server.
+   err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
+   () => console.log('complete') // Called when connection is closed (for whatever reason).
+ );
+	 */
 }
