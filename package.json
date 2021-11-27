@@ -10,7 +10,7 @@
     "test:watch": "jest --watch",
     "test:ci": "jest --runInBand",
     "dev": "run-p ng:serve be:serve",
-    "dev:setup": "git clone https://github.com/letheanVPN/lthn.git lthn",
+    "dev:setup": "rimraf lthn && git clone https://github.com/letheanVPN/lthn.git lthn",
     "doc": "npx @compodoc/compodoc -p tsconfig.doc.json",
     "doc:serve": "npx @compodoc/compodoc -s",
     "ng:serve": "ng serve -c development -o --ssl --ssl-key $HOME/Lethean/conf/private.pem --ssl-cert $HOME/Lethean/conf/public.pem",
