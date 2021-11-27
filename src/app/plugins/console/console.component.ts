@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import { NgTerminal } from 'ng-terminal';
 import {WebsocketService} from '@service/websocket.service';
 import { webSocket } from "rxjs/webSocket";
@@ -14,20 +14,29 @@ import { webSocket } from "rxjs/webSocket";
 export class ConsoleComponent implements OnInit, AfterViewInit {
 	@ViewChild('term', { static: true }) child: NgTerminal;
 
-
+	@Input() attach  = 'lethean-wallet-rpc';
 	private command: string[] = []
-
+	private sub$;
 	constructor(private ws: WebsocketService) {
-
 console.log("console")
 
 	}
 
 	ngOnInit(): void {
-		this.ws.connect().subscribe((data) => this.child.write(data[1] + '\r\n'))
-		this.ws.sendMessage('daemon:letheand')
+		this.ws.connect().subscribe((data) => {
+			if(this.attach === data[0]) this.child.write(data[1] + '\r\n')
+		})
 
+			this.changeStream(this.attach)
     }
+
+	getSub(){
+		this.sub$ = this.ws.connect();
+	}
+
+	changeStream(channel:string){
+		this.ws.sendMessage(`daemon:${this.attach}`)
+	}
 
 	ngAfterViewInit() {
 
@@ -44,7 +53,7 @@ console.log("console")
 				if (ev.keyCode === 13) {
 
 					//console.log(`cmd:letheand:${this.command.join('')}`)
-					that.ws.sendMessage(`cmd:letheand:${this.command.join('')}`)
+					that.ws.sendMessage(`cmd:letheand:${this.command.join('')}\n`)
 					this.command = []
 					this.child.write('\r\n$ ');
 				} else if (ev.keyCode === 8) {
