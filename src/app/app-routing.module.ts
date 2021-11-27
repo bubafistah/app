@@ -7,7 +7,6 @@ import {RootRoutingModule} from '@module/root-routing.module';
 import {SettingsRoutingModule} from '@module/settings/settings-routing.module';
 import {WalletRoutingModule} from '@plugin/lthn/wallet/wallet-routing.module';
 import {LoginComponent} from '@module/auth/login.component';
-import {ConsoleRoutingModule} from '@plugin/console/console-routing.module';
 
 const routes: Routes = [
 	{
@@ -31,7 +30,6 @@ const routes: Routes = [
 		UserRoutingModule,
 		SettingsRoutingModule,
 		WalletRoutingModule,
-		ConsoleRoutingModule,
 		// Make sure Root is the last in the list, it has a catch all
 		RootRoutingModule
 	],
