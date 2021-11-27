@@ -1,14 +1,15 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import { NgTerminal } from 'ng-terminal';
+import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {NgTerminal} from 'ng-terminal';
 import {WebsocketService} from '@service/websocket.service';
-import { webSocket } from "rxjs/webSocket";
 
 
 @Component({
 	selector: 'lthn-app-console',
 	templateUrl: './console.component.html',
 	styleUrls: ['./console.component.scss'],
-	encapsulation: ViewEncapsulation.None
+	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.Default
+
 
 })
 export class ConsoleComponent implements OnInit, AfterViewInit {
@@ -17,14 +18,23 @@ export class ConsoleComponent implements OnInit, AfterViewInit {
 	@Input() attach  = 'lethean-wallet-rpc';
 	private command: string[] = []
 	private sub$;
-	constructor(private ws: WebsocketService) {
-console.log("console")
+	constructor(private ws: WebsocketService, private ref: ChangeDetectorRef) {
+		this.ref.detach()
+		setInterval(() => {
+			this.ref.detectChanges();
+		}, 1000);
 
 	}
 
 	ngOnInit(): void {
+		let that = this;
+		this.ref.detectChanges();
 		this.ws.connect().subscribe((data) => {
-			if(this.attach === data[0]) this.child.write(data[1] + '\r\n')
+			if(this.attach === data[0]) {
+				this.child.write(data[1] + '\r\n');
+				that.ref.markForCheck()
+			}
+
 		})
 
 			this.changeStream(this.attach)
@@ -36,10 +46,10 @@ console.log("console")
 
 	changeStream(channel:string){
 		this.ws.sendMessage(`daemon:${this.attach}`)
+		this.ref.markForCheck()
 	}
 
 	ngAfterViewInit() {
-
 		const that = this;
 		this.child.write('$ ');
 		if(this.child.keyEventInput) {
@@ -56,14 +66,17 @@ console.log("console")
 					that.ws.sendMessage(`cmd:letheand:${this.command.join('')}\n`)
 					this.command = []
 					this.child.write('\r\n$ ');
+					this.ref.detectChanges();
 				} else if (ev.keyCode === 8) {
 					 this.command.pop()
 					if (this.child.underlying.buffer.active.cursorX > 0) {
 						this.child.write('\b \b');
+						this.ref.detectChanges();
 					}
 				} else if (printable) {
 					this.command.push(e.key);
 					this.child.write(e.key);
+					this.ref.detectChanges();
 				}
 				//console.log(this.command.join(""))
 			});
