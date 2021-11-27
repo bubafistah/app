@@ -14,7 +14,7 @@ const axios = require('axios').default;
 	providedIn: 'root'
 })
 export class WalletService {
-	private url = 'http://localhost:36910/json_rpc';
+	private url = 'https://localhost:36911/daemon/wallet/json_rpc';
 
 	constructor(private http: HttpClient) {
 	}
@@ -27,7 +27,7 @@ export class WalletService {
 			responseType: 'text' as 'json'
 		};
 
-		const request = {rpcBindPort: '36910', disableRpcLogin: true};
+		const request = {rpcBindPort: '36963', disableRpcLogin: false};
 
 		return this.http
 			.post<any>(
