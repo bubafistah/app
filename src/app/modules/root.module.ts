@@ -7,6 +7,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {AuthGuard} from './auth/route.guard';
 import {FlexModule} from '@angular/flex-layout';
 import {ConsoleModule} from '@plugin/console/console.module';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 const routes: Routes = [
@@ -32,7 +33,8 @@ const routes: Routes = [
 		MatCardModule,
 		MatButtonModule,
 		FlexModule,
-		ConsoleModule
+		ConsoleModule,
+		MatTabsModule
 	]
 })
 export class RootModule {
