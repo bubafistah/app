@@ -15,39 +15,49 @@ export class ConsoleComponent implements OnInit, AfterViewInit {
 	@ViewChild('term', { static: true }) child: NgTerminal;
 
 
+	private command: string[] = []
+
 	constructor(private ws: WebsocketService) {
 
-
+console.log("console")
 
 	}
 
 	ngOnInit(): void {
 		this.ws.connect().subscribe((data) => this.child.write(data[1] + '\r\n'))
-		this.ws.sendMessage('letheand')
+		this.ws.sendMessage('daemon:letheand')
+
     }
 
 	ngAfterViewInit() {
 
+		const that = this;
+		this.child.write('$ ');
+		if(this.child.keyEventInput) {
 
+			this.child.keyEventInput.subscribe((e) => {
+				//console.log('keyboard event:' + e.domEvent.keyCode + ', ' + e.key);
 
-//		if(this.child.keyEventInput) {
-//
-//			this.child.keyEventInput.subscribe((e) => {
-//				console.log('keyboard event:' + e.domEvent.keyCode + ', ' + e.key);
-//
-//				const ev = e.domEvent;
-//				const printable = !ev.altKey && !ev.ctrlKey && !ev.metaKey;
-//
-//				if (ev.keyCode === 13) {
-//					this.child.write('\r\n$ ');
-//				} else if (ev.keyCode === 8) {
-//					if (this.child.underlying.buffer.active.cursorX > 2) {
-//						this.child.write('\b \b');
-//					}
-//				} else if (printable) {
-//					this.child.write(e.key);
-//				}
-//			});
-//		}
+				const ev = e.domEvent;
+				const printable = !ev.altKey && !ev.ctrlKey && !ev.metaKey;
+
+				if (ev.keyCode === 13) {
+
+					//console.log(`cmd:letheand:${this.command.join('')}`)
+					that.ws.sendMessage(`cmd:letheand:${this.command.join('')}`)
+					this.command = []
+					this.child.write('\r\n$ ');
+				} else if (ev.keyCode === 8) {
+					 this.command.pop()
+					if (this.child.underlying.buffer.active.cursorX > 0) {
+						this.child.write('\b \b');
+					}
+				} else if (printable) {
+					this.command.push(e.key);
+					this.child.write(e.key);
+				}
+				//console.log(this.command.join(""))
+			});
+		}
 	}
 }

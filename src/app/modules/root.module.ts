@@ -6,6 +6,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {AuthGuard} from './auth/route.guard';
 import {FlexModule} from '@angular/flex-layout';
+import {ConsoleModule} from '@plugin/console/console.module';
 
 
 const routes: Routes = [
@@ -30,7 +31,8 @@ const routes: Routes = [
 		RouterModule.forChild(routes),
 		MatCardModule,
 		MatButtonModule,
-		FlexModule
+		FlexModule,
+		ConsoleModule
 	]
 })
 export class RootModule {
