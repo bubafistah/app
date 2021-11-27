@@ -8,7 +8,7 @@ const axios = require('axios').default;
 export const request =
 	(url) =>
 	(method, params = {}) =>
-		axios.post(url, rpcBody(method)(params));
+		axios.post(url, JSON.stringify(rpcBody(method)(params)));
 
 interface Response {
 	id: string;
