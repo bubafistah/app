@@ -18,6 +18,9 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {AuthModule} from '@module/auth/auth.module';
 import {ConsoleModule} from '@plugin/console/console.module';
+import {BlockchainService} from '@plugin/lthn/chain/blockchain.service';
+import {WalletService} from '@plugin/lthn/wallet/wallet.service';
+import {date} from 'random-js';
 
 
 @NgModule({
@@ -50,4 +53,17 @@ import {ConsoleModule} from '@plugin/console/console.module';
  * Application shell/bootstrap
  */
 export class AppModule {
+
+	/**
+	 * Start blockchain & wallet service automatically on start
+	 *
+	 * @param {BlockchainService} chain
+	 * @param {WalletService} wallet
+	 */
+	constructor(private chain: BlockchainService, private wallet: WalletService) {
+		this.chain.startDaemon().then((data) => {
+			console.log("blockchain started")
+			this.wallet.startWallet().then((data) => console.log('wallet started'))
+		})
+	}
 }
