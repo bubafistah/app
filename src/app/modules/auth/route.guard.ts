@@ -13,6 +13,7 @@ export class AuthGuard implements CanActivate {
 	) {
 	}
 
+
 	/**
 	 * Handles logged out access
 	 * Run during routing to check if the user is logged in or not, we do this check if
