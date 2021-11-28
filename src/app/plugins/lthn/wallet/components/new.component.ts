@@ -4,9 +4,8 @@ import { FormControl } from '@angular/forms';
 import { WalletService } from '../wallet.service';
 
 @Component({
-	selector: 'lthn-app-new',
-	templateUrl: './new.component.html',
-	styleUrls: ['./new.component.scss']
+	selector: 'lthn-wallet-new',
+	templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {
 	wallet_name = new FormControl('');

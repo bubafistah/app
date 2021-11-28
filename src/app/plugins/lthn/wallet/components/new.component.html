@@ -1,0 +1,15 @@
+<mat-form-field appearance="standard">
+    <mat-label>Wallet Name</mat-label>
+    <input [formControl]="wallet_name" matInput type="text">
+</mat-form-field>
+<mat-form-field appearance="standard">
+    <mat-label>Wallet Password</mat-label>
+    <input [formControl]="password" matInput type="password">
+</mat-form-field>
+<mat-form-field appearance="standard">
+    <mat-label>Confirm Password</mat-label>
+    <input [formControl]="password_confirm" matInput type="password">
+</mat-form-field>
+<button mat-button (click)="createWallet()">Create Wallet</button>
+
+

@@ -9,64 +9,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { NewComponent } from './new/new.component';
-import { RestoreComponent } from './restore/restore.component';
-import { BackupComponent } from './backup/backup.component';
-import { SettingsComponent } from './settings/settings.component';
+import { NewComponent } from './components/new.component';
+import { RestoreComponent } from './components/restore.component';
+import { BackupComponent } from './components/backup.component';
+import { SettingsComponent } from './components/settings.component';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
-	{
-		path: '',
-		component: WalletComponent,
-		data: {
-			title: 'Wallet Manager - Lethean (LTHN)',
-			heading: 'Wallets',
-			description: 'Lethean Wallet Manager',
-			robots: false
-		}
-	},
-	{
-		path: 'new',
-		component: NewComponent,
-		data: {
-			title: 'New Wallet - Lethean (LTHN)',
-			heading: 'Create New Wallet',
-			description: 'Create a wallet',
-			robots: false
-		}
-	},
-	{
-		path: 'restore',
-		component: RestoreComponent,
-		data: {
-			title: 'Restore Wallet - Lethean (LTHN)',
-			heading: 'Restore Wallet',
-			description: 'Restore Wallet',
-			robots: false
-		}
-	},
-	{
-		path: 'backup',
-		component: BackupComponent,
-		data: {
-			title: 'Backup Wallet - Lethean (LTHN)',
-			heading: 'Backup Wallet',
-			description: 'Backup Wallet',
-			robots: false
-		}
-	},
-	{
-		path: 'settings',
-		component: SettingsComponent,
-		data: {
-			title: 'Wallet Settings - Lethean (LTHN)',
-			heading: 'Wallet Settings',
-			description: 'Wallet Settings',
-			robots: false
-		}
-	}
+
 ];
 
 @NgModule({
@@ -76,6 +27,9 @@ const routes: Routes = [
 		RestoreComponent,
 		BackupComponent,
 		SettingsComponent
+	],
+	exports: [
+		NewComponent,RestoreComponent
 	],
 	imports: [
 		CommonModule,
