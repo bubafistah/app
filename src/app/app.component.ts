@@ -13,7 +13,10 @@ import {TranslateService} from '@ngx-translate/core';
 export class AppComponent implements OnInit {
 	public menu = false;
 	public heading = '';
+	public currentLanguage = 'en';
+
 	@ViewChild('sidenav') public sidenav: MatSidenav;
+	public currentFlag: any;
 
 	constructor(
 		private router: Router,
@@ -33,6 +36,10 @@ export class AppComponent implements OnInit {
 		this.updateMeta();
 	}
 
+	changeLanguage(lang: string){
+		this.currentLanguage = lang
+		this.translate.use(lang);
+	}
 	openMenu() {
 		this.menu = true;
 		this.sidenav.open();
