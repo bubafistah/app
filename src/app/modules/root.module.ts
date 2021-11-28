@@ -8,6 +8,7 @@ import {AuthGuard} from './auth/route.guard';
 import {FlexModule} from '@angular/flex-layout';
 import {ConsoleModule} from '@plugin/console/console.module';
 import {MatTabsModule} from '@angular/material/tabs';
+import {WalletModule} from '@plugin/lthn/wallet/wallet.module';
 
 
 const routes: Routes = [
@@ -34,7 +35,8 @@ const routes: Routes = [
 		MatButtonModule,
 		FlexModule,
 		ConsoleModule,
-		MatTabsModule
+		MatTabsModule,
+		WalletModule
 	]
 })
 export class RootModule {

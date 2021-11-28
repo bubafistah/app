@@ -9,7 +9,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { NewComponent } from './new/new.component';
+import { NewComponent } from './components/new.component';
 import { RestoreComponent } from './restore/restore.component';
 import { BackupComponent } from './backup/backup.component';
 import { SettingsComponent } from './settings/settings.component';
@@ -17,26 +17,6 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
-	{
-		path: '',
-		component: WalletComponent,
-		data: {
-			title: 'Wallet Manager - Lethean (LTHN)',
-			heading: 'Wallets',
-			description: 'Lethean Wallet Manager',
-			robots: false
-		}
-	},
-	{
-		path: 'new',
-		component: NewComponent,
-		data: {
-			title: 'New Wallet - Lethean (LTHN)',
-			heading: 'Create New Wallet',
-			description: 'Create a wallet',
-			robots: false
-		}
-	},
 	{
 		path: 'restore',
 		component: RestoreComponent,
@@ -76,6 +56,9 @@ const routes: Routes = [
 		RestoreComponent,
 		BackupComponent,
 		SettingsComponent
+	],
+	exports: [
+		NewComponent
 	],
 	imports: [
 		CommonModule,
