@@ -9,6 +9,7 @@ import {FlexModule} from '@angular/flex-layout';
 import {ConsoleModule} from '@plugin/console/console.module';
 import {MatTabsModule} from '@angular/material/tabs';
 import {WalletModule} from '@plugin/lthn/wallet/wallet.module';
+import {TranslateModule} from '@ngx-translate/core';
 
 
 const routes: Routes = [
@@ -36,7 +37,8 @@ const routes: Routes = [
 		FlexModule,
 		ConsoleModule,
 		MatTabsModule,
-		WalletModule
+		WalletModule,
+		TranslateModule
 	]
 })
 export class RootModule {
