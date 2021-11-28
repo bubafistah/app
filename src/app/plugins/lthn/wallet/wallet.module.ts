@@ -5,6 +5,8 @@ import { MatCardModule } from '@angular/material/card';
 import { FlexModule } from '@angular/flex-layout';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { RouterModule, Routes } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -40,6 +42,8 @@ const routes: Routes = [
 		ReactiveFormsModule,
 		MatListModule,
 		MatButtonModule,
+		MatCheckboxModule,
+		MatExpansionModule,
 		MatToolbarModule,
 		MatIconModule,
 		MatTooltipModule,
