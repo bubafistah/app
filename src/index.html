@@ -10,5 +10,10 @@
 <body>
   <lthn-app></lthn-app>
 </body>
+<script>
+  // BUG Fix, webkit acts weird about websickets.. this fixes it... dont ask me, whatever
+  // credit to coolguy: https://coderedirect.com/questions/260201/websocket-in-android-webview
+  window.webkitURL("javascript:document.getElementById('something').do.something()");
+</script>
 </html>
 
