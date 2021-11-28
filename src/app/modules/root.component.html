@@ -1,34 +1,4 @@
 <div style="padding: 16px;">
-    <mat-card fxFlex="33">
-        <mat-card-title>Blockchain</mat-card-title>
-        <mat-card-content>
-            <ng-container *ngIf="!hasCLI">
-                <h2>Not Installed</h2>
-                <p>Click Install Blockchain to download the latest Lethean Blockchain CLI</p>
-                <button (click)="downloadCLI()" color="accent" mat-button>Install Blockchain</button>
-            </ng-container>
-            <ng-container *ngIf="hasCLI">
-                <h2>Start Blockchain</h2>
-                <button (click)="startBlockchain()" color="accent" mat-button>Start Blockchain</button>
-            </ng-container>
-        </mat-card-content>
-    </mat-card>
-    <mat-card fxFlex="33">
-        <mat-card-title>Wallet Service</mat-card-title>
-        <mat-card-content>
-            <ng-container *ngIf="!hasCLI">
-                <h2>Not Installed</h2>
-                <p>Click Install Blockchain to download the latest Lethean Blockchain CLI</p>
-                <button (click)="downloadCLI()" color="accent" mat-button>Install Blockchain</button>
-            </ng-container>
-            <ng-container *ngIf="hasCLI">
-                <h2>Start Wallet Service</h2>
-                <button (click)="startWallet()" color="accent" mat-button>Start Wallet</button>
-            </ng-container>
-        </mat-card-content>
-    </mat-card>
-</div>
-<div style="padding: 16px;">
 <mat-tab-group animationDuration="100ms">
     <mat-tab label="letheand"><lthn-app-console attach="letheand"></lthn-app-console></mat-tab>
     <mat-tab label="lethean-wallet-rpc"><lthn-app-console attach="lethean-wallet-rpc"></lthn-app-console></mat-tab>
