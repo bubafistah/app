@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import {ActivatedRoute, NavigationEnd, NavigationStart, Router} from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
 import {TranslateService} from '@ngx-translate/core';
@@ -13,7 +13,10 @@ import {TranslateService} from '@ngx-translate/core';
 export class AppComponent implements OnInit {
 	public menu = false;
 	public heading = '';
+	public currentLanguage = 'en';
+
 	@ViewChild('sidenav') public sidenav: MatSidenav;
+	public currentFlag: any;
 
 	constructor(
 		private router: Router,
@@ -27,12 +30,19 @@ export class AppComponent implements OnInit {
 
 		// the lang to use, if the lang isn't available, it will use the current loader to get them
 		translate.use('en');
+
+
+
 	}
 
 	ngOnInit(): void {
 		this.updateMeta();
 	}
 
+	changeLanguage(lang: string){
+		this.currentLanguage = lang
+		this.translate.use(lang);
+	}
 	openMenu() {
 		this.menu = true;
 		this.sidenav.open();
@@ -48,14 +58,13 @@ export class AppComponent implements OnInit {
 			.pipe(filter((event) => event instanceof NavigationEnd))
 			.subscribe(() => {
 				const rt = this.getChild(this.activatedRoute);
-
 				rt.data.subscribe((data) => {
-					this.titleService.setTitle(data.title);
+					this.titleService.setTitle(this.translate.instant(data.title));
 					this.heading = data.heading;
 					if (data.description) {
 						this.metaService.updateTag({
 							name: 'description',
-							content: data.description
+							content: this.translate.instant(data.description)
 						});
 					} else {
 						this.metaService.removeTag("name='description'");

@@ -17,6 +17,7 @@ import { BackupComponent } from './components/backup.component';
 import { SettingsComponent } from './components/settings.component';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
+import {TranslateModule} from '@ngx-translate/core';
 
 const routes: Routes = [
 
@@ -46,7 +47,8 @@ const routes: Routes = [
 		MatToolbarModule,
 		MatIconModule,
 		MatTooltipModule,
-		MatInputModule
+		MatInputModule,
+		TranslateModule
 	]
 })
 export class WalletModule {}

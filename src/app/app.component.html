@@ -28,43 +28,53 @@
                 <button (click)="openMenu()" *ngIf="!menu" mat-button>
                     <mat-icon>menu_open</mat-icon>
                 </button>
-                <span>{{heading}}</span>
+                <span>{{heading | translate}}</span>
                 <span class="flex-spacer"></span>
                 <button [routerLink]="['/console']" mat-button>
                     <mat-icon>terminal</mat-icon>
                 </button>
-                <!--                <ng-container *ngIf="!focusMode">-->
-                <!--                    <span class="flex-spacer"></span>-->
-                <!--                    <mat-menu #appMenu="matMenu">-->
-                <!--                        <ng-template let-name="name" matMenuContent>-->
-                <!--                            <mat-list-item>-->
-                <!--                                <a color="accent" href="https://hiveonboard.com?ref=dvpn" mat-button-->
-                <!--                                   target="_blank">Signup</a>-->
-                <!--                                <button [routerLink]="['login']" color="accent" mat-button>Login</button>-->
-                <!--                            </mat-list-item>-->
-                <!--                            <mat-divider></mat-divider>-->
-                <!--                            <mat-list-item>-->
-                <!--                                <button [routerLink]="['user']" color="accent" mat-button>User</button>-->
-                <!--                                &lt;!&ndash;                <button [routerLink]="['user', 'profile']" color="accent" mat-button>Profiles</button>&ndash;&gt;-->
-                <!--                            </mat-list-item>-->
-                <!--                            <mat-list-item>-->
-                <!--                                <button [routerLink]="['settings']" color="accent" mat-button>Settings</button>-->
-                <!--                            </mat-list-item>-->
-                <!--                            <mat-divider></mat-divider>-->
-                <!--                            <mat-list-item>-->
-                <!--                                <button [routerLink]="['opensource-licence']" color="accent" mat-button>OS Licences-->
-                <!--                                </button>-->
-                <!--                            </mat-list-item>-->
+                <mat-menu #appMenu="matMenu">
+                    <ng-template let-name="name" matMenuContent>
+                        <mat-list-item>
+                            <button (click)="changeLanguage('en')" mat-button color="accent">
+                                <img src="assets/flags/1x1/en.svg" width="16" alt="{{ 'lang.en' | translate }}">&nbsp;&nbsp;{{ 'lang.en' | translate }}
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <button (click)="changeLanguage('ru')" mat-button color="accent">
+                                <img src="assets/flags/1x1/ru.svg" width="16" alt="{{ 'lang.ru' | translate }}">&nbsp;&nbsp;{{ 'lang.ru' | translate }}
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <button (click)="changeLanguage('zh')" mat-button color="accent">
+                                <img src="assets/flags/1x1/zh.svg" width="16" alt="{{ 'lang.zh' | translate }}">&nbsp;&nbsp;{{ 'lang.zh' | translate }}
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <button (click)="changeLanguage('es')" mat-button color="accent">
+                                <img src="assets/flags/1x1/es.svg" width="16" alt="{{ 'lang.es' | translate }}">&nbsp;&nbsp;{{ 'lang.es' | translate }}
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <button (click)="changeLanguage('de')" mat-button color="accent">
+                                <img src="assets/flags/1x1/de.svg" width="16" alt="{{ 'lang.de' | translate }}">&nbsp;&nbsp;{{ 'lang.de' | translate }}
+                            </button>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <button (click)="changeLanguage('fr')" mat-button color="accent">
+                                <img src="assets/flags/1x1/fr.svg" width="16" alt="{{ 'lang.fr' | translate }}">&nbsp;&nbsp;{{ 'lang.fr' | translate }}
+                            </button>
+                        </mat-list-item>
 
-                <!--                        </ng-template>-->
-                <!--                    </mat-menu>-->
 
-                <!--                    <button [matMenuTriggerData]="{auth: this.auth}" [matMenuTriggerFor]="appMenu"-->
-                <!--                            mat-icon-button-->
-                <!--                            matTooltip="Click Me!">-->
-                <!--                        <img src="https://robohash.org/cant access my account?set=set4" style="width: 42px;">-->
-                <!--                    </button>-->
-                <!--                </ng-container>-->
+                    </ng-template>
+                </mat-menu>
+
+                <button [matMenuTriggerData]="{auth: 'dave'}" [matMenuTriggerFor]="appMenu"
+                        mat-icon-button
+                        matTooltip="Click Me!">
+                    <img src="assets/flags/1x1/{{this.currentLanguage}}.svg" width="24">
+                </button>
             </mat-toolbar-row>
         </mat-toolbar>
         <router-outlet></router-outlet>
