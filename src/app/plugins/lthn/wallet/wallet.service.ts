@@ -7,6 +7,7 @@ import {AddAddressBook, Address, Balance, CreateWallet, GetAddressBookOut, GetBu
 	IncomingTransfersOut, IntegratedAddress, MakeIntegratedAddressIn, MakeUriIn, OpenWallet, QueryKeyIn, QueryKeyOut,
 	SplitIntegratedAddressOut, StoreOut, SweepAllIn, SweepAllOut, Transfer, TransferIn, TransferOut, TransferSplitIn,
 	TransferSplitOut, Uri} from '@plugin/lthn/wallet/interfaces';
+import {RestoreWallet} from '@plugin/lthn/wallet/interfaces/wallet';
 
 const axios = require('axios').default;
 
@@ -145,6 +146,10 @@ export class WalletService {
 
 	createWallet(x: CreateWallet) {
 		return request(this.url)('create_wallet', x);
+	}
+
+	restoreWallet(x: RestoreWallet) {
+		return request(this.url)('generate_from_keys', x);
 	}
 
 	other(method: string, arg?: any): Observable<any> {
