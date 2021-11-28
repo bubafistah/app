@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {BrowserModule, BrowserTransferStateModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {DataModule} from '@data/data.module';
 import {StatusModule} from '@module/status/status.module';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -20,8 +20,12 @@ import {AuthModule} from '@module/auth/auth.module';
 import {ConsoleModule} from '@plugin/console/console.module';
 import {BlockchainService} from '@plugin/lthn/chain/blockchain.service';
 import {WalletService} from '@plugin/lthn/wallet/wallet.service';
-import {date} from 'random-js';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
+export function HttpLoaderFactory(http: HttpClient) {
+	return new TranslateHttpLoader(http);
+}
 
 @NgModule({
 	declarations: [AppComponent],
@@ -30,6 +34,14 @@ import {date} from 'random-js';
 		BrowserTransferStateModule,
 		BrowserAnimationsModule,
 		HttpClientModule,
+		TranslateModule.forRoot({
+			defaultLanguage: 'en',
+			loader: {
+				provide: TranslateLoader,
+				useFactory: HttpLoaderFactory,
+				deps: [HttpClient]
+			}
+		}),
 		AppRoutingModule,
 		CommonModule,
 		DataModule,
@@ -44,7 +56,8 @@ import {date} from 'random-js';
 		MatTooltipModule,
 		FlexModule,
 		AuthModule,
-		ConsoleModule
+		ConsoleModule,
+
 	],
 	providers: [],
 	bootstrap: [AppComponent]

@@ -3,6 +3,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
 	selector: 'lthn-app',
@@ -18,8 +19,15 @@ export class AppComponent implements OnInit {
 		private router: Router,
 		private activatedRoute: ActivatedRoute,
 		private titleService: Title,
-		private metaService: Meta
-	) {}
+		private metaService: Meta,
+		private translate: TranslateService
+	) {
+		// this language will be used as a fallback when a translation isn't found in the current language
+		translate.setDefaultLang('en');
+
+		// the lang to use, if the lang isn't available, it will use the current loader to get them
+		translate.use('en');
+	}
 
 	ngOnInit(): void {
 		this.updateMeta();
