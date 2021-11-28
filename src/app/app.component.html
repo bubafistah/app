@@ -28,7 +28,7 @@
                 <button (click)="openMenu()" *ngIf="!menu" mat-button>
                     <mat-icon>menu_open</mat-icon>
                 </button>
-                <span>{{heading}}</span>
+                <span>{{heading | translate}}</span>
                 <span class="flex-spacer"></span>
                 <button [routerLink]="['/console']" mat-button>
                     <mat-icon>terminal</mat-icon>
