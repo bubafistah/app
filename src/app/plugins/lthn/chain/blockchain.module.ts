@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {BlockchainComponent} from './blockchain.component';
-import {ChartModule} from '../../../modules/chart/chart.module';
+import {ChartModule} from '@module/chart/chart.module';
 import {RouterModule, Routes} from '@angular/router';
 import {MatCardModule} from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
