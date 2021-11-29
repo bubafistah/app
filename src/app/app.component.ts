@@ -5,7 +5,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
 import {TranslateService} from '@ngx-translate/core';
 import {select, Store} from '@ngrx/store';
-import {changeLanguage, selectLanguage} from '@module/settings/data';
+import {changeLanguage, selectLanguage, selectMenuVisibility, toggleHideNavigation} from '@module/settings/data';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -14,7 +14,7 @@ import {Subscription} from 'rxjs';
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-	public menu = false;
+	public menu: boolean;
 	public heading = '';
 
 
@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
 	public currentFlag: any;
 	public currentLanguage$: Subscription;
 	public currentLanguage: string;
+	private menu$: Subscription;
 
 	constructor(
 		private router: Router,
@@ -41,20 +42,22 @@ export class AppComponent implements OnInit {
 			this.currentLanguage = lang;
 			this.translate.use(lang)
 		})
+
+		this.menu$ = this.store.pipe(select(selectMenuVisibility)).subscribe((opened) => {
+			this.menu = opened
+			this.sidenav.toggle();
+
+		})
 		this.updateMeta();
 	}
 
 	changeLanguage(lang: string){
 		this.store.dispatch(changeLanguage({language: lang}))
 	}
-	openMenu() {
-		this.menu = true;
-		this.sidenav.open();
-	}
 
-	closeMenu() {
-		this.menu = false;
-		this.sidenav.close();
+	toggleMenu() {
+		this.store.dispatch(toggleHideNavigation())
+
 	}
 
 	updateMeta() {
