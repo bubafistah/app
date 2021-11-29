@@ -1,9 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import {ActivatedRoute, NavigationEnd, NavigationStart, Router} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
 import {TranslateService} from '@ngx-translate/core';
+import {select, Store} from '@ngrx/store';
+import {changeLanguage, selectLanguage} from '@module/settings/data';
+import {Subscription} from 'rxjs';
 
 @Component({
 	selector: 'lthn-app',
@@ -13,35 +16,36 @@ import {TranslateService} from '@ngx-translate/core';
 export class AppComponent implements OnInit {
 	public menu = false;
 	public heading = '';
-	public currentLanguage = 'en';
+
 
 	@ViewChild('sidenav') public sidenav: MatSidenav;
 	public currentFlag: any;
+	public currentLanguage$: Subscription;
+	public currentLanguage: string;
 
 	constructor(
 		private router: Router,
 		private activatedRoute: ActivatedRoute,
 		private titleService: Title,
 		private metaService: Meta,
-		private translate: TranslateService
+		private translate: TranslateService,
+		private store: Store
 	) {
 		// this language will be used as a fallback when a translation isn't found in the current language
 		translate.setDefaultLang('en');
-
-		// the lang to use, if the lang isn't available, it will use the current loader to get them
-		translate.use('en');
-
-
-
 	}
 
 	ngOnInit(): void {
+		// setup language watcher
+		this.currentLanguage$ = this.store.pipe(select(selectLanguage)).subscribe((lang) => {
+			this.currentLanguage = lang;
+			this.translate.use(lang)
+		})
 		this.updateMeta();
 	}
 
 	changeLanguage(lang: string){
-		this.currentLanguage = lang
-		this.translate.use(lang);
+		this.store.dispatch(changeLanguage({language: lang}))
 	}
 	openMenu() {
 		this.menu = true;
