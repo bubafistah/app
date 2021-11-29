@@ -5,7 +5,7 @@
             <a [routerLink]="['/']">
                 <img alt="Lethean Logo" class="logo" src="../assets/images/logo.png"/>
             </a>
-            <button (click)="closeMenu()" *ngIf="menu" mat-button>
+            <button (click)="toggleMenu()" *ngIf="menu" mat-button>
                 <mat-icon>menu</mat-icon>
             </button>
         </div>
@@ -25,7 +25,7 @@
         <mat-toolbar>
             <mat-toolbar-row>
 
-                <button (click)="openMenu()" *ngIf="!menu" mat-button>
+                <button (click)="toggleMenu()" *ngIf="!menu" mat-button>
                     <mat-icon>menu_open</mat-icon>
                 </button>
                 <span>{{heading | translate}}</span>
