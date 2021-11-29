@@ -2,7 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -19,36 +19,33 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2017",
+    "target": "es2015",
     "module": "es2020",
     "lib": [
       "es2018",
       "dom"
-    ],
-    "types": [
-      "jest"
     ],
     "typeRoots": [
       "./node_modules/@types"
     ],
     "paths": {
       "@service/*": [
-        "src/app/services/*"
+        "app/services/*"
       ],
       "@module/*": [
-        "src/app/modules/*"
+        "app/modules/*"
       ],
       "@plugin/*": [
-        "src/app/plugins/*"
+        "app/plugins/*"
       ],
       "@interface/*": [
-        "src/app/interfaces/*"
+        "app/interfaces/*"
       ],
       "@data/*": [
-        "src/app/data/*"
+        "app/data/*"
       ],
       "@env/*": [
-        "src/environments/*"
+        "environments/*"
       ]
     }
   },
