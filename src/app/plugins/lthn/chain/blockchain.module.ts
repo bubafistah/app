@@ -7,15 +7,16 @@ import {MatCardModule} from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
 import {MatButtonModule} from '@angular/material/button';
 import {FlexModule} from '@angular/flex-layout';
+import {TranslateModule} from '@ngx-translate/core';
 
 const routes: Routes = [
 	{
 		path: '',
 		component: BlockchainComponent,
 		data: {
-			title: 'Blockchain Stats - Lethean (LTHN)',
-			heading: 'Lethean Blockchain Stats',
-			description: 'Lethean (LTHN) Blockchain Stats',
+			title: 'view.chain.title',
+			heading: 'view.chain.heading',
+			description: 'view.chain.description',
 			robots: false
 		}
 	}
@@ -30,7 +31,8 @@ const routes: Routes = [
 		MatCardModule,
 		MatListModule,
 		MatButtonModule,
-		FlexModule
+		FlexModule,
+		TranslateModule
 	],
 	exports: [RouterModule]
 })

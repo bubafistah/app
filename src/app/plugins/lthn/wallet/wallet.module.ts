@@ -13,14 +13,21 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NewComponent } from './components/new.component';
 import { RestoreComponent } from './components/restore.component';
-import { BackupComponent } from './components/backup.component';
-import { SettingsComponent } from './components/settings.component';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
 
 const routes: Routes = [
-
+	{
+		path: 'wallets',
+		component: WalletComponent,
+		data: {
+			title: 'view.wallets.title',
+			heading: 'view.wallets.heading',
+			description: 'view.wallets.description',
+			robots: true
+		}
+	}
 ];
 
 @NgModule({
@@ -28,11 +35,9 @@ const routes: Routes = [
 		WalletComponent,
 		NewComponent,
 		RestoreComponent,
-		BackupComponent,
-		SettingsComponent
 	],
 	exports: [
-		NewComponent,RestoreComponent
+		NewComponent,RestoreComponent,RouterModule
 	],
 	imports: [
 		CommonModule,

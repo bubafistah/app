@@ -19,9 +19,9 @@ const routes: Routes = [
 		canActivate: [AuthGuard],
 		pathMatch: 'full',
 		data: {
-			title: 'Lethean',
-			heading: 'meta.dashboard.heading',
-			description: 'Lethean (LTHN) Web app',
+			title: 'view.dashboard.title',
+			heading: 'view.dashboard.heading',
+			description: 'view.dashboard.description',
 			robots: true
 		}
 	}
