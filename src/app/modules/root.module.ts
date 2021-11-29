@@ -11,27 +11,10 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {WalletModule} from '@plugin/lthn/wallet/wallet.module';
 import {TranslateModule} from '@ngx-translate/core';
 
-
-const routes: Routes = [
-	{
-		path: '',
-		component: RootComponent,
-		canActivate: [AuthGuard],
-		pathMatch: 'full',
-		data: {
-			title: 'view.dashboard.title',
-			heading: 'view.dashboard.heading',
-			description: 'view.dashboard.description',
-			robots: true
-		}
-	}
-];
-
 @NgModule({
 	declarations: [RootComponent],
 	imports: [
 		CommonModule,
-		RouterModule.forChild(routes),
 		MatCardModule,
 		MatButtonModule,
 		FlexModule,
