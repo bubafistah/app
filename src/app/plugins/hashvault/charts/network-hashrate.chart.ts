@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import * as ChartsActions from '../../../modules/chart/data/actions';
-import {BaseChartConfigService} from '../../../modules/chart/base-chart-config.service';
-import {ChartConfigInterface} from '../../../modules/chart/chart-config.interface';
+import {BaseChartConfigService} from '@module/chart/base-chart-config.service';
+import {ChartConfigInterface} from '@module/chart/chart-config.interface';
 
 @Injectable({
 	providedIn: 'any'

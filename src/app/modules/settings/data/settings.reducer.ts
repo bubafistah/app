@@ -1,4 +1,4 @@
-import {Action, createReducer, on} from '@ngrx/store';
+import { createReducer, on} from '@ngrx/store';
 import * as SettingsActions from './settings.actions';
 import {SettingsState} from './settingsState';
 
@@ -6,34 +6,12 @@ import {SettingsState} from './settingsState';
 // for all your users
 export const initialState: SettingsState = {
 	// app layout
-	fixedHeader: true,
-	fixedNavigation: true,
-	focusMode: false,
-	minifyNavigation: false,
 	hideNavigation: false,
-	topNavigation: false,
-	boxedLayout: false,
-
-	// mobile menu
-	pushContent: false,
-	noOverlay: false,
-	offCanvas: false,
-
 	// accessibility
 	biggerContentFont: false,
 	highContrastText: false,
 	daltonism: false,
-	preloaderInside: false,
 	rtl: false,
-
-	// global modifications
-	cleanPageBackground: false,
-	hideNavigationIcons: false,
-	disableCSSAnimation: false,
-	hideInfoCard: false,
-	leanSubheader: false,
-	hierarchicalNavigation: false,
-
 	// global font size
 	globalFontSize: 'md',
 	// UI Language
@@ -52,15 +30,10 @@ const settingsReducer = createReducer(
 		...state,
 		darkMode: !state.darkMode
 	})),
-	on(SettingsActions.toggleFocusMode, (state) => ({
-		...state,
-		focusMode: !state.focusMode
-	})),
 	on(SettingsActions.toggleHideNavigation, (state) => ({
 		...state,
 		hideNavigation: !state.hideNavigation
-	})),
-	on(SettingsActions.appReset, () => ({...initialState}))
+	}))
 );
 
 export function reducer(state, action) {

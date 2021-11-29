@@ -49,9 +49,6 @@
       ]
     }
   },
-  "exclude": [
-    "lthn/"
-  ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

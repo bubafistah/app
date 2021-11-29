@@ -14,15 +14,12 @@ export const selectDarkMode = createSelector(
 	selectSettingsState,
 	(state: SettingsState) => state.darkMode
 );
-export const selectFocusMode = createSelector(
-	selectSettingsState,
-	(state: SettingsState) => state.focusMode
-);
+
 
 /**
  * returns true if hide navigation is false
  */
 export const selectMenuVisibility = createSelector(
 	selectSettingsState,
-	(state: SettingsState) => state.hideNavigation !== true
+	(state: SettingsState) => !state.hideNavigation
 );
