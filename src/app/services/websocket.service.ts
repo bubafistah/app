@@ -1,7 +1,5 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 export const WS_ENDPOINT = 'ws://localhost:36909';
-import { Socket } from 'ngx-socket-io';
-import {map} from 'rxjs/operators';
 import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
 
 @Injectable({
