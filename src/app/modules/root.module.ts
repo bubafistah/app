@@ -10,6 +10,7 @@ import {ConsoleModule} from '@plugin/console/console.module';
 import {MatTabsModule} from '@angular/material/tabs';
 import {WalletModule} from '@plugin/lthn/wallet/wallet.module';
 import {TranslateModule} from '@ngx-translate/core';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
 	declarations: [RootComponent],
@@ -21,7 +22,8 @@ import {TranslateModule} from '@ngx-translate/core';
 		ConsoleModule,
 		MatTabsModule,
 		WalletModule,
-		TranslateModule
+		TranslateModule,
+		MatDividerModule
 	]
 })
 export class RootModule {

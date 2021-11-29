@@ -4,19 +4,14 @@
     <button (click)="downloadCLI()" color="accent" mat-button>{{ 'button.install-blockchain' | translate }}</button>
 </ng-container>
 <ng-container *ngIf="hasCLI">
-    <div style="padding: 16px;">
-        <mat-card fxFlex="33">
-            <mat-card-title>{{ 'plugin.lthn.wallet.titles.new-wallet' | translate }}</mat-card-title>
-            <mat-card-content>
-                <lthn-wallet-new></lthn-wallet-new>
-            </mat-card-content>
-        </mat-card>
-        <mat-card fxFlex="33">
-            <mat-card-title>{{ 'plugin.lthn.wallet.titles.restore-seed' | translate }}</mat-card-title>
-            <mat-card-content>
-                <lthn-wallet-restore></lthn-wallet-restore>
-            </mat-card-content>
-        </mat-card>
+    <div fxLayout="row"  style="padding: 16px;">
+        <div fxFlex="33" style="margin-right:6px;">
+            <lthn-wallet-new></lthn-wallet-new>
+        </div>
+        <div fxFlex="66">
+            <lthn-wallet-restore></lthn-wallet-restore>
+        </div>
+
     </div>
     <div style="padding: 16px;">
         <mat-tab-group animationDuration="100ms">
