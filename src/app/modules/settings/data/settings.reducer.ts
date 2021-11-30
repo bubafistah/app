@@ -6,7 +6,7 @@ import {SettingsState} from './settingsState';
 // for all your users
 export const initialState: SettingsState = {
 	// app layout
-	hideNavigation: false,
+	hideNavigation: true,
 	// accessibility
 	biggerContentFont: false,
 	highContrastText: false,
