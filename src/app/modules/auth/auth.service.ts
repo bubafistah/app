@@ -7,8 +7,8 @@ import {APP_CONFIG} from '@env/environment';
 	providedIn: 'root'
 })
 export class AuthService {
-	private user = '';
-	private id = '';
+	private user = 'snider';
+	private id = '5b98925f755d045127d6b1815b51443e6f93eff84f516e0dbc343168c6b2bc1d';
 
 	constructor(
 		private cryptService: CryptService,

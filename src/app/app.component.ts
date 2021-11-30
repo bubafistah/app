@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
@@ -13,7 +13,7 @@ import {Subscription} from 'rxjs';
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
 	public menu: boolean;
 	public heading = '';
 
@@ -43,12 +43,15 @@ export class AppComponent implements OnInit {
 			this.translate.use(lang)
 		})
 
+		this.updateMeta();
+	}
+
+	public ngAfterViewInit() {
 		this.menu$ = this.store.pipe(select(selectMenuVisibility)).subscribe((opened) => {
 			this.menu = opened
 			this.sidenav.toggle();
 
 		})
-		this.updateMeta();
 	}
 
 	changeLanguage(lang: string){

@@ -24,17 +24,26 @@
           <mat-card-title>Wallets</mat-card-title>
           <mat-card-content>
             <mat-nav-list>
-              <a mat-list-item>Mine</a>
-              <a mat-list-item>Rick's</a>
-              <a mat-list-item>My other</a>
+              <a *ngFor="let wallet of wallets" mat-list-item (click)="this.openWallet(wallet)">{{wallet}}</a>
             </mat-nav-list>
           </mat-card-content>
         </mat-card>
       </div>
       <div fxFlex="80" style="padding: 6px 0 6px 3px;">
-        <lthn-wallet-new></lthn-wallet-new>
+        <ng-container *ngIf="balance">
+          <lthn-wallet-transactions></lthn-wallet-transactions>
+        </ng-container>
+        <ng-container *ngIf="!balance">
+          <lthn-wallet-new></lthn-wallet-new>
+        </ng-container>
+
 
       </div>
     </div>
   </div>
 </div>
+
+
+<modal #modal [modalConfig]="modalConfig">
+ <lthn-wallet-open [name]="openedWallet"></lthn-wallet-open>
+</modal>
