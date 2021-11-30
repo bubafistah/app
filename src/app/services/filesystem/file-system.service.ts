@@ -25,7 +25,12 @@ export class FileSystemService {
 	 * @returns
 	 */
 	async listFiles(dirname) {
-		return await this.fileSystem.list(dirname);
+		try {
+			return await this.fileSystem.list(dirname);
+		} catch (e) {
+			return []
+		}
+
 	}
 
 	/**

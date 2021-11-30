@@ -28,9 +28,6 @@ export class AuthService {
 	 * @returns {boolean}
 	 */
 	getAuthStatus() {
-		if (!APP_CONFIG.production) {
-			return true;
-		}
 		return this.user.length > 0;
 	}
 

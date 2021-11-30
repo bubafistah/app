@@ -13,6 +13,7 @@ export class RootComponent implements OnInit {
 	public posts: any = [];
 
 	public hasCLI: boolean;
+	public downloadingCLI: boolean;
 
 	constructor(
 		private router: Router,
@@ -43,7 +44,11 @@ export class RootComponent implements OnInit {
 	}
 
 	downloadCLI() {
-		this.chain.downloadCLI();
+		this.downloadingCLI = true
+		this.chain.downloadCLI().then((data) => {
+			this.downloadingCLI = false;
+			this.router.navigateByUrl('/chain')
+		});
 	}
 
 	startBlockchain() {
