@@ -7,7 +7,7 @@ import {AddAddressBook, Address, Balance, CreateWallet, GetAddressBookOut, GetBu
 	IncomingTransfersOut, IntegratedAddress, MakeIntegratedAddressIn, MakeUriIn, OpenWallet, QueryKeyIn, QueryKeyOut,
 	SplitIntegratedAddressOut, StoreOut, SweepAllIn, SweepAllOut, Transfer, TransferIn, TransferOut, TransferSplitIn,
 	TransferSplitOut, Uri} from '@plugin/lthn/wallet/interfaces';
-import {RestoreWallet} from '@plugin/lthn/wallet/interfaces/wallet';
+import {RestoreWallet} from '@plugin/lthn/wallet/interfaces/requests/restoreWallet';
 
 const axios = require('axios').default;
 

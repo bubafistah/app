@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {WalletRpcService} from '@service/wallet.rpc.service';
-import {RestoreWallet} from '@plugin/lthn/wallet/interfaces/wallet';
+import {RestoreWallet} from '@plugin/lthn/wallet/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -20,9 +20,6 @@ export class WalletService {
 
   /**
    * Restore wallet
-   *
-   * {filename: '', address: '', restore_height: '', autosave_current: true,
-   * password: '', spendkey (optional),viewkey: ''}
    *
    * @param {RestoreWallet} req
    * @returns {Promise<AxiosResponse<any>>}
