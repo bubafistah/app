@@ -3,6 +3,7 @@ import {WalletService} from '@plugin/lthn/wallet/wallet.service';
 import {ModalConfig} from '@service/ui/modal/modalConfig';
 import {ModalComponent} from '@service/ui/modal/modal.component';
 import {Balance} from '@plugin/lthn/wallet/interfaces';
+import {Observable} from 'rxjs';
 
 @Component({
 	selector: 'lthn-spp-wallet',
@@ -10,7 +11,7 @@ import {Balance} from '@plugin/lthn/wallet/interfaces';
 	styleUrls: ['./wallet.component.scss']
 })
 export class WalletComponent implements OnInit, OnDestroy {
-	public balance:  Balance;
+	public balance:  Balance | Promise<Balance>;
 	constructor(private wallet: WalletService) {}
 	public wallets: string[] = [];
 	public modalConfig: ModalConfig = {modalTitle: 'Open Wallet'} as ModalConfig;
@@ -37,9 +38,6 @@ export class WalletComponent implements OnInit, OnDestroy {
 	}
 
 	async getBalance() {
-		this.balance = await this.wallet.getBalance().then((data) => {
-			this.showtx = true;
-			return data['data'].result
-		})
+		this.balance = await this.wallet.getBalance().then((data) => data)
 	}
 }

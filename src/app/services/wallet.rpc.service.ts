@@ -7,7 +7,8 @@ import {AddAddressBook, Address, Balance, CreateWallet, GetAddressBookOut, GetBu
 	SplitIntegratedAddressOut, StoreOut, SweepAllIn, SweepAllOut, Transfer, TransferIn, TransferOut, TransferSplitIn,
 	TransferSplitOut, Uri} from '@plugin/lthn/wallet/interfaces';
 import {RestoreWallet} from '@plugin/lthn/wallet/interfaces/requests/restoreWallet';
-
+import {Observable} from 'rxjs';
+import { from } from 'rxjs';
 const axios = require('axios').default;
 
 @Injectable({
@@ -138,7 +139,7 @@ export class WalletRpcService {
 	 * @param {GetTransfersIn} x
 	 * @returns {Promise<GetTransfersOut>}
 	 */
-	getTransfers(x: GetTransfersIn): Promise<GetTransfersOut> {
+	getTransfers(x: GetTransfersIn): Promise<GetTransfersOut[]> {
 		return request(this.url)('get_transfers', x);
 	}
 

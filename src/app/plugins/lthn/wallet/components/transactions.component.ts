@@ -2,6 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 
 import {FormControl} from '@angular/forms';
 import {WalletRpcService} from '@service/wallet.rpc.service';
+import {Observable} from 'rxjs';
+import {GetTransfersOut} from '@plugin/lthn/wallet/interfaces';
+import {ColumnMode} from '@swimlane/ngx-datatable';
 
 @Component({
 	selector: 'lthn-wallet-transactions',
@@ -13,19 +16,29 @@ export class TransactionsComponent implements OnInit {
 	filename = new FormControl('');
 	password = new FormControl('');
 
+	rows: GetTransfersOut[];
+
+
+	columns = [
+		{name: 'Amount'}, {name: 'Fee'}, {name: 'Height'}, {name: 'Note'}, {name: 'Payment ID'},
+		{name: 'Timestamp'}, {name: 'txid'}, {name: 'type'}, {name: 'unlock_time'}];
+
+	ColumnMode = ColumnMode;
+
 	constructor(private wallet: WalletRpcService) {
 
 	}
 
 	ngOnInit(): void {
-		this.loadTransactions()
+		this.loadTransactions();
 	}
 
-	loadTransactions() {
+	async loadTransactions() {
 
-		return this.wallet.getTransfers({
+		this.rows = await this.wallet.getTransfers({
 			in: true
-		}).then((data) => console.log(data['data'].result));
+		}).then((data) => data['in']);
+		console.log(this.rows);
 
 	}
 }
