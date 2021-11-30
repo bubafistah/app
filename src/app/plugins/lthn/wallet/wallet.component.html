@@ -30,7 +30,13 @@
         </mat-card>
       </div>
       <div fxFlex="80" style="padding: 6px 0 6px 3px;">
-        <lthn-wallet-new></lthn-wallet-new>
+        <ng-container *ngIf="balance">
+          <lthn-wallet-transactions></lthn-wallet-transactions>
+        </ng-container>
+        <ng-container *ngIf="!balance">
+          <lthn-wallet-new></lthn-wallet-new>
+        </ng-container>
+
 
       </div>
     </div>

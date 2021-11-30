@@ -11,9 +11,12 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {WalletModule} from '@plugin/lthn/wallet/wallet.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {MatDividerModule} from '@angular/material/divider';
+import {ModalComponent} from '@service/ui/modal/modal.component';
 
 @NgModule({
 	declarations: [RootComponent],
+	exports: [
+	],
 	imports: [
 		CommonModule,
 		MatCardModule,

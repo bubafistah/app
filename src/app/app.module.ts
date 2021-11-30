@@ -22,6 +22,7 @@ import {BlockchainService} from '@plugin/lthn/chain/blockchain.service';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {WalletService} from '@plugin/lthn/wallet/wallet.service';
+import {ModalComponent} from '@service/ui/modal/modal.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
@@ -56,10 +57,12 @@ export function HttpLoaderFactory(http: HttpClient) {
 		MatTooltipModule,
 		FlexModule,
 		AuthModule,
-		ConsoleModule,
+		ConsoleModule
 
 	],
 	providers: [],
+	exports: [
+	],
 	bootstrap: [AppComponent]
 })
 /**

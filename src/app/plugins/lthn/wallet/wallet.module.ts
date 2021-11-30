@@ -16,6 +16,9 @@ import { RestoreComponent } from './components/restore.component';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
+import {OpenComponent} from '@plugin/lthn/wallet/components/open.component';
+import {ModalModule} from '@service/ui/modal/modal.module';
+import {TransactionsComponent} from '@plugin/lthn/wallet/components/transactions.component';
 
 const routes: Routes = [
 	{
@@ -35,9 +38,11 @@ const routes: Routes = [
 		WalletComponent,
 		NewComponent,
 		RestoreComponent,
+		OpenComponent,
+		TransactionsComponent
 	],
 	exports: [
-		NewComponent,RestoreComponent,RouterModule
+		NewComponent,RestoreComponent,TransactionsComponent,OpenComponent,RouterModule
 	],
 	imports: [
 		CommonModule,
@@ -53,7 +58,8 @@ const routes: Routes = [
 		MatIconModule,
 		MatTooltipModule,
 		MatInputModule,
-		TranslateModule
+		TranslateModule,
+		ModalModule
 	]
 })
 export class WalletModule {}

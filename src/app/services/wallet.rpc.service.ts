@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {request} from '@service/json-rpc';
-import {Observable} from 'rxjs';
 import {AddAddressBook, Address, Balance, CreateWallet, GetAddressBookOut, GetBulkPaymentsIn,
 	GetBulkPaymentsOut, GetPaymentsIn, GetPaymentsOut, GetTransfersIn, GetTransfersOut, Height, IncomingTransfersIn,
 	IncomingTransfersOut, IntegratedAddress, MakeIntegratedAddressIn, MakeUriIn, OpenWallet, QueryKeyIn, QueryKeyOut,
@@ -48,27 +47,27 @@ export class WalletRpcService {
 	/**
 	 * Get openned wallet balance
 	 *
-	 * @returns {Observable<Balance>}
+	 * @returns {Promise<Balance>}
 	 */
-	getBalance(): Observable<Balance> {
+	getBalance(): Promise<Balance> {
 		return request(this.url)('getbalance');
 	}
 
 	/**
 	 * Get the address of the opened wallet
 	 *
-	 * @returns {Observable<Address>}
+	 * @returns {Promise<Address>}
 	 */
-	getAddress(): Observable<Address> {
+	getAddress(): Promise<Address> {
 		return request(this.url)('getaddress');
 	}
 
 	/**
 	 * Get chain height
 	 *
-	 * @returns {Observable<Height>}
+	 * @returns {Promise<Height>}
 	 */
-	getHeight(): Observable<Height> {
+	getHeight(): Promise<Height> {
 		return request(this.url)('getheight');
 	}
 
@@ -76,18 +75,18 @@ export class WalletRpcService {
 	 * Send a transaction
 	 *
 	 * @param {TransferIn} x
-	 * @returns {Observable<TransferOut>}
+	 * @returns {Promise<TransferOut>}
 	 */
-	transfer(x: TransferIn): Observable<TransferOut> {
+	transfer(x: TransferIn): Promise<TransferOut> {
 		return request(this.url)('transfer', x);
 	}
 
 	/**
 	 *
 	 * @param {TransferSplitIn} x
-	 * @returns {Observable<TransferSplitOut>}
+	 * @returns {Promise<TransferSplitOut>}
 	 */
-	transferSplit(x: TransferSplitIn): Observable<TransferSplitOut> {
+	transferSplit(x: TransferSplitIn): Promise<TransferSplitOut> {
 		return request(this.url)('transfer_split', x);
 	}
 
@@ -102,44 +101,44 @@ export class WalletRpcService {
 	/**
 	 * Send all funds
 	 * @param {SweepAllIn} x
-	 * @returns {Observable<SweepAllOut>}
+	 * @returns {Promise<SweepAllOut>}
 	 */
-	sweepAll(x: SweepAllIn): Observable<SweepAllOut> {
+	sweepAll(x: SweepAllIn): Promise<SweepAllOut> {
 		return request(this.url)('sweep_all');
 	}
 
 	/**
 	 *
-	 * @returns {Observable<StoreOut>}
+	 * @returns {Promise<StoreOut>}
 	 */
-	store(): Observable<StoreOut> {
+	store(): Promise<StoreOut> {
 		return request(this.url)('store');
 	}
 
 	/**
 	 *
 	 * @param {GetPaymentsIn} x
-	 * @returns {Observable<GetPaymentsOut>}
+	 * @returns {Promise<GetPaymentsOut>}
 	 */
-	getPayments(x: GetPaymentsIn): Observable<GetPaymentsOut> {
+	getPayments(x: GetPaymentsIn): Promise<GetPaymentsOut> {
 		return request(this.url)('get_payments', x);
 	}
 
 	/**
 	 *
 	 * @param {GetBulkPaymentsIn} x
-	 * @returns {Observable<GetBulkPaymentsOut>}
+	 * @returns {Promise<GetBulkPaymentsOut>}
 	 */
-	getBulkPayments(x: GetBulkPaymentsIn): Observable<GetBulkPaymentsOut> {
+	getBulkPayments(x: GetBulkPaymentsIn): Promise<GetBulkPaymentsOut> {
 		return request(this.url)('get_bulk_payments', x);
 	}
 
 	/**
 	 *
 	 * @param {GetTransfersIn} x
-	 * @returns {Observable<GetTransfersOut>}
+	 * @returns {Promise<GetTransfersOut>}
 	 */
-	getTransfers(x: GetTransfersIn): Observable<GetTransfersOut> {
+	getTransfers(x: GetTransfersIn): Promise<GetTransfersOut> {
 		return request(this.url)('get_transfers', x);
 	}
 
@@ -147,51 +146,51 @@ export class WalletRpcService {
 	 * Get transfer by Transactin ID
 	 *
 	 * @param {{txid: string}} x
-	 * @returns {Observable<Transfer>}
+	 * @returns {Promise<Transfer>}
 	 */
-	getTransferByTxid(x: { txid: string }): Observable<Transfer> {
+	getTransferByTxid(x: { txid: string }): Promise<Transfer> {
 		return request(this.url)('get_transfer_by_txid', x);
 	}
 
 	/**
 	 *
 	 * @param {IncomingTransfersIn} x
-	 * @returns {Observable<IncomingTransfersOut>}
+	 * @returns {Promise<IncomingTransfersOut>}
 	 */
 	incomingTransfers(
 		x: IncomingTransfersIn
-	): Observable<IncomingTransfersOut> {
+	): Promise<IncomingTransfersOut> {
 		return request(this.url)('incoming_transfers', x);
 	}
 
 	/**
 	 *
 	 * @param {QueryKeyIn} x
-	 * @returns {Observable<QueryKeyOut>}
+	 * @returns {Promise<QueryKeyOut>}
 	 */
-	queryKey(x: QueryKeyIn): Observable<QueryKeyOut> {
+	queryKey(x: QueryKeyIn): Promise<QueryKeyOut> {
 		return request(this.url)('query_key', x);
 	}
 
 	/**
 	 *
 	 * @param {MakeIntegratedAddressIn} x
-	 * @returns {Observable<IntegratedAddress>}
+	 * @returns {Promise<IntegratedAddress>}
 	 */
 	makeIntegratedAddress(
 		x: MakeIntegratedAddressIn
-	): Observable<IntegratedAddress> {
+	): Promise<IntegratedAddress> {
 		return request(this.url)('make_integrated_address', x);
 	}
 
 	/**
 	 *
 	 * @param {IntegratedAddress} x
-	 * @returns {Observable<SplitIntegratedAddressOut>}
+	 * @returns {Promise<SplitIntegratedAddressOut>}
 	 */
 	splitIntegratedAddress(
 		x: IntegratedAddress
-	): Observable<SplitIntegratedAddressOut> {
+	): Promise<SplitIntegratedAddressOut> {
 		return request(this.url)('split_integrated_address', x);
 	}
 
@@ -206,36 +205,36 @@ export class WalletRpcService {
 	/**
 	 *
 	 * @param {MakeUriIn} x
-	 * @returns {Observable<Uri>}
+	 * @returns {Promise<Uri>}
 	 */
-	makeUri(x: MakeUriIn): Observable<Uri> {
+	makeUri(x: MakeUriIn): Promise<Uri> {
 		return request(this.url)('make_uri', x);
 	}
 
 	/**
 	 *
 	 * @param {Uri} x
-	 * @returns {Observable<MakeUriIn>}
+	 * @returns {Promise<MakeUriIn>}
 	 */
-	parseUri(x: Uri): Observable<MakeUriIn> {
+	parseUri(x: Uri): Promise<MakeUriIn> {
 		return request(this.url)('parse_uri', x);
 	}
 
 	/**
 	 *
 	 * @param {{entries: number[]}} x
-	 * @returns {Observable<GetAddressBookOut>}
+	 * @returns {Promise<GetAddressBookOut>}
 	 */
-	getAddressBook(x: { entries: number[] }): Observable<GetAddressBookOut> {
+	getAddressBook(x: { entries: number[] }): Promise<GetAddressBookOut> {
 		return request(this.url)('get_address_book', x);
 	}
 
 	/**
 	 *
 	 * @param {AddAddressBook} x
-	 * @returns {Observable<{index: number}>}
+	 * @returns {Promise<{index: number}>}
 	 */
-	addAddressBook(x: AddAddressBook): Observable<{ index: number }> {
+	addAddressBook(x: AddAddressBook): Promise<{ index: number }> {
 		return request(this.url)('add_address_book', x);
 	}
 
@@ -279,9 +278,9 @@ export class WalletRpcService {
 	 *
 	 * @param {string} method
 	 * @param arg
-	 * @returns {Observable<any>}
+	 * @returns {Promise<any>}
 	 */
-	other(method: string, arg?: any): Observable<any> {
+	other(method: string, arg?: any): Promise<any> {
 		return request(this.url)(method, arg);
 	}
 }

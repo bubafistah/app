@@ -1,22 +1,29 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {WalletRpcService} from '@service/wallet.rpc.service';
-import {RestoreWallet} from '@plugin/lthn/wallet/interfaces';
+import {Balance, OpenWallet, RestoreWallet} from '@plugin/lthn/wallet/interfaces';
+import {FileSystemService} from '@service/filesystem/file-system.service';
+import {Observable} from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
+/**
+ * Orchestrates dealing with wallets, to add a new wallet type, implement this class
+ */
 export class WalletService {
+	private wallets: string[] = [];
 
-  constructor(private rpc: WalletRpcService) { }
+	constructor(private fs: FileSystemService, private rpc: WalletRpcService) {
+	}
 
-  /**
-   * Start wallet service
-   *
-   * @returns {Promise<void>}
-   */
-  startWallet(){
-    return this.rpc.startWallet()
-  }
+	/**
+	 * Start wallet service
+	 *
+	 * @returns {Promise<void>}
+	 */
+	startWallet() {
+		return this.rpc.startWallet();
+	}
 
 	/**
 	 * Restore wallet
