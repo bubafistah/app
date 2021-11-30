@@ -13,7 +13,7 @@
     "dev:setup": "rimraf lthn && git clone https://github.com/letheanVPN/lthn.git lthn",
     "doc": "npx @compodoc/compodoc -p tsconfig.doc.json",
     "doc:serve": "npx @compodoc/compodoc -s",
-    "ng:serve": "ng serve -c development -o --ssl --ssl-key $HOME/Lethean/conf/private.pem --ssl-cert $HOME/Lethean/conf/public.pem",
+    "ng:serve": "ng serve -c development -o ",
     "be:serve": "cd lthn && $HOME/.deno/bin/deno run --allow-net --allow-env --allow-run --allow-read --allow-write --unstable src/server.ts backend start"
   },
   "main": "src/app/main.ts",
