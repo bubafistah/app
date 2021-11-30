@@ -12,7 +12,7 @@
     <preset_collections/>
     <framework>ngx-translate</framework>
     <filename>i18n-edit.babel</filename>
-    <source_root_dir/>
+    <source_root_dir>src/app</source_root_dir>
     <folder_node>
         <name/>
         <children>
@@ -1618,6 +1618,39 @@
                                             </concept_node>
                                             <concept_node>
                                                 <name>restore-seed</name>
+                                                <definition_loaded>false</definition_loaded>
+                                                <description/>
+                                                <comment/>
+                                                <default_text/>
+                                                <translations>
+                                                    <translation>
+                                                        <language>de-DE</language>
+                                                        <approved>false</approved>
+                                                    </translation>
+                                                    <translation>
+                                                        <language>en-GB</language>
+                                                        <approved>false</approved>
+                                                    </translation>
+                                                    <translation>
+                                                        <language>es-ES</language>
+                                                        <approved>false</approved>
+                                                    </translation>
+                                                    <translation>
+                                                        <language>fr-FR</language>
+                                                        <approved>false</approved>
+                                                    </translation>
+                                                    <translation>
+                                                        <language>ru-RU</language>
+                                                        <approved>false</approved>
+                                                    </translation>
+                                                    <translation>
+                                                        <language>zh-CN</language>
+                                                        <approved>false</approved>
+                                                    </translation>
+                                                </translations>
+                                            </concept_node>
+                                            <concept_node>
+                                                <name>wallet-transactions</name>
                                                 <definition_loaded>false</definition_loaded>
                                                 <description/>
                                                 <comment/>

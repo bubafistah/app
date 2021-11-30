@@ -3,10 +3,9 @@ import {WalletService} from '@plugin/lthn/wallet/wallet.service';
 import {ModalConfig} from '@service/ui/modal/modalConfig';
 import {ModalComponent} from '@service/ui/modal/modal.component';
 import {Balance} from '@plugin/lthn/wallet/interfaces';
-import {Observable} from 'rxjs';
 
 @Component({
-	selector: 'lthn-spp-wallet',
+	selector: 'lthn-app-wallet',
 	templateUrl: './wallet.component.html',
 	styleUrls: ['./wallet.component.scss']
 })
@@ -18,6 +17,16 @@ export class WalletComponent implements OnInit, OnDestroy {
 	@ViewChild('modal') private modalComponent: ModalComponent
 	public openedWallet: string;
 	public showtx: boolean = false;
+	public txnSelection: any = {
+		in: true,
+		out: true,
+		pending: true,
+		failed: true,
+		pool: true,
+		filter_by_height: false,
+		min_height: null,
+		max_height: null
+	};
 	async openModal() {
 		return await this.modalComponent.open()
 	}
@@ -39,5 +48,14 @@ export class WalletComponent implements OnInit, OnDestroy {
 
 	async getBalance() {
 		this.balance = await this.wallet.getBalance().then((data) => data)
+	}
+
+	public async toggle(col) {
+		await this.wallet.loadTransfers(this.txnSelection);
+		this.txnSelection[col] = !!this.txnSelection[col]
+	}
+
+	public isChecked(col) {
+		return this.txnSelection[col]
 	}
 }

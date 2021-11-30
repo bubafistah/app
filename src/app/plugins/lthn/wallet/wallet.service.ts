@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {WalletRpcService} from '@service/wallet.rpc.service';
-import {Balance, OpenWallet, RestoreWallet} from '@plugin/lthn/wallet/interfaces';
+import {Balance, GetTransfersIn, OpenWallet, RestoreWallet} from '@plugin/lthn/wallet/interfaces';
 import {FileSystemService} from '@service/filesystem/file-system.service';
 import {Observable} from 'rxjs';
 
@@ -80,4 +80,9 @@ export class WalletService {
 		}
 		return this.wallets;
 	}
+
+	loadTransfers(opts: GetTransfersIn){
+		return this.rpc.getTransfers(opts).then((data) => Object.values(data).flat());
+	}
+
 }
