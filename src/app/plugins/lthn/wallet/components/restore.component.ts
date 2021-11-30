@@ -1,11 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {WalletService} from '@plugin/lthn/wallet/wallet.service';
+import {WalletRpcService} from '@service/wallet.rpc.service';
 import {FormControl, FormGroup} from '@angular/forms';
+import {WalletService} from '@plugin/lthn/wallet/wallet.service';
 
 @Component({
 	selector: 'lthn-wallet-restore',
 	templateUrl: './restore.component.html'
 })
+
 export class RestoreComponent implements OnInit {
 	restoreWalletForm = new FormGroup({
 		filename: new FormControl(''),
@@ -26,16 +28,16 @@ export class RestoreComponent implements OnInit {
 	}
 
 	restoreWallet() {
-		console.log(this.restoreWalletForm.value)
+
 		this.wallet.restoreWallet({
 			filename: this.restoreWalletForm.value.filename,
 			address: this.restoreWalletForm.value.address,
 			restore_height: this.restoreWalletForm.value.restore_height,
 			autosave_current: this.restoreWalletForm.value.autosave_current,
 			password: this.restoreWalletForm.value.password,
-			spendkey: 
+			spendkey:
 			(
-				this.restoreWalletForm.value.viewonly_wallet ? 
+				this.restoreWalletForm.value.viewonly_wallet ?
 					'' : this.restoreWalletForm.value.spendkey
 			)
 			,
