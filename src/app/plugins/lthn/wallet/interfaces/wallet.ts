@@ -39,13 +39,3 @@ export interface CreateWallet {
 	language: string; // Language for your wallets' seed.
 }
 
-export interface RestoreWallet {
-	restore_height?: number; // (Optional; defaults to 0) The block height to restore the wallet from.
-	filename: string; // The wallet's file name on the RPC server.
-	address: string; // The wallet's primary address.
-	spendkey?: string; // (Optional; omit to create a view-only wallet) The wallet's private spend key.
-	viewkey: string; // The wallet's private view key.
-	password: string; // The wallet's password.
-	autosave_current?: boolean; // (Defaults to true) If true, save the current wallet before generating the new wallet.
-
-}
