@@ -1,7 +1,17 @@
 <ng-container *ngIf="!hasCLI">
-    <h2>{{ 'words.state.not_installed' | translate }}</h2>
-    <p>{{ 'words.state.not_installed_desc' | translate }}</p>
-    <button (click)="downloadCLI()" color="accent" mat-button>{{ 'button.install-blockchain' | translate }}</button>
+    <div style="padding: 16px;">
+    <mat-card >
+        <mat-card-title>{{ 'words.states.not_installed' | translate }}</mat-card-title>
+        <mat-card-content>
+            <p>{{ 'words.states.not_installed_desc' | translate }}</p>
+            <button (click)="downloadCLI()" color="accent" mat-button>{{ 'button.install-blockchain' | translate }}</button>
+            <ng-container *ngIf="downloadingCLI">
+                <lthn-app-console attach="update-cli"></lthn-app-console>
+            </ng-container>
+        </mat-card-content>
+    </mat-card>
+    </div>
+
 </ng-container>
 <ng-container *ngIf="hasCLI">
     <div fxLayout="row"  style="padding: 16px;">

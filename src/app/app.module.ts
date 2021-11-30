@@ -23,6 +23,7 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {WalletService} from '@plugin/lthn/wallet/wallet.service';
 import {ModalComponent} from '@service/ui/modal/modal.component';
+import {FileSystemService} from '@service/filesystem/file-system.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
@@ -73,13 +74,16 @@ export class AppModule {
 	/**
 	 * Start blockchain & wallet service automatically on start
 	 *
+	 * @param fs
 	 * @param {BlockchainService} chain
 	 * @param {WalletRpcService} wallet
 	 */
-	constructor(private chain: BlockchainService, private wallet: WalletService) {
-		this.chain.startDaemon().then((data) => {
-			console.log("blockchain started")
-			this.wallet.startWallet().then((data) => console.log('wallet started'))
-		})
+	constructor(private fs: FileSystemService, private chain: BlockchainService, private wallet: WalletService) {
+		this.fs.listFiles('/cli').then((dat: any) => {
+			this.chain.startDaemon().then((data) => {
+				console.log("blockchain started")
+				this.wallet.startWallet().then((data) => console.log('wallet started'))
+			})
+		});
 	}
 }

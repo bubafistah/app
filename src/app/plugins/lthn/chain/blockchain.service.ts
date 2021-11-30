@@ -82,6 +82,6 @@ export class BlockchainService {
 		return this.http
 			.post<any>(`https://localhost:36911/update/cli`, {}, options)
 			.toPromise()
-			.then((dat) => console.log(dat));
+			.then((dat) => dat);
 	}
 }
