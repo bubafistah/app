@@ -1,49 +1,81 @@
-<div class="container" fxLayout="column">
-  <div fxFlex="100" style="padding: 12px 12px 3px 12px;">
-    <mat-toolbar>
-      <mat-toolbar-row>
-        <span class="lthn-brand">Wallet Manager</span>
-        <span class="flex-spacer"></span>
-        <button [routerLink]="['/', 'wallet', 'new']" mat-button matTooltip="New Wallet">
-          <mat-icon>account_balance_wallet</mat-icon>
-        </button>
-        <button [routerLink]="['/', 'wallet', 'backup']" mat-button matTooltip="Backup">
-          <mat-icon>cloud_download</mat-icon>
-        </button>
-        <button [routerLink]="['/', 'wallet', 'restore']" mat-button matTooltip="Restore">
-          <mat-icon>cloud_upload</mat-icon>
-        </button>
-        <button [routerLink]="['/', 'wallet', 'settings']" mat-button matTooltip="Settings">
-          <mat-icon>settings</mat-icon>
-        </button>
-      </mat-toolbar-row>
-    </mat-toolbar>
-    <div fxLayout="row">
-      <div fxFlex="20" style="padding: 6px 3px 6px 0;">
-        <mat-card>
-          <mat-card-title>Wallets</mat-card-title>
-          <mat-card-content>
-            <mat-nav-list>
-              <a *ngFor="let wallet of wallets" mat-list-item (click)="this.openWallet(wallet)">{{wallet}}</a>
-            </mat-nav-list>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      <div fxFlex="80" style="padding: 6px 0 6px 3px;">
-        <ng-container *ngIf="balance">
-          <lthn-wallet-transactions></lthn-wallet-transactions>
-        </ng-container>
-        <ng-container *ngIf="!balance">
-          <lthn-wallet-new></lthn-wallet-new>
-        </ng-container>
+<div fxLayout="column">
+    <div fxFlex="100" style="padding: 12px 12px 3px 12px;">
+        <mat-toolbar>
+            <mat-toolbar-row>
+                <span class="lthn-brand">Wallet Manager</span>
+                <span class="flex-spacer"></span>
+                <button [routerLink]="['/', 'wallet', 'new']" mat-button matTooltip="New Wallet">
+                    <mat-icon>account_balance_wallet</mat-icon>
+                </button>
+                <button [routerLink]="['/', 'wallet', 'backup']" mat-button matTooltip="Backup">
+                    <mat-icon>cloud_download</mat-icon>
+                </button>
+                <button [routerLink]="['/', 'wallet', 'restore']" mat-button matTooltip="Restore">
+                    <mat-icon>cloud_upload</mat-icon>
+                </button>
+                <button [routerLink]="['/', 'wallet', 'settings']" mat-button matTooltip="Settings">
+                    <mat-icon>settings</mat-icon>
+                </button>
+            </mat-toolbar-row>
+        </mat-toolbar>
+        <div fxLayout="row">
+            <div fxFlex="20" style="padding: 6px 3px 6px 0;">
+                <mat-card>
+                    <mat-card-title>Wallets</mat-card-title>
+                    <mat-card-content>
+                        <mat-select [placeholder]="openedWallet">
+                            <mat-option *ngFor="let wallet of wallets"
+                                        (click)="this.openWallet(wallet)">{{wallet}}</mat-option>
+                        </mat-select>
+                        <mat-divider></mat-divider>
+                        <h4>Available Columns</h4>
+                        <mat-list>
+                            <mat-list-item>
+                                <input type="checkbox" id="in" (click)="toggle('in')" [checked]="isChecked('in')"/>
+                                <label for="in">Incoming</label>
+                            </mat-list-item>
+
+                            <mat-list-item>
+                                <input type="checkbox" id="out" (click)="toggle('out')" [checked]="isChecked('out')"/>
+                                <label for="out">Sent</label>
+                            </mat-list-item>
+
+                            <mat-list-item>
+                                <input type="checkbox" id="pending" (click)="toggle('pending')"
+                                       [checked]="isChecked('pending')"/>
+                                <label for="pending">Incoming</label>
+                            </mat-list-item>
+
+                            <mat-list-item>
+                                <input type="checkbox" id="failed" (click)="toggle('failed')"
+                                       [checked]="isChecked('failed')"/>
+                                <label for="failed">Incoming</label>
+                            </mat-list-item>
+
+                            <mat-list-item>
+                                <input type="checkbox" id="pool" (click)="toggle('pool')"
+                                       [checked]="isChecked('pool')"/>
+                                <label for="pool">Incoming</label>
+                            </mat-list-item>
+                        </mat-list>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div fxFlex="80" style="padding: 6px 0 6px 3px;">
+                <ng-container *ngIf="balance">
+                    <lthn-wallet-transactions [opts]="txnSelection"></lthn-wallet-transactions>
+                </ng-container>
+                <ng-container *ngIf="!balance">
+                    <lthn-wallet-new></lthn-wallet-new>
+                </ng-container>
 
 
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 
 <modal #modal [modalConfig]="modalConfig">
- <lthn-wallet-open [name]="openedWallet"></lthn-wallet-open>
+    <lthn-wallet-open [name]="openedWallet"></lthn-wallet-open>
 </modal>

@@ -3,7 +3,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {WalletRpcService} from '@service/wallet.rpc.service';
 import {Observable} from 'rxjs';
-import {GetTransfersOut} from '@plugin/lthn/wallet/interfaces';
+import {GetTransfersIn, GetTransfersOut} from '@plugin/lthn/wallet/interfaces';
 import {ColumnMode} from '@swimlane/ngx-datatable';
 
 @Component({
@@ -12,6 +12,13 @@ import {ColumnMode} from '@swimlane/ngx-datatable';
 })
 export class TransactionsComponent implements OnInit {
 	@Input() name?: string = '';
+	@Input() opts: GetTransfersIn = {
+		in: true,
+		out: true,
+		pending: true,
+		failed: true,
+		pool: true,
+	};
 
 	filename = new FormControl('');
 	password = new FormControl('');
@@ -19,9 +26,10 @@ export class TransactionsComponent implements OnInit {
 	rows: GetTransfersOut[];
 
 
+
 	columns = [
 		{name: 'Amount'}, {name: 'Fee'}, {name: 'Height'}, {name: 'Note'}, {name: 'Payment ID'},
-		{name: 'Timestamp'}, {name: 'txid'}, {name: 'type'}, {name: 'unlock_time'}];
+		{name: 'Timestamp'}, {name: 'txid'}, {name: 'Type'}, {name: 'Unlock Time'}];
 
 	ColumnMode = ColumnMode;
 
@@ -35,9 +43,7 @@ export class TransactionsComponent implements OnInit {
 
 	async loadTransactions() {
 
-		this.rows = await this.wallet.getTransfers({
-			in: true
-		}).then((data) => data['in']);
+		this.rows = await this.wallet.getTransfers(this.opts).then((data) => Object.values(data).flat());
 		console.log(this.rows);
 
 	}
