@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { FormControl } from '@angular/forms';
-import { WalletService } from '../wallet.service';
+import { WalletRpcService } from '@service/wallet.rpc.service';
 
 @Component({
 	selector: 'lthn-wallet-new',
@@ -11,7 +11,7 @@ export class NewComponent implements OnInit {
 	wallet_name = new FormControl('');
 	password = new FormControl('');
 	password_confirm = new FormControl('');
-	constructor(private wallet: WalletService) {}
+	constructor(private wallet: WalletRpcService) {}
 
 	ngOnInit(): void {}
 

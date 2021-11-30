@@ -26,3 +26,4 @@ export {MakeUriIn} from './dto/makeUriIn';
 export {SweepAllIn} from './dto/sweepAllIn';
 export {GetAddressBookOut} from './dto/getAddressBookOut';
 export {SweepAllOut} from './dto/sweepAllOut';
+export {RestoreWallet} from './requests/restoreWallet'
