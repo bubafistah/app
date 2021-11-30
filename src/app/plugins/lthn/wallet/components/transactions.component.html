@@ -2,5 +2,18 @@
     <mat-card-title>{{ 'plugin.lthn.wallet.titles.wallet-transactions' | translate }}</mat-card-title>
     <mat-card-content>
 
+            <ngx-datatable
+                    class="material striped dark"
+                    [rows]="rows"
+                    [loadingIndicator]="true"
+                    [columns]="columns"
+                    [columnMode]="ColumnMode.force"
+                    [headerHeight]="50"
+                    [footerHeight]="50"
+                    [rowHeight]="50"
+                    [limit]="10"
+            >
+            </ngx-datatable>
+
     </mat-card-content>
 </mat-card>

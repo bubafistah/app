@@ -7,8 +7,17 @@ const rpcBody = (method) => (params) => ({
 const axios = require('axios').default;
 export const request =
 	(url) =>
-	async (method, params = {}) =>
-		await axios.post(url, JSON.stringify(rpcBody(method)(params)));
+	 (method, params = {}) =>
+		 axios.post(url, JSON.stringify(rpcBody(method)(params))).then((data) => {
+			 console.log(data)
+			 if(data['data'].error){
+				return data['data']
+			 } else if(data['data']) {
+				 return data['data'].result
+			 }else{
+				 return data
+			 }
+		 });
 
 interface Response {
 	id: string;

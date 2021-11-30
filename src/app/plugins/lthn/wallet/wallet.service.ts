@@ -49,10 +49,10 @@ export class WalletService {
 	 * Get wallet balance
 	 *
 	 * @param {Balance} req
-	 * @returns {Observable<Balance>}
+	 * @returns {Promise<Balance>}
 	 */
-	async getBalance(): Promise<Balance> {
-		return await this.rpc.getBalance()
+	getBalance(): Promise<Balance> {
+		return this.rpc.getBalance()
 	}
 	/**
 	 * Gets the list of known wallets from the file system
