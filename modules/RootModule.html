@@ -201,35 +201,23 @@ import {ConsoleModule} from &#x27;@plugin/console/console.module&#x27;;
 import {MatTabsModule} from &#x27;@angular/material/tabs&#x27;;
 import {WalletModule} from &#x27;@plugin/lthn/wallet/wallet.module&#x27;;
 import {TranslateModule} from &#x27;@ngx-translate/core&#x27;;
-
-
-const routes: Routes &#x3D; [
-	{
-		path: &#x27;&#x27;,
-		component: RootComponent,
-		canActivate: [AuthGuard],
-		pathMatch: &#x27;full&#x27;,
-		data: {
-			title: &#x27;Lethean&#x27;,
-			heading: &#x27;meta.dashboard.heading&#x27;,
-			description: &#x27;Lethean (LTHN) Web app&#x27;,
-			robots: true
-		}
-	}
-];
+import {MatDividerModule} from &#x27;@angular/material/divider&#x27;;
+import {ModalComponent} from &#x27;@service/ui/modal/modal.component&#x27;;
 
 @NgModule({
 	declarations: [RootComponent],
+	exports: [
+	],
 	imports: [
 		CommonModule,
-		RouterModule.forChild(routes),
 		MatCardModule,
 		MatButtonModule,
 		FlexModule,
 		ConsoleModule,
 		MatTabsModule,
 		WalletModule,
-		TranslateModule
+		TranslateModule,
+		MatDividerModule
 	]
 })
 export class RootModule {
