@@ -1,20 +1,48 @@
 /**
+ * Restore Wallet request payload
  *
- * @param filename The wallet's file name on the RPC server.
- * @param restore_height (Optional; defaults to 0) The block height to restore the wallet from.
- * @param address  The wallet's primary address.
- * @param spendkey (Optional; omit to create a view-only wallet) The wallet's private spend key.
- * @param viewkey The wallet's private view key.
- * @param password The wallet's password.
- * @param autosave_current (Defaults to true) If true, save the current wallet before generating the new wallet.
+ * @property filename string
+ * @property restore_height string
+ * @property address string
+ * @property spendkey string
+ * @property viewkey string
+ * @property password string
  */
 export interface RestoreWallet {
-	restore_height?: number;
+
+	/**
+	 * The wallet's file name on the RPC server.
+	 */
 	filename: string;
+
+	/**
+	 * (Optional; defaults to 0) The block height to restore the wallet from.
+	 */
+	restore_height?: number;
+
+	/**
+	 * The wallet's primary address.
+	 */
 	address: string;
+
+	/**
+	 * (Optional; omit to create a view-only wallet) The wallet's private spend key.
+	 */
 	spendkey?: string;
+
+	/**
+	 * The wallet's private view key.
+	 */
 	viewkey: string;
+
+	/**
+	 * The wallet's password.
+	 */
 	password: string;
+
+	/**
+	 * (Defaults to true) If true, save the current wallet before generating the new wallet.
+	 */
 	autosave_current?: boolean;
 
 }
