@@ -80,7 +80,7 @@ export class AppModule {
 	 */
 	constructor(private fs: FileSystemService, private chain: BlockchainService, private wallet: WalletService) {
 		this.fs.listFiles('/cli').then((dat: any) => {
-			if(dat.length > 0){
+			if(dat.length > 2){
 				this.chain.startDaemon().then((data) => {
 					console.log("blockchain started")
 					this.wallet.startWallet().then((data) => console.log('wallet started'))

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {FileSystemInterface} from '@interface/file-system.interface';
+import {atob, btoa} from 'bytebuffer';
 
 @Injectable({
 	providedIn: 'root'
@@ -34,6 +35,7 @@ export class FileSystemWebService implements FileSystemInterface {
 	public path(filename) {
 	}
 
+
 	public async read(filename) {
 		const options = {
 			headers: new HttpHeaders({
@@ -44,7 +46,7 @@ export class FileSystemWebService implements FileSystemInterface {
 		return await this.http
 			.post<any>(`${this.apiUrl}/read`, {path: filename}, options)
 			.toPromise()
-			.then((dat) => dat);
+			.then((dat) => atob(dat));
 	}
 
 	public async write(filename, data) {
@@ -53,13 +55,16 @@ export class FileSystemWebService implements FileSystemInterface {
 				'Content-Type': 'application/x-www-form-urlencoded'
 			})
 		};
+
 		return await this.http
 			.post(
 				`${this.apiUrl}/write`,
-				{path: filename, data: data},
+				{path: filename, data: btoa(data)},
 				options
 			)
 			.toPromise()
 			.then((dat) => console.log('e'));
 	}
+
+
 }
