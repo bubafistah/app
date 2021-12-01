@@ -326,6 +326,7 @@ import {OpenComponent} from &#x27;@plugin/lthn/wallet/components/open.component&
 import {ModalModule} from &#x27;@service/ui/modal/modal.module&#x27;;
 import {TransactionsComponent} from &#x27;@plugin/lthn/wallet/components/transactions.component&#x27;;
 import {NgxDatatableModule} from &#x27;@swimlane/ngx-datatable&#x27;;
+import {MatSelectModule} from &#x27;@angular/material/select&#x27;;
 
 const routes: Routes &#x3D; [
 	{
@@ -367,7 +368,8 @@ const routes: Routes &#x3D; [
 		MatInputModule,
 		TranslateModule,
 		ModalModule,
-		NgxDatatableModule
+		NgxDatatableModule,
+		MatSelectModule
 	]
 })
 export class WalletModule {}
