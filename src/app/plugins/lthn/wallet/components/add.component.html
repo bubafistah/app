@@ -1,0 +1,20 @@
+<div class="wallet-add-container">
+<mat-tab-group dynamicHeight>
+	<mat-tab>
+		<ng-template mat-tab-label>
+			<label matTooltip="Create new wallet">
+				<mat-icon>add_box</mat-icon>
+			</label>
+		</ng-template>
+		<lthn-wallet-new></lthn-wallet-new>
+	</mat-tab>
+	<mat-tab >
+		<ng-template mat-tab-label>
+			<label matTooltip="Restore wallet">
+				<mat-icon>cloud_download</mat-icon>
+			</label>
+		</ng-template>
+		<lthn-wallet-restore></lthn-wallet-restore>
+	</mat-tab>
+</mat-tab-group>
+</div>

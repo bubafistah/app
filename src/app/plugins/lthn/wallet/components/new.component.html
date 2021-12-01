@@ -5,6 +5,7 @@
         <mat-form-field class="full_width"  appearance="standard">
             <mat-label>{{ 'plugin.lthn.wallet.label.filename' | translate }}</mat-label>
             <input [formControl]="wallet_name" matInput type="text">
+			<mat-error *ngIf="wallet_name.errors?.['nameTaken']">Wallet already exists</mat-error>
         </mat-form-field>
         <mat-form-field  class="full_width" appearance="standard">
             <mat-label>{{ 'plugin.lthn.wallet.label.wallet-password' | translate }}</mat-label>

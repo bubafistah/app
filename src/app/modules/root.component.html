@@ -14,15 +14,10 @@
 
 </ng-container>
 <ng-container *ngIf="hasCLI">
-    <div fxLayout="row"  style="padding: 16px;">
-        <div fxFlex="33" style="margin-right:6px;">
-            <lthn-wallet-new></lthn-wallet-new>
-        </div>
-        <div fxFlex="66">
-            <lthn-wallet-restore></lthn-wallet-restore>
-        </div>
-
-    </div>
+	<div style="padding: 30px;">
+	<lthn-wallet-add>
+	</lthn-wallet-add>
+	</div>
     <div style="padding: 16px;">
         <mat-tab-group animationDuration="100ms">
             <mat-tab label="{{ 'plugin.lthn.daemons.letheand' | translate }}">
