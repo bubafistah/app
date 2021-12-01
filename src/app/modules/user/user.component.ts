@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ConfigIniParser} from 'config-ini-parser';
-import {CryptService} from '../../services/crypt.service';
-import {FileSystemService} from '../../services/filesystem/file-system.service';
+import {CryptService} from '@service/crypt.service';
+import {FileSystemService} from '@service/filesystem/file-system.service';
 import {Router} from '@angular/router';
 import {AuthService} from '../auth/auth.service';
 
