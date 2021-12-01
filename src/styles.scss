@@ -28,3 +28,23 @@ html, body {
 .mat-form-field {
 	padding-right: 10px;
 }
+
+.wallet-add-container {
+	max-width: 1000px;
+	position: relative;
+
+	.mat-tab-header {
+		position: absolute;
+		z-index: 2;
+		right: 0;
+		border-bottom: 0px;
+
+		label {
+			margin-bottom: 0px;
+		}
+	}
+
+	.mat-tab-label {
+		min-width: 0px;
+	}
+}

@@ -11,6 +11,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTabsModule } from '@angular/material/tabs';
 import { NewComponent } from './components/new.component';
 import { RestoreComponent } from './components/restore.component';
 import { MatInputModule } from '@angular/material/input';
@@ -21,6 +22,8 @@ import {ModalModule} from '@service/ui/modal/modal.module';
 import {TransactionsComponent} from '@plugin/lthn/wallet/components/transactions.component';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {MatSelectModule} from '@angular/material/select';
+import {AddComponent} from './components/add.component'
+
 
 const routes: Routes = [
 	{
@@ -41,10 +44,11 @@ const routes: Routes = [
 		NewComponent,
 		RestoreComponent,
 		OpenComponent,
-		TransactionsComponent
+		TransactionsComponent,
+		AddComponent
 	],
 	exports: [
-		NewComponent,RestoreComponent,TransactionsComponent,OpenComponent,RouterModule
+		NewComponent,RestoreComponent,TransactionsComponent,OpenComponent,RouterModule,AddComponent
 	],
 	imports: [
 		CommonModule,
@@ -63,7 +67,8 @@ const routes: Routes = [
 		TranslateModule,
 		ModalModule,
 		NgxDatatableModule,
-		MatSelectModule
+		MatSelectModule,
+		MatTabsModule
 	]
 })
 export class WalletModule {}
