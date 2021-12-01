@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {WalletRpcService} from '@service/wallet.rpc.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {WalletService} from '@plugin/lthn/wallet/wallet.service';
-import {walletNameNotTakenValidator} from '../validators'
+import {nameNotTakenValidator} from '../validators'
 
 @Component({
 	selector: 'lthn-wallet-restore',
@@ -11,7 +11,7 @@ import {walletNameNotTakenValidator} from '../validators'
 
 export class RestoreComponent implements OnInit {
 	restoreWalletForm = new FormGroup({
-		filename: new FormControl('', [walletNameNotTakenValidator(this.wallet.walletList())]),
+		filename: new FormControl('', [nameNotTakenValidator(this.wallet.walletList())]),
 		address: new FormControl(''),
 		restore_height: new FormControl('0'),
 		autosave_current: new FormControl(true),

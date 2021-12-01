@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { WalletRpcService } from '@service/wallet.rpc.service';
 
-import { walletNameNotTakenValidator } from '../validators'
+import { nameNotTakenValidator } from '../validators'
 import { WalletService } from '../wallet.service'
 
 @Component({
@@ -11,7 +11,7 @@ import { WalletService } from '../wallet.service'
 	templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {
-	wallet_name = new FormControl('', [walletNameNotTakenValidator(this.wallet.walletList())]);
+	wallet_name = new FormControl('', [nameNotTakenValidator(this.wallet.walletList())]);
 	password = new FormControl('');
 	password_confirm = new FormControl('');
 	constructor(private walletRpc: WalletRpcService, private wallet: WalletService) {}

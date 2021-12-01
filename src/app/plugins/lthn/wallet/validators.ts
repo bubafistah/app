@@ -1,12 +1,12 @@
 import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
 
-export function walletNameNotTakenValidator(walletList: string[]): ValidatorFn {
+export function nameNotTakenValidator(nameList: string[]): ValidatorFn {
     return (control:AbstractControl) : ValidationErrors | null => {
 
         const value = control.value;
 
-		if (walletList.includes(value)) {
-			return {walletNameTaken:true}
+		if (nameList.includes(value)) {
+			return {nameTaken:true}
 		}
 		return null;
     }
