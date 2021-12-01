@@ -144,7 +144,7 @@ export class CryptService {
 			});
 		// Leave nothing to chance
 		privateKey = null
-		encryptionKey = null
+		encryptionKey = ''
 		message = null
 
 		return decrypted;
