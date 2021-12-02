@@ -10,7 +10,7 @@
     "clean": "rimraf node_modules",
     "test:watch": "jest --watch",
     "test:ci": "jest --runInBand",
-    "dev": "run-p dev:ssr be:serve",
+    "dev": "run-p ng:serve be:serve",
     "dev:lite": "run-p ng:serve be:serve",
     "dev:setup": "rimraf lthn && git clone https://github.com/letheanVPN/lthn.git lthn",
     "doc": "npx @compodoc/compodoc -p tsconfig.doc.json",
