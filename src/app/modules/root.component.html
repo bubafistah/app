@@ -5,7 +5,7 @@
         <mat-card-content>
             <p>{{ 'words.states.not_installed_desc' | translate }}</p>
             <button (click)="downloadCLI()" color="accent" mat-button>{{ 'button.install-blockchain' | translate }}</button>
-            <ng-container *ngIf="downloadingCLI">
+            <ng-container *ngIf="downloadingCLI ">
                 <lthn-app-console attach="update-cli"></lthn-app-console>
             </ng-container>
         </mat-card-content>

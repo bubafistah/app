@@ -17,13 +17,12 @@ import {FlexModule} from '@angular/flex-layout';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {AuthModule} from '@module/auth/auth.module';
-import {ConsoleModule} from '@plugin/console/console.module';
 import {BlockchainService} from '@plugin/lthn/chain/blockchain.service';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {WalletService} from '@plugin/lthn/wallet/wallet.service';
-import {ModalComponent} from '@service/ui/modal/modal.component';
 import {FileSystemService} from '@service/filesystem/file-system.service';
+import {ConsoleModule} from '@plugin/console/console.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);

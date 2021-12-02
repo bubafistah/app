@@ -10,22 +10,23 @@ import {nameNotTakenValidator} from '../validators'
 })
 
 export class RestoreComponent implements OnInit {
-	restoreWalletForm = new FormGroup({
-		filename: new FormControl('', [nameNotTakenValidator(this.wallet.walletList())]),
-		address: new FormControl(''),
-		restore_height: new FormControl('0'),
-		autosave_current: new FormControl(true),
-		password: new FormControl(''),
-		password_confirm: new FormControl(''),
-		spendkey: new FormControl(''),
-		viewkey: new FormControl(''),
-		viewonly_wallet: new FormControl(false),
-	});
+	restoreWalletForm : FormGroup;
 
 	constructor(private wallet: WalletService) {
 	}
 
 	ngOnInit(): void {
+		this.restoreWalletForm = new FormGroup({
+			filename: new FormControl('', [nameNotTakenValidator(this.wallet.walletList())]),
+			address: new FormControl(''),
+			restore_height: new FormControl('0'),
+			autosave_current: new FormControl(true),
+			password: new FormControl(''),
+			password_confirm: new FormControl(''),
+			spendkey: new FormControl(''),
+			viewkey: new FormControl(''),
+			viewonly_wallet: new FormControl(false),
+		});
 	}
 
 	restoreWallet() {

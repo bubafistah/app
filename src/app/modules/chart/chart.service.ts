@@ -24,7 +24,7 @@ export class ChartService {
 	 * @private
 	 */
 	private chartMeta = {
-		networkDifficulty: this.networkHashrateConfigService
+		networkDifficulty: NetworkHashrateChart
 	};
 	/**
 	 * holds all the data observables for all charts

@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConsoleComponent } from './console.component';
-import { NgTerminalModule } from 'ng-terminal';
 import { MatCardModule } from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import {NgTerminalModule} from 'ng-terminal';
+
 
 @NgModule({
 	declarations: [ConsoleComponent],
@@ -12,9 +13,9 @@ import {MatButtonModule} from '@angular/material/button';
 	],
 	imports: [
 		CommonModule,
-		NgTerminalModule,
 		MatCardModule,
-		MatButtonModule
+		MatButtonModule,
+		NgTerminalModule
 	]
 })
 export class ConsoleModule {}

@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {atob, btoa} from 'bytebuffer';
 
 @Injectable({
 	providedIn: 'root'
@@ -17,11 +18,22 @@ export class WebStorageService implements Storage {
 	}
 
 	getItem(key): string | null {
-		return this.backend('get', {object: key});
+		try {
+			return this.backend('get', {object: key});
+		}catch (e){
+			console.log('getItem Error')
+		}
+		return null;
 	}
 
 	setItem(key: string, value: string) {
-		return this.backend('set', {object: key, data: value});
+		try {
+			return this.backend('set', {object: key, data: value});
+		}catch (e){
+			console.log('setItem Error')
+		}
+		return null;
+
 	}
 
 	removeItem(key) {
@@ -32,9 +44,22 @@ export class WebStorageService implements Storage {
 		this.backend('clear', {});
 	}
 
-	private backend(cmd:string, payload):string {
+	/**
+	 * Performs call to backend object store
+	 *
+	 * @param {string} cmd
+	 * @param payload
+	 * @returns {string | null}
+	 * @private
+	 */
+	private backend(cmd:string, payload: any):string|null {
 		const axios = require('axios').default;
-		const ret = axios.post(`${this.apiUrl}/${cmd}`, {group: 'lthn-app', ...payload}).then((data) => data.data)
-		return ret.data;
+		try {
+			const ret = axios.post(`${this.apiUrl}/${cmd}`, atob({group: 'lthn-app', ...payload})).then((data) => data.data)
+			return ret.data;
+		}catch (NetworkError) {
+			console.log('HTTP Error')
+		}
+		return null
 	}
 }

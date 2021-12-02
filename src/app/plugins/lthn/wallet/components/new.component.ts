@@ -11,12 +11,16 @@ import { WalletService } from '../wallet.service'
 	templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {
-	wallet_name = new FormControl('', [nameNotTakenValidator(this.wallet.walletList())]);
-	password = new FormControl('');
-	password_confirm = new FormControl('');
+	wallet_name: FormControl;
+	password: FormControl;
+	password_confirm: FormControl;
 	constructor(private walletRpc: WalletRpcService, private wallet: WalletService) {}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		this.wallet_name = new FormControl('', [nameNotTakenValidator(this.wallet.walletList())]);
+		this.password = new FormControl('')
+		this.password_confirm = new FormControl('')
+	}
 
 	createWallet() {
 		if (this.password.value === this.password_confirm.value) {

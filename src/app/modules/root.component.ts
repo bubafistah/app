@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
 import {Client} from '@hiveio/dhive';
 import {Router} from '@angular/router';
 import {FileSystemService} from '@service/filesystem/file-system.service';
 import {BlockchainService} from '@plugin/lthn/chain/blockchain.service';
 import {WalletService} from '@plugin/lthn/wallet/wallet.service';
+import { isPlatformServer} from '@angular/common';
 
 @Component({
 	selector: 'lthn-root',
@@ -14,13 +15,15 @@ export class RootComponent implements OnInit {
 
 	public hasCLI: boolean;
 	public downloadingCLI: boolean;
-
+	@Inject(PLATFORM_ID) platformId: Object
+	public disableConsole = true
 	constructor(
 		private router: Router,
 		private fileSystem: FileSystemService,
 		private chain: BlockchainService,
 		private wallet: WalletService
 	) {
+		this.disableConsole = isPlatformServer(this.platformId)
 	}
 
 	async ngOnInit() {
