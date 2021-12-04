@@ -24,7 +24,7 @@ export class ChartService {
 	 * @private
 	 */
 	private chartMeta = {
-		networkDifficulty: NetworkHashrateChart
+		networkDifficulty: this.NetworkHashrateChart
 	};
 	/**
 	 * holds all the data observables for all charts
@@ -37,7 +37,7 @@ export class ChartService {
 		private store: Store<{ payload: any }>,
 		@Inject(PLATFORM_ID) private platformId: Object,
 		//@TODO try and find a better way than get DI to give us configs, so they can themselves use services
-		private networkHashrateConfigService: NetworkHashrateChart
+		private NetworkHashrateChart: NetworkHashrateChart
 	) {
 		if (isPlatformBrowser(this.platformId)) {
 			Chart.register(...registerables);

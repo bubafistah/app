@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import * as ChartsActions from '../../../modules/chart/data/actions';
+import * as ChartsActions from '@module/chart/data/actions';
 import {BaseChartConfigService} from '@module/chart/base-chart-config.service';
 import {ChartConfigInterface} from '@module/chart/chart-config.interface';
 
