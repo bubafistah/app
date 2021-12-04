@@ -6,11 +6,12 @@ import {atob, btoa} from 'bytebuffer';
 })
 export class WebStorageService implements Storage {
 
-	private items = [];
+	private items = {};
+	private count = 0
 	private apiUrl = 'https://localhost:36911/object';
 
 	get length() {
-		return this.items.length;
+		return this.count;
 	}
 
 	key(key:number): string | null {
@@ -19,6 +20,9 @@ export class WebStorageService implements Storage {
 
 	getItem(key): string | null {
 		try {
+			if(this.items[key]){
+				return this.items[key]
+			}
 			return this.backend('get', {object: key});
 		}catch (e){
 			console.log('getItem Error')
@@ -28,6 +32,8 @@ export class WebStorageService implements Storage {
 
 	setItem(key: string, value: string) {
 		try {
+			this.items[key] = value
+			this.count++
 			return this.backend('set', {object: key, data: value});
 		}catch (e){
 			console.log('setItem Error')
@@ -37,10 +43,14 @@ export class WebStorageService implements Storage {
 	}
 
 	removeItem(key) {
+		delete this.items[key]
+		this.count--
 		this.backend('remove', {object: key});
 	}
 
 	clear() {
+		this.items ={}
+		this.count = 0
 		this.backend('clear', {});
 	}
 
@@ -55,7 +65,7 @@ export class WebStorageService implements Storage {
 	private backend(cmd:string, payload: any):string|null {
 		const axios = require('axios').default;
 		try {
-			const ret = axios.post(`${this.apiUrl}/${cmd}`, atob({group: 'lthn-app', ...payload})).then((data) => data.data)
+			const ret = axios.post(`${this.apiUrl}/${cmd}`, {group: 'lthn-app', ...payload}).then((data) => data.data)
 			return ret.data;
 		}catch (NetworkError) {
 			console.log('HTTP Error')
