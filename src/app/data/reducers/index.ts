@@ -44,4 +44,4 @@ export const metaReducers: MetaReducer<AppState>[] = !APP_CONFIG.production
 	? []
 	: [localStorageSyncReducer];
 
-export const effects = [Settings.SettingsEffects, Chart.ChartsEffects];
+export const effects = [Chart.ChartsEffects, Settings.SettingsEffects ];

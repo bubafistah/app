@@ -11,16 +11,13 @@
     "test:watch": "jest --watch",
     "test:ci": "jest --runInBand",
     "dev": "run-p ng:serve be:serve",
-    "dev:lite": "run-p ng:serve be:serve",
     "dev:setup": "rimraf lthn && git clone https://github.com/letheanVPN/lthn.git lthn",
     "doc": "npx @compodoc/compodoc -p tsconfig.doc.json",
     "doc:serve": "npx @compodoc/compodoc -s",
     "ng:serve": "ng serve -c development -o ",
     "be:serve": "cd lthn && $HOME/.deno/bin/deno run --allow-net --allow-env --allow-run --allow-read --allow-write --unstable src/server.ts backend start",
     "dev:ssr": "ng run lethean-app:serve-ssr",
-    "serve:ssr": "node dist/lethean-app/server/main.js",
-    "build:ssr": "ng build && ng run lethean-app:server",
-    "prerender": "ng run lethean-app:prerender"
+    "build:ssr": "ng build && ng run lethean-app:server"
   },
   "main": "src/app/main.ts",
   "private": true,
