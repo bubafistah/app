@@ -1,6 +1,7 @@
 import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {NgTerminal} from 'ng-terminal';
 import {WebsocketService} from '@service/websocket.service';
+import {atob, btoa} from 'bytebuffer';
 
 
 @Component({
@@ -31,7 +32,8 @@ export class ConsoleComponent implements OnInit, AfterViewInit {
 		this.ref.detectChanges();
 		this.ws.connect().subscribe((data) => {
 			if(this.attach === data[0]) {
-				this.child.write(data[1] + '\r\n');
+
+				this.child.write(atob(data[1]) + '\r\n');
 				that.ref.markForCheck()
 			}
 
