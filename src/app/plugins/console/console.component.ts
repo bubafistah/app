@@ -8,7 +8,7 @@ import {WebsocketService} from '@service/websocket.service';
 	templateUrl: './console.component.html',
 	styleUrls: ['./console.component.scss'],
 	encapsulation: ViewEncapsulation.None,
-	//changeDetection: ChangeDetectionStrategy.OnPush
+	changeDetection: ChangeDetectionStrategy.OnPush
 
 
 })
@@ -19,9 +19,9 @@ export class ConsoleComponent implements OnInit, AfterViewInit {
 	private command: string[] = []
 	private sub$;
 	constructor(private ws: WebsocketService, private ref: ChangeDetectorRef) {
-		//this.ref.detach()
+		this.ref.detach()
 		setInterval(() => {
-		//	this.ref.detectChanges();
+			this.ref.detectChanges();
 		}, 1000);
 
 	}
@@ -32,8 +32,19 @@ export class ConsoleComponent implements OnInit, AfterViewInit {
 		this.ref.detectChanges();
 		this.ws.connect().subscribe((data) => {
 			if(this.attach === data[0]) {
-				this.child.underlying.writeln(atob(data[1]));
-			//	that.ref.markForCheck()
+				let line  = atob(data[1]);
+				if(line.includes("src/cryptonote_protocol/cryptonote_protocol_handler.inl:1154")){
+					let parts: string[] = line.split("src/cryptonote_protocol/cryptonote_protocol_handler.inl:1154");
+					if(parts.length > 0){
+						this.child.underlying.writeln(parts[1].trim());
+					}
+				}else if (line.includes("src/cryptonote_protocol/cryptonote_protocol_handler.inl:305")){
+
+				}else{
+					this.child.underlying.writeln(line.trim());
+				}
+
+				that.ref.markForCheck()
 			}
 
 		})
