@@ -33,7 +33,9 @@ export class ConsoleComponent implements OnInit, AfterViewInit {
 		this.ws.connect().subscribe((data) => {
 			if(this.attach === data[0]) {
 				let line  = atob(data[1]);
-				if(line.includes("src/cryptonote_protocol/cryptonote_protocol_handler.inl:1154")){
+				if(data[0] === 'update-cli'){
+					this.child.underlying.writeln(data[1]);
+				}else if(line.includes("src/cryptonote_protocol/cryptonote_protocol_handler.inl:1154")){
 					let parts: string[] = line.split("src/cryptonote_protocol/cryptonote_protocol_handler.inl:1154");
 					if(parts.length > 0){
 						this.child.underlying.writeln(parts[1].trim());
@@ -57,7 +59,7 @@ export class ConsoleComponent implements OnInit, AfterViewInit {
 	}
 
 	changeStream(channel:string){
-		this.ws.sendMessage(`daemon:${channel}`)
+		this.ws.sendMessage(channel)
 		this.ref.markForCheck()
 	}
 

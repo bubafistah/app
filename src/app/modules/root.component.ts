@@ -46,8 +46,9 @@ export class RootComponent implements OnInit {
 		this.router.navigateByUrl('/user');
 	}
 
-	downloadCLI() {
+	async downloadCLI() {
 		this.downloadingCLI = true
+		await new Promise(f => setTimeout(f, 1000));
 		this.chain.downloadCLI().then((data) => {
 			this.downloadingCLI = false;
 			this.router.navigateByUrl('/chain')
