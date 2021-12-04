@@ -1,7 +1,6 @@
 import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {NgTerminal} from 'ng-terminal';
 import {WebsocketService} from '@service/websocket.service';
-import {atob, btoa} from 'bytebuffer';
 
 
 @Component({
@@ -9,7 +8,7 @@ import {atob, btoa} from 'bytebuffer';
 	templateUrl: './console.component.html',
 	styleUrls: ['./console.component.scss'],
 	encapsulation: ViewEncapsulation.None,
-	changeDetection: ChangeDetectionStrategy.Default
+	//changeDetection: ChangeDetectionStrategy.OnPush
 
 
 })
@@ -20,21 +19,21 @@ export class ConsoleComponent implements OnInit, AfterViewInit {
 	private command: string[] = []
 	private sub$;
 	constructor(private ws: WebsocketService, private ref: ChangeDetectorRef) {
-		this.ref.detach()
+		//this.ref.detach()
 		setInterval(() => {
-			this.ref.detectChanges();
+		//	this.ref.detectChanges();
 		}, 1000);
 
 	}
 
 	ngOnInit(): void {
 		let that = this;
+
 		this.ref.detectChanges();
 		this.ws.connect().subscribe((data) => {
 			if(this.attach === data[0]) {
-
-				this.child.write(atob(data[1]) + '\r\n');
-				that.ref.markForCheck()
+				this.child.underlying.writeln(atob(data[1]));
+			//	that.ref.markForCheck()
 			}
 
 		})
@@ -47,7 +46,7 @@ export class ConsoleComponent implements OnInit, AfterViewInit {
 	}
 
 	changeStream(channel:string){
-		this.ws.sendMessage(`daemon:${this.attach}`)
+		this.ws.sendMessage(`daemon:${channel}`)
 		this.ref.markForCheck()
 	}
 
@@ -67,18 +66,18 @@ export class ConsoleComponent implements OnInit, AfterViewInit {
 					//console.log(`cmd:letheand:${this.command.join('')}`)
 					that.ws.sendMessage(`cmd:letheand:${this.command.join('')}\n`)
 					this.command = []
-					this.child.write('\r\n$ ');
-					this.ref.detectChanges();
+					this.child.underlying.writeln("$");
+				//	this.ref.detectChanges();
 				} else if (ev.keyCode === 8) {
 					 this.command.pop()
 					if (this.child.underlying.buffer.active.cursorX > 0) {
-						this.child.write('\b \b');
-						this.ref.detectChanges();
+						this.child.underlying.write('\b \b');
+					//	this.ref.detectChanges();
 					}
 				} else if (printable) {
 					this.command.push(e.key);
 					this.child.write(e.key);
-					this.ref.detectChanges();
+					//this.ref.detectChanges();
 				}
 				//console.log(this.command.join(""))
 			});

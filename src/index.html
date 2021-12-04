@@ -5,7 +5,7 @@
   <title>Lethean</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="wails-options" content="noautoinject">
+  <meta name="wails-options" content="noautoinjectipc,noautoinjectruntime">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
@@ -14,7 +14,7 @@
 <script>
   // BUG Fix, webkit acts weird about websickets.. this fixes it... dont ask me, whatever
   // credit to coolguy: https://coderedirect.com/questions/260201/websocket-in-android-webview
-  new window.webkitURL("javascript:document.getElementById('something').do.something()");
+ // window.webkitURL("javascript:document.getElementById('something').do.something()");
 </script>
 </html>
 
