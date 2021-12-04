@@ -4,6 +4,7 @@ import { ConsoleComponent } from './console.component';
 import { MatCardModule } from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {NgTerminalModule} from 'ng-terminal';
+import {FlexModule} from '@angular/flex-layout';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {NgTerminalModule} from 'ng-terminal';
 		CommonModule,
 		MatCardModule,
 		MatButtonModule,
-		NgTerminalModule
+		NgTerminalModule,
+		FlexModule
 	]
 })
 export class ConsoleModule {}
