@@ -86,7 +86,7 @@
 
             <tr>
                 <td class="col-md-3">changeDetection</td>
-                <td class="col-md-9"><code>ChangeDetectionStrategy.Default</code></td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
             </tr>
 
             <tr>
@@ -321,8 +321,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="47"
-                            class="link-to-prism">src/app/plugins/console/console.component.ts:47</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="61"
+                            class="link-to-prism">src/app/plugins/console/console.component.ts:61</a></div>
                 </td>
             </tr>
 
@@ -390,8 +390,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="43"
-                            class="link-to-prism">src/app/plugins/console/console.component.ts:43</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="57"
+                            class="link-to-prism">src/app/plugins/console/console.component.ts:57</a></div>
                 </td>
             </tr>
 
@@ -427,8 +427,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="52"
-                            class="link-to-prism">src/app/plugins/console/console.component.ts:52</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="66"
+                            class="link-to-prism">src/app/plugins/console/console.component.ts:66</a></div>
                 </td>
             </tr>
 
@@ -591,7 +591,7 @@ import {WebsocketService} from &#x27;@service/websocket.service&#x27;;
 	templateUrl: &#x27;./console.component.html&#x27;,
 	styleUrls: [&#x27;./console.component.scss&#x27;],
 	encapsulation: ViewEncapsulation.None,
-	changeDetection: ChangeDetectionStrategy.Default
+	changeDetection: ChangeDetectionStrategy.OnPush
 
 
 })
@@ -611,10 +611,24 @@ export class ConsoleComponent implements OnInit, AfterViewInit {
 
 	ngOnInit(): void {
 		let that &#x3D; this;
+
 		this.ref.detectChanges();
 		this.ws.connect().subscribe((data) &#x3D;&gt; {
 			if(this.attach &#x3D;&#x3D;&#x3D; data[0]) {
-				this.child.write(data[1] + &#x27;\r\n&#x27;);
+				let line  &#x3D; atob(data[1]);
+				if(data[0] &#x3D;&#x3D;&#x3D; &#x27;update-cli&#x27;){
+					this.child.underlying.writeln(data[1]);
+				}else if(line.includes(&quot;src/cryptonote_protocol/cryptonote_protocol_handler.inl:1154&quot;)){
+					let parts: string[] &#x3D; line.split(&quot;src/cryptonote_protocol/cryptonote_protocol_handler.inl:1154&quot;);
+					if(parts.length &gt; 0){
+						this.child.underlying.writeln(parts[1].trim());
+					}
+				}else if (line.includes(&quot;src/cryptonote_protocol/cryptonote_protocol_handler.inl:305&quot;)){
+
+				}else{
+					this.child.underlying.writeln(line.trim());
+				}
+
 				that.ref.markForCheck()
 			}
 
@@ -628,7 +642,7 @@ export class ConsoleComponent implements OnInit, AfterViewInit {
 	}
 
 	changeStream(channel:string){
-		this.ws.sendMessage(&#x60;daemon:${this.attach}&#x60;)
+		this.ws.sendMessage(channel)
 		this.ref.markForCheck()
 	}
 
@@ -648,18 +662,18 @@ export class ConsoleComponent implements OnInit, AfterViewInit {
 					//console.log(&#x60;cmd:letheand:${this.command.join(&#x27;&#x27;)}&#x60;)
 					that.ws.sendMessage(&#x60;cmd:letheand:${this.command.join(&#x27;&#x27;)}\n&#x60;)
 					this.command &#x3D; []
-					this.child.write(&#x27;\r\n$ &#x27;);
-					this.ref.detectChanges();
+					this.child.underlying.writeln(&quot;$&quot;);
+				//	this.ref.detectChanges();
 				} else if (ev.keyCode &#x3D;&#x3D;&#x3D; 8) {
 					 this.command.pop()
 					if (this.child.underlying.buffer.active.cursorX &gt; 0) {
-						this.child.write(&#x27;\b \b&#x27;);
-						this.ref.detectChanges();
+						this.child.underlying.write(&#x27;\b \b&#x27;);
+					//	this.ref.detectChanges();
 					}
 				} else if (printable) {
 					this.command.push(e.key);
 					this.child.write(e.key);
-					this.ref.detectChanges();
+					//this.ref.detectChanges();
 				}
 				//console.log(this.command.join(&quot;&quot;))
 			});
@@ -670,7 +684,10 @@ export class ConsoleComponent implements OnInit, AfterViewInit {
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;ng-terminal #term&gt;&lt;/ng-terminal&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;mat-card style&#x3D;&quot;width: 90vw&quot;&gt;
+    &lt;ng-terminal #term&gt;&lt;/ng-terminal&gt;
+&lt;/mat-card&gt;
+
 
 
 </code></pre>
@@ -680,16 +697,16 @@ export class ConsoleComponent implements OnInit, AfterViewInit {
                 <p class="comment">
                     <code>./console.component.scss</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss">.xterm-viewport {
-	width: auto !important;
-}
-
-.xterm-screen {
-	width: auto !important;
-	&gt; canvas {
-		width: 100% !important;
-	}
-}
+                <pre class="line-numbers"><code class="language-scss">//.xterm-viewport {
+//	width: auto !important;
+//}
+//
+//.xterm-screen {
+//	width: auto !important;
+//	&gt; canvas {
+//		width: 100% !important;
+//	}
+//}
 </code></pre>
     </div>
 
@@ -718,7 +735,7 @@ export class ConsoleComponent implements OnInit, AfterViewInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ng-terminal #term></ng-terminal></div>'
+        var COMPONENT_TEMPLATE = '<div><mat-card style="width: 90vw">    <ng-terminal #term></ng-terminal></mat-card></div>'
     var COMPONENTS = [{'name': 'AddComponent', 'selector': 'lthn-wallet-add'},{'name': 'AppComponent', 'selector': 'lthn-app'},{'name': 'BackupComponent', 'selector': 'lthn-app-backup'},{'name': 'BlockchainComponent', 'selector': 'lthn-chain'},{'name': 'ConsoleComponent', 'selector': 'lthn-app-console'},{'name': 'LoginComponent', 'selector': 'lthn-login'},{'name': 'LogsComponent', 'selector': 'lthn-app-logs'},{'name': 'ModalComponent', 'selector': 'modal'},{'name': 'NewComponent', 'selector': 'lthn-wallet-new'},{'name': 'NoDaemonRunningDialog', 'selector': 'lthn-app-status-no-daemon'},{'name': 'OpenComponent', 'selector': 'lthn-wallet-open'},{'name': 'PostComponent', 'selector': 'lthn-app-post'},{'name': 'ProfileComponent', 'selector': 'lthn-user-profile'},{'name': 'RestoreComponent', 'selector': 'lthn-wallet-restore'},{'name': 'RootComponent', 'selector': 'lthn-root'},{'name': 'SettingsComponent', 'selector': 'lthn-settings'},{'name': 'SettingsComponent', 'selector': 'lthn-app-settings'},{'name': 'StatusComponent', 'selector': 'lthn-app-status'},{'name': 'TransactionsComponent', 'selector': 'lthn-wallet-transactions'},{'name': 'UserComponent', 'selector': 'lthn-user'},{'name': 'VpnComponent', 'selector': 'lthn-vpn'},{'name': 'WalletComponent', 'selector': 'lthn-app-wallet'}];
     var DIRECTIVES = [{'name': 'ChartDirective', 'selector': '[lthnChart]'}];
     var ACTUAL_COMPONENT = {'name': 'ConsoleComponent'};

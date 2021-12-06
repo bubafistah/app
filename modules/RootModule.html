@@ -191,18 +191,15 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {NgModule} from &#x27;@angular/core&#x27;;
 import {CommonModule} from &#x27;@angular/common&#x27;;
-import {RouterModule, Routes} from &#x27;@angular/router&#x27;;
 import {RootComponent} from &#x27;./root.component&#x27;;
 import {MatCardModule} from &#x27;@angular/material/card&#x27;;
 import {MatButtonModule} from &#x27;@angular/material/button&#x27;;
-import {AuthGuard} from &#x27;./auth/route.guard&#x27;;
 import {FlexModule} from &#x27;@angular/flex-layout&#x27;;
 import {ConsoleModule} from &#x27;@plugin/console/console.module&#x27;;
 import {MatTabsModule} from &#x27;@angular/material/tabs&#x27;;
 import {WalletModule} from &#x27;@plugin/lthn/wallet/wallet.module&#x27;;
 import {TranslateModule} from &#x27;@ngx-translate/core&#x27;;
 import {MatDividerModule} from &#x27;@angular/material/divider&#x27;;
-import {ModalComponent} from &#x27;@service/ui/modal/modal.component&#x27;;
 
 @NgModule({
 	declarations: [RootComponent],
@@ -213,11 +210,11 @@ import {ModalComponent} from &#x27;@service/ui/modal/modal.component&#x27;;
 		MatCardModule,
 		MatButtonModule,
 		FlexModule,
-		ConsoleModule,
 		MatTabsModule,
 		WalletModule,
 		TranslateModule,
-		MatDividerModule
+		MatDividerModule,
+		ConsoleModule
 	]
 })
 export class RootModule {
