@@ -3,6 +3,7 @@ import {WalletService} from '@plugin/lthn/wallet/wallet.service';
 import {ModalConfig} from '@service/ui/modal/modalConfig';
 import {ModalComponent} from '@service/ui/modal/modal.component';
 import {Balance} from '@plugin/lthn/wallet/interfaces';
+import {PluginDefinition, PluginStatus} from '@data/plugins';
 
 @Component({
 	selector: 'lthn-app-wallet',
@@ -10,12 +11,19 @@ import {Balance} from '@plugin/lthn/wallet/interfaces';
 	styleUrls: ['./wallet.component.scss']
 })
 export class WalletComponent implements OnInit, OnDestroy {
+	public pluginConfig: PluginDefinition = {
+		description_short: 'test',
+		git_repo: 'https://github.com/Snider/plugin-bootstrap.git',
+		name: 'test',
+		readme_list: 'https://github.com/Snider/plugin-bootstrap#readme',
+		status: PluginStatus.ACTIVE
+	}
 	public balance:  Balance | Promise<Balance>;
 	constructor(private wallet: WalletService) {}
 	public wallets: string[] = [];
 	public modalConfig: ModalConfig = {modalTitle: 'Open Wallet'} as ModalConfig;
 	@ViewChild('modal') private modalComponent: ModalComponent
-	public openedWallet: string;
+	public openedWallet: string = '';
 	public showtx: boolean = false;
 	public txnSelection: any = {
 		in: true,
