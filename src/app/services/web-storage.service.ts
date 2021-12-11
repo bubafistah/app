@@ -20,10 +20,10 @@ export class WebStorageService implements Storage {
 
 	getItem(key): string | null {
 		try {
-			if(this.items[key]){
-				return this.items[key]
+			const ret = this.backend('get', {object: key});
+			if(ret){
+				return JSON.parse(ret)
 			}
-			return this.backend('get', {object: key});
 		}catch (e){
 			console.log('getItem Error')
 		}
@@ -32,7 +32,6 @@ export class WebStorageService implements Storage {
 
 	setItem(key: string, value: string) {
 		try {
-			this.items[key] = value
 			this.count++
 			return this.backend('set', {object: key, data: value});
 		}catch (e){

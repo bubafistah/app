@@ -5,6 +5,11 @@ export const addWallet = createAction(
 	props<{ wallet: string }>()
 );
 
+export const switchWallet = createAction(
+	'[Wallet] Switching Wallets',
+	props<{ wallet: string }>()
+);
+
 export const getWalletList = createAction(
 	'[Wallet] Get Wallet list'
 )

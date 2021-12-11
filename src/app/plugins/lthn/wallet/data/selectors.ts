@@ -18,8 +18,8 @@ export const selectOpenedWallet = createSelector(selectWalletsState, (state) => 
 });
 
 export const selectWalletCount = createSelector(selectWalletsState, (state) => {
-	if (state && state.count) {
-		return state.count;
+	if (state && state.known_wallets) {
+		return state.known_wallets.length;
 	}
 	return null;
 });

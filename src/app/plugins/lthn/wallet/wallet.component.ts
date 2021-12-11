@@ -5,7 +5,7 @@ import {ModalComponent} from '@service/ui/modal/modal.component';
 import {Balance} from '@plugin/lthn/wallet/interfaces';
 import {PluginDefinition, PluginStatus} from '@data/plugins';
 import {select, Store} from '@ngrx/store';
-import {addWallet, getWalletList, selectOpenedWallet, selectWallets} from '@plugin/lthn/wallet/data';
+import {addWallet, getWalletList, selectOpenedWallet, selectWallets, switchWallet} from '@plugin/lthn/wallet/data';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -62,7 +62,7 @@ export class WalletComponent implements OnInit, OnDestroy {
 	}
 
 	openWallet(key: string){
-		this.store.dispatch(addWallet({wallet: key}))
+		this.store.dispatch(switchWallet({wallet: key}))
 	}
 
 	async getBalance() {
