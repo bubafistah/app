@@ -45,7 +45,7 @@ export function localStorageSyncReducer(
 }
 
 export const metaReducers: MetaReducer<AppState>[] = !APP_CONFIG.production
-	? [localStorageSyncReducer]
+	? []
 	: [localStorageSyncReducer];
 
 export const effects = [Chart.ChartsEffects, Settings.SettingsEffects, Wallet.WalletEffects ];

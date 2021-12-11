@@ -1,19 +1,19 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {WalletService} from '@plugin/lthn/wallet/wallet.service';
-import {ModalConfig} from '@service/ui/modal/modalConfig';
 import {ModalComponent} from '@service/ui/modal/modal.component';
 import {Balance} from '@plugin/lthn/wallet/interfaces';
 import {PluginDefinition, PluginStatus} from '@data/plugins';
 import {select, Store} from '@ngrx/store';
-import {addWallet, getWalletList, selectOpenedWallet, selectWallets, switchWallet} from '@plugin/lthn/wallet/data';
+import * as WalletActions from '@plugin/lthn/wallet/data';
 import {Subscription} from 'rxjs';
+import {getWalletData} from '@plugin/lthn/wallet/data';
 
 @Component({
 	selector: 'lthn-app-wallet',
 	templateUrl: './wallet.component.html',
 	styleUrls: ['./wallet.component.scss']
 })
-export class WalletComponent implements OnInit, OnDestroy {
+export class WalletComponent implements OnInit, OnDestroy, AfterViewInit {
 	public pluginConfig: PluginDefinition = {
 		description_short: 'test',
 		git_repo: 'https://github.com/Snider/plugin-bootstrap.git',
@@ -41,18 +41,27 @@ export class WalletComponent implements OnInit, OnDestroy {
 	private subs$: Subscription[] = []
 	constructor(private wallet: WalletService, private store: Store) {}
 
-	async ngOnInit() {
-		 await this.getBalance()
+	ngOnInit() {
 
-		this.subs$['wallets'] = this.store.pipe(select(selectWallets)).subscribe((data) => {
+		this.store.dispatch(WalletActions.WalletStartPolling())
+		this.subs$['wallets'] = this.store.pipe(select(WalletActions.selectWallets)).subscribe((data) => {
 			if(data) this.wallets = data
 		})
 
-		this.subs$['openedWallet'] = this.store.pipe(select(selectOpenedWallet)).subscribe((data) => {
-			if(data) this.openedWallet = data
+		this.subs$['openedWallet'] = this.store.pipe(select(WalletActions.selectOpenedWallet)).subscribe((wallet) => {
+			if(wallet) {
+				this.openedWallet = wallet
+
+			}
 		})
 
+		this.subs$['walletData'] = this.store.pipe(select(WalletActions.selectWalletHeight)).subscribe((data) => console.log(data))
+
 	 }
+
+	public ngAfterViewInit() {
+
+	}
 
 	ngOnDestroy(): void {
 		for (let sub of this.subs$){
@@ -62,7 +71,7 @@ export class WalletComponent implements OnInit, OnDestroy {
 	}
 
 	openWallet(key: string){
-		this.store.dispatch(switchWallet({wallet: key}))
+		this.store.dispatch(WalletActions.switchWallet({address: key}))
 	}
 
 	async getBalance() {

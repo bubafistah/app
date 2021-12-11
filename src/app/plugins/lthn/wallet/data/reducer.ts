@@ -1,29 +1,39 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { WalletsState } from './state';
+import {Wallet, WalletsState, WalletState} from './state';
 
 import * as WalletActions from './actions';
+import {WalletLoaded} from './actions';
 
-export const initialState: WalletsState = {
-	known_wallets: [],
-	loaded_wallet: ''
-};
+export const initialState: WalletsState = new WalletState
 
 const walletReducer = createReducer(
 	initialState,
-	on(WalletActions.addWallet, (state: any, { wallet }) => ({
+	on(WalletActions.addWallet, (state: any, { address }) => ({
 		...state,
 		known_wallets: [
 			...state.known_wallets,
-			wallet
-		]
+			address
+		],
+		wallets: {
+			...state.wallets, [address]: new Wallet()
+		}
 	})),
-	on(WalletActions.openWallet, (state: any, {wallet, password}) => ({
+	on(WalletActions.openWallet, (state: any, {address, password}) => ({
 		...state,
-		loaded_wallet: wallet,
+		loaded_wallet: address,
 		known_wallets: [
 			...state.known_wallets,
-			wallet
-		]
+			address
+		],
+		wallets: {
+			...state.wallets, [address]: new Wallet()
+		}
+	})),
+	on(WalletActions.WalletLoaded, (state: any, {stats}) => ({
+		...state,
+		wallets: {
+			...state.wallets,[state.loaded_wallet]: stats
+		}
 	}))
 );
 
