@@ -24,6 +24,7 @@ import {WalletService} from '@plugin/lthn/wallet/wallet.service';
 import {FileSystemService} from '@service/filesystem/file-system.service';
 import {ConsoleModule} from '@plugin/console/console.module';
 import {PluginsModule} from '@plugin/plugins.module';
+import {NotifierModule} from 'angular-notifier';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
@@ -59,7 +60,10 @@ export function HttpLoaderFactory(http: HttpClient) {
 		FlexModule,
 		AuthModule,
 		ConsoleModule,
-		PluginsModule
+		PluginsModule,
+		NotifierModule.withConfig({
+			// Custom options in here
+		}),
 
 	],
 	providers: [],
