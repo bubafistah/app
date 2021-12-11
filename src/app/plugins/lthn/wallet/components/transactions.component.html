@@ -3,18 +3,23 @@
     <mat-card-content>
 
             <ngx-datatable
-                    class="material striped dark"
+                    class="material"
                     [rows]="rows"
                     [loadingIndicator]="true"
-                    [columns]="columns"
                     [columnMode]="ColumnMode.force"
                     [headerHeight]="50"
                     [footerHeight]="50"
                     [rowHeight]="50"
                     [limit]="10"
+                    [trackByProp]="'timestamp'"
                     [sorts]="[{ prop: 'timestamp', dir: 'desc' }]"
             >
                 <ngx-datatable-column name="Type"></ngx-datatable-column>
+                <ngx-datatable-column name="Txid">
+                    <ng-template let-value="value"  ngx-datatable-cell-template>
+                        <span [innerHTML]="value | hashLink:'txn' | keepHtml"></span>
+                    </ng-template>
+                </ngx-datatable-column>
                 <ngx-datatable-column name="Amount">
                     <ng-template let-value="value" ngx-datatable-cell-template>
                        {{ value | toCoin}}
