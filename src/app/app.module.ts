@@ -23,6 +23,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {WalletService} from '@plugin/lthn/wallet/wallet.service';
 import {FileSystemService} from '@service/filesystem/file-system.service';
 import {ConsoleModule} from '@plugin/console/console.module';
+import {PluginsModule} from '@plugin/plugins.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
@@ -57,7 +58,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 		MatTooltipModule,
 		FlexModule,
 		AuthModule,
-		ConsoleModule
+		ConsoleModule,
+		PluginsModule
 
 	],
 	providers: [],
