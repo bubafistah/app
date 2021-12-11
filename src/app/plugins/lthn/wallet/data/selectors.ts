@@ -59,6 +59,13 @@ export const selectWalletHeight = createSelector(selectOpenedWalletData, (state)
 	return null;
 });
 
+export const selectWalletTransactions = createSelector(selectOpenedWalletData, (state) => {
+
+		return state.transfers;
+
+
+});
+
 
 export const selectWalletCount = createSelector(selectWalletsState, (state) => {
 	if (state && state.known_wallets) {

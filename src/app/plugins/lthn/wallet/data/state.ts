@@ -1,4 +1,5 @@
 import {PaginatorOptions} from '@data/interface/pagination';
+import {GetTransfersOut, Transfer} from '@plugin/lthn/wallet/interfaces';
 
 export interface WalletsState {
 	loaded_wallet: string;
@@ -19,6 +20,7 @@ export interface Wallet {
 	 */
 	height: number;
 	name: string;
+	transfers: GetTransfersOut[];
 	options: {
 		inactivityThreshold: number;
 		pollingInterval: number;
@@ -30,8 +32,12 @@ export interface Wallet {
 export class Wallet implements Wallet {
 	options = {
 		inactivityThreshold: 10,
-		pollingInterval: 1000,
+		pollingInterval: 10000,
 		pagination: new PaginatorOptions
+	}
+
+	constructor(name: string) {
+		this.name = name
 	}
 
 }

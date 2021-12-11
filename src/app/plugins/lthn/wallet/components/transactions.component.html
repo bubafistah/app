@@ -12,7 +12,19 @@
                     [footerHeight]="50"
                     [rowHeight]="50"
                     [limit]="10"
+                    [sorts]="[{ prop: 'timestamp', dir: 'desc' }]"
             >
+                <ngx-datatable-column name="Type"></ngx-datatable-column>
+                <ngx-datatable-column name="Amount">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                       {{ value | toCoin}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Timestamp">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{ value | timeAgo }}
+                    </ng-template>
+                </ngx-datatable-column>
             </ngx-datatable>
 
     </mat-card-content>

@@ -43,19 +43,18 @@ export class WalletComponent implements OnInit, OnDestroy, AfterViewInit {
 
 	ngOnInit() {
 
-		this.store.dispatch(WalletActions.WalletStartPolling())
 		this.subs$['wallets'] = this.store.pipe(select(WalletActions.selectWallets)).subscribe((data) => {
-			if(data) this.wallets = data
-		})
-
-		this.subs$['openedWallet'] = this.store.pipe(select(WalletActions.selectOpenedWallet)).subscribe((wallet) => {
-			if(wallet) {
-				this.openedWallet = wallet
+			if(data && data.length > 0) {
+				this.wallets = data
+				this.subs$['openedWallet'] = this.store.pipe(select(WalletActions.selectOpenedWallet)).subscribe((wallet) => {
+					if(wallet) {
+						this.openedWallet = wallet
+						this.store.dispatch(WalletActions.WalletStartPolling())
+					}
+				})
 
 			}
 		})
-
-		this.subs$['walletData'] = this.store.pipe(select(WalletActions.selectWalletHeight)).subscribe((data) => console.log(data))
 
 	 }
 
@@ -67,6 +66,7 @@ export class WalletComponent implements OnInit, OnDestroy, AfterViewInit {
 		for (let sub of this.subs$){
 			sub.unsubscribe();
 		}
+		this.store.dispatch(WalletActions.WalletStopPolling())
 		console.log('WalletComponent DESTROY');
 	}
 

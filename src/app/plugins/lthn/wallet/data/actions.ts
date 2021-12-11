@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import {Balance, GetTransfersOut, Transfer} from '@plugin/lthn/wallet/interfaces';
 
 export const addWallet = createAction(
 	'[Wallet] Adding Known Wallet',
@@ -41,5 +42,7 @@ export const WalletStartPolling = createAction('[Wallet] Start Polling');
 export const WalletStopPolling = createAction('[Wallet] Stop Polling');
 export const WalletStoppedPolling = createAction('[Wallet] Stopped Polling');
 export const WalletLoadData = createAction('[Wallet] Load Requested' );
-export const WalletLoaded = createAction('[Wallet] Loaded', props<{  stats: any }>() );
+export const WalletLoaded = createAction('[Wallet] Loaded' );
+export const WalletTransfers = createAction('[Wallet] Loaded Transfers', props<{ address: string, transfers: GetTransfersOut[] }>() );
+export const WalletBalance = createAction('[Wallet] Loaded Balance', props<{ address: string, balance: Balance }>() );
 

@@ -10,6 +10,9 @@ import {merge, of, timer} from 'rxjs';
 import {selectOpenedWalletData, selectWalletData} from './selectors';
 import {HttpClient} from '@angular/common/http';
 import {rpcBody} from '@service/json-rpc';
+import {Balance, GetTransfersIn, GetTransfersOut} from '@plugin/lthn/wallet/interfaces';
+import {WalletTransfers} from './actions';
+import {debug} from '@data/debug.rxjs';
 
 @Injectable()
 export class WalletEffects {
@@ -33,27 +36,40 @@ export class WalletEffects {
 				ofType(WalletActions.WalletLoadData),
 				// Get the polling interval
 				withLatestFrom(this.store.pipe(select(WalletSelectors.selectOpenedWalletData))),
-				switchMap(([action, wallet]) => {
-						// Start polling
-						return merge(
+				switchMap(([action, wallet]) => merge(
 							timer(0, wallet.options.pollingInterval).pipe(
 								takeWhile(() => this.isPollingActiveStats),
-								switchMap(() => this.http.post<any>(`https://localhost:36911/daemon/wallet/json_rpc`,
-									JSON.stringify(rpcBody('getbalance')('')))
-									.pipe(
-										map((data) => {
-											console.log(data)
-												return {stats: data};
-											}
-										)
+								switchMap(() =>
+									merge(
+										this.http.post<any>(`https://localhost:36911/daemon/wallet/json_rpc`,
+											JSON.stringify(rpcBody('getbalance')('')))
+											.pipe(
+												map((res: any) => {
+													this.store.dispatch( WalletActions.WalletBalance({
+														address: wallet.name,
+														balance: res['result'] as Balance
+													}))
+													}
+												)
+											),
+										this.http.post<any>(`https://localhost:36911/daemon/wallet/json_rpc`,
+											JSON.stringify(rpcBody('get_transfers')({in: true, out: true, failed: true, pending: true } as GetTransfersIn)))
+											.pipe(
+												map((res: any) => {
+													this.store.dispatch( WalletActions.WalletTransfers({
+														address: wallet.name,
+													 	transfers: res['result'] as GetTransfersOut[]
+													}))
+
+													}
+												)
+											)
 									)
 								)
 							)
 						).pipe(
 							map((payload) => {
-									return WalletActions.WalletLoaded({
-										stats: payload.stats
-									});
+									return WalletActions.WalletLoaded();
 								},
 								catchError((error) => {
 										console.error(error);
@@ -61,8 +77,8 @@ export class WalletEffects {
 									}
 								)
 							)
-						);
-					}
+						)
+
 				)
 			)
 		);

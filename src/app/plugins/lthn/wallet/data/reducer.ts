@@ -2,7 +2,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import {Wallet, WalletsState, WalletState} from './state';
 
 import * as WalletActions from './actions';
-import {WalletLoaded} from './actions';
+import {WalletLoaded, WalletTransfers} from './actions';
 
 export const initialState: WalletsState = new WalletState
 
@@ -15,7 +15,7 @@ const walletReducer = createReducer(
 			address
 		],
 		wallets: {
-			...state.wallets, [address]: new Wallet()
+			...state.wallets, [address]: new Wallet(address)
 		}
 	})),
 	on(WalletActions.openWallet, (state: any, {address, password}) => ({
@@ -26,13 +26,21 @@ const walletReducer = createReducer(
 			address
 		],
 		wallets: {
-			...state.wallets, [address]: new Wallet()
+			...state.wallets, [address]: new Wallet(address)
 		}
 	})),
-	on(WalletActions.WalletLoaded, (state: any, {stats}) => ({
-		...state,
-		wallets: {
-			...state.wallets,[state.loaded_wallet]: stats
+	on(WalletActions.WalletTransfers, (state: any, { address, transfers }) => ({
+		...state, wallets: {
+			...state.wallets,[address]: {
+				...state.wallets[address], transfers: transfers
+			}
+		}
+	})),
+	on(WalletActions.WalletBalance, (state: any, { address, balance }) => ({
+		...state, wallets: {
+			...state.wallets, [address]: {
+				...state.wallets[address], balance:  balance
+			}
 		}
 	}))
 );
