@@ -1,15 +1,20 @@
 <mat-card>
-    <mat-card-title>{{ 'plugin.lthn.wallet.titles.unlockang-wallet' | translate }}</mat-card-title>
+    <mat-card-title>{{ 'plugin.lthn.wallet.titles.unlock-wallet' | translate }}</mat-card-title>
     <mat-card-content>
+        <div fxLayout="row, wrap">
+            <div  fxFlex="20" *ngFor="let wall of wallets">
+            <mat-card>
+                <mat-card-title>{{wall}}</mat-card-title>
+                <mat-card-content>
+                    <mat-form-field  class="full_width" appearance="standard">
+                        <mat-label>{{ 'plugin.lthn.wallet.label.wallet-password' | translate }}</mat-label>
+                        <input [id]="wall+'-pass'" matInput type="password">
+                    </mat-form-field>
+                    <button mat-button (click)="unlockWallet(wall)" color="accent">{{ 'plugin.lthn.wallet.button.unlock-wallet' | translate }}</button>
 
-        <mat-form-field class="full_width"  appearance="standard">
-            <mat-label>{{ 'plugin.lthn.wallet.label.filename' | translate }}</mat-label>
-            <input [formControl]="filename" [value]="this.name" matInput type="text">
-        </mat-form-field>
-        <mat-form-field  class="full_width" appearance="standard">
-            <mat-label>{{ 'plugin.lthn.wallet.label.wallet-password' | translate }}</mat-label>
-            <input [formControl]="password" matInput type="password">
-        </mat-form-field>
-        <button mat-button (click)="unlockWallet()">{{ 'plugin.lthn.wallet.button.unlock-wallet' | translate }}</button>
+                </mat-card-content>
+            </mat-card>
+            </div>
+        </div>
     </mat-card-content>
 </mat-card>

@@ -5,9 +5,9 @@ import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/cor
 	templateUrl: './add.component.html'
 })
 export class AddComponent implements OnInit, OnChanges {
-	@Input() targetAddForm: string = 'restore';
+	@Input() targetAddForm: string = 'open';
 	targetTabIndex: number = 0;
-	
+
 	constructor() { }
 
 	ngOnInit(): void {
@@ -15,7 +15,9 @@ export class AddComponent implements OnInit, OnChanges {
 	}
 
 	setTargetTabIndex(): void {
-		if (this.targetAddForm === "restore") {
+		if (this.targetAddForm === "open") {
+			this.targetTabIndex = 2;
+		}else if (this.targetAddForm === "restore") {
 			this.targetTabIndex = 1;
 		}else{
 			this.targetTabIndex = 0;

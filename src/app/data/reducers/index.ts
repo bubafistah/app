@@ -4,6 +4,7 @@ import * as Settings from '../../modules/settings/data';
 import * as User from '../../modules/user/data/user';
 import {localStorageSync} from 'ngrx-store-localstorage';
 import * as Chart from '../../modules/chart/data';
+import * as Wallet from '../../plugins/lthn/wallet/data';
 import * as Logs from '../logs';
 import {WebStorageService} from '@service/web-storage.service';
 
@@ -12,13 +13,15 @@ export interface AppState {
 	charts: Chart.ChartsState;
 	user: User.UsersState;
 	logs: Logs.LogsState;
+	wallets: Wallet.WalletsState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
 	settings: Settings.reducer,
 	charts: Chart.reducer,
 	user: User.reducer,
-	logs: Logs.reducer
+	logs: Logs.reducer,
+	wallets: Wallet.reducer
 };
 
 export function localStorageSyncReducer(
@@ -27,6 +30,7 @@ export function localStorageSyncReducer(
 	return localStorageSync({
 		keys: [
 			'settings',
+			'wallets',
 			{
 				user: {
 					encrypt: (state: string) => btoa(state), // placeholder
@@ -36,12 +40,12 @@ export function localStorageSyncReducer(
 		],
 		rehydrate: true,
 		removeOnUndefined: true,
-		storage:  new WebStorageService()
+		//storage:  new WebStorageService()
 	})(reducer);
 }
 
 export const metaReducers: MetaReducer<AppState>[] = !APP_CONFIG.production
-	? []
+	? [localStorageSyncReducer]
 	: [localStorageSyncReducer];
 
-export const effects = [Chart.ChartsEffects, Settings.SettingsEffects ];
+export const effects = [Chart.ChartsEffects, Settings.SettingsEffects, Wallet.WalletEffects ];

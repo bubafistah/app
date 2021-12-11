@@ -61,12 +61,13 @@ export class WalletService {
 		this.fs.listFiles('/wallets').then((data) => {
 			if (data.length > 0) {
 				for (let dat of data) {
-					if (!dat.endsWith('.keys') && !dat.endsWith('.txt')) {
+					if (!this.wallets.includes(dat) && !dat.endsWith('.keys') && !dat.endsWith('.txt')) {
 						this.wallets.push(dat);
 					}
 				}
 			}
 		});
+		return this.wallets
 	}
 
 	/**

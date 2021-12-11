@@ -4,6 +4,9 @@ import {ModalConfig} from '@service/ui/modal/modalConfig';
 import {ModalComponent} from '@service/ui/modal/modal.component';
 import {Balance} from '@plugin/lthn/wallet/interfaces';
 import {PluginDefinition, PluginStatus} from '@data/plugins';
+import {select, Store} from '@ngrx/store';
+import {addWallet, getWalletList, selectOpenedWallet, selectWallets, switchWallet} from '@plugin/lthn/wallet/data';
+import {Subscription} from 'rxjs';
 
 @Component({
 	selector: 'lthn-app-wallet',
@@ -19,9 +22,9 @@ export class WalletComponent implements OnInit, OnDestroy {
 		status: PluginStatus.ACTIVE
 	}
 	public balance:  Balance | Promise<Balance>;
-	constructor(private wallet: WalletService) {}
+
 	public wallets: string[] = [];
-	public modalConfig: ModalConfig = {modalTitle: 'Open Wallet'} as ModalConfig;
+
 	@ViewChild('modal') private modalComponent: ModalComponent
 	public openedWallet: string = '';
 	public showtx: boolean = false;
@@ -35,23 +38,31 @@ export class WalletComponent implements OnInit, OnDestroy {
 		min_height: null,
 		max_height: null
 	};
-	async openModal() {
-		return await this.modalComponent.open()
-	}
-	 async ngOnInit() {
+	private subs$: Subscription[] = []
+	constructor(private wallet: WalletService, private store: Store) {}
+
+	async ngOnInit() {
 		 await this.getBalance()
-		 this.wallets = this.wallet.walletList()
+
+		this.subs$['wallets'] = this.store.pipe(select(selectWallets)).subscribe((data) => {
+			if(data) this.wallets = data
+		})
+
+		this.subs$['openedWallet'] = this.store.pipe(select(selectOpenedWallet)).subscribe((data) => {
+			if(data) this.openedWallet = data
+		})
 
 	 }
 
 	ngOnDestroy(): void {
+		for (let sub of this.subs$){
+			sub.unsubscribe();
+		}
 		console.log('WalletComponent DESTROY');
 	}
 
 	openWallet(key: string){
-		this.openedWallet = key;
-		this.openModal()
-
+		this.store.dispatch(switchWallet({wallet: key}))
 	}
 
 	async getBalance() {

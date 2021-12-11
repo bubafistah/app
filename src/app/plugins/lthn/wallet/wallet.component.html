@@ -23,8 +23,9 @@
                 <mat-card>
                     <mat-card-title>Wallets</mat-card-title>
                     <mat-card-content>
-                        <mat-select [placeholder]="openedWallet">
+                        <mat-select [(value)]="openedWallet" [placeholder]="openedWallet" >
                             <mat-option *ngFor="let wallet of wallets"
+                                        value="{{wallet}}"
                                         (click)="this.openWallet(wallet)">{{wallet}}</mat-option>
                         </mat-select>
                         <mat-divider></mat-divider>
@@ -63,11 +64,11 @@
             </div>
             <div fxFlex="80" style="padding: 6px 0 6px 3px;">
                 <ng-container *ngIf="openedWallet.length > 1">
-                    <lthn-wallet-transactions [opts]="txnSelection"></lthn-wallet-transactions>
+<!--                    <lthn-wallet-transactions [opts]="txnSelection"></lthn-wallet-transactions>-->
                 </ng-container>
                 <ng-container *ngIf="openedWallet.length === 0">
 
-                        <lthn-wallet-add targetAddForm="restore">
+                        <lthn-wallet-add targetAddForm="open">
                         </lthn-wallet-add>
 
                 </ng-container>
@@ -77,8 +78,3 @@
         </div>
     </div>
 </div>
-
-
-<modal #modal [modalConfig]="modalConfig">
-    <lthn-wallet-open [name]="openedWallet"></lthn-wallet-open>
-</modal>
