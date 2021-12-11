@@ -9,7 +9,7 @@ export class HashLinkPipe implements PipeTransform {
 
     return content === undefined
       ? "¯\\_(ツ)_/¯"
-      : `<a class="lthn-brand" href="${url}">${this.cutMiddle(content, 8)}</a>`;
+      : `<a class="lthn-brand" href="${url}">${this.cutMiddle(content, 16)}</a>`;
   }
 
   private cutMiddle(string, maxLength) {

@@ -22,7 +22,7 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Amount">
                     <ng-template let-value="value" ngx-datatable-cell-template>
-                       {{ value | toCoin}}
+                       {{ value | toCoin | number:'1.0-8'}}
                     </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Timestamp">
