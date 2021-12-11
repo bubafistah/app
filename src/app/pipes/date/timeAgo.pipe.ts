@@ -7,8 +7,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class TimeAgoPipe implements PipeTransform {
 	constructor() {}
 
-	transform(value: string) {
-		const d = new Date(value);
+	transform(value: number) {
+		const d = new Date(value * 1000);
 		const now = new Date();
 		const seconds = Math.round(
 			Math.abs((now.getTime() - d.getTime()) / 1000)

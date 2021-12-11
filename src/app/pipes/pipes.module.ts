@@ -7,6 +7,7 @@ import {ShruggiePipe} from './content/shruggie.pipe';
 import {RemoveTrailingZerosPipe} from './math/removeTrailingZeros.pipe';
 import {MarkdownPipe} from './content/markdown.pipe';
 import {EffortPipe} from './crypto/effort.pipe';
+import {ToCoinPipe} from 'app/pipes/crypto/toCoin.pipe';
 
 @NgModule({
 	declarations: [
@@ -16,7 +17,8 @@ import {EffortPipe} from './crypto/effort.pipe';
 		EscapeHtmlPipe,
 		ShruggiePipe,
 		RemoveTrailingZerosPipe,
-		MarkdownPipe
+		MarkdownPipe,
+		ToCoinPipe
 	],
 	exports: [
 		HashRatePipe,
@@ -25,7 +27,8 @@ import {EffortPipe} from './crypto/effort.pipe';
 		EscapeHtmlPipe,
 		ShruggiePipe,
 		RemoveTrailingZerosPipe,
-		MarkdownPipe
+		MarkdownPipe,
+		ToCoinPipe
 	],
 	imports: [CommonModule]
 })

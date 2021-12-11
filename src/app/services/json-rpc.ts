@@ -1,4 +1,4 @@
-const rpcBody = (method) => (params) => ({
+export const rpcBody = (method) => (params) => ({
 	jsonrpc: '2.0',
 	id: '0',
 	method: method,

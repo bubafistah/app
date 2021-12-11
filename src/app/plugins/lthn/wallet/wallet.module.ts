@@ -23,6 +23,7 @@ import {TransactionsComponent} from '@plugin/lthn/wallet/components/transactions
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {MatSelectModule} from '@angular/material/select';
 import {AddComponent} from './components/add.component'
+import {PipesModule} from 'app/pipes/pipes.module';
 
 
 const routes: Routes = [
@@ -68,7 +69,8 @@ const routes: Routes = [
 		ModalModule,
 		NgxDatatableModule,
 		MatSelectModule,
-		MatTabsModule
+		MatTabsModule,
+		PipesModule
 	]
 })
 export class WalletModule {}
