@@ -8,6 +8,7 @@ import {RemoveTrailingZerosPipe} from './math/removeTrailingZeros.pipe';
 import {MarkdownPipe} from './content/markdown.pipe';
 import {EffortPipe} from './crypto/effort.pipe';
 import {ToCoinPipe} from 'app/pipes/crypto/toCoin.pipe';
+import {HashLinkPipe} from 'app/pipes/crypto/hashLink.pipe';
 
 @NgModule({
 	declarations: [
@@ -18,7 +19,8 @@ import {ToCoinPipe} from 'app/pipes/crypto/toCoin.pipe';
 		ShruggiePipe,
 		RemoveTrailingZerosPipe,
 		MarkdownPipe,
-		ToCoinPipe
+		ToCoinPipe,
+		HashLinkPipe
 	],
 	exports: [
 		HashRatePipe,
@@ -28,7 +30,8 @@ import {ToCoinPipe} from 'app/pipes/crypto/toCoin.pipe';
 		ShruggiePipe,
 		RemoveTrailingZerosPipe,
 		MarkdownPipe,
-		ToCoinPipe
+		ToCoinPipe,
+		HashLinkPipe
 	],
 	imports: [CommonModule]
 })
