@@ -8,7 +8,7 @@ import { isPlatformServer} from '@angular/common';
 import {select, Store} from '@ngrx/store';
 import {ChainSetGetInfo, getChainInfo} from '@plugin/lthn/chain/data';
 import {ChainGetInfo} from '@plugin/lthn/chain/interfaces/props/get_info';
-import {Observable} from 'rxjs';
+import {interval, Observable} from 'rxjs';
 
 @Component({
 	selector: 'lthn-root',
@@ -42,11 +42,13 @@ export class RootComponent implements OnInit {
 		});
 		this.fileSystem.listFiles('/cli').then((dat: any) => {
 			this.hasCLI = dat.length > 0;
-			this.chain.chainRpc('get_info', '').subscribe((data) => {
-				this.store.dispatch(ChainSetGetInfo({info: data.result}))
-			})
+			this.chain.getInfo()
+			interval(15000).subscribe(n => this.chain.getInfo());
+
 		});
 	}
+
+
 
 	renderAppView() {
 
