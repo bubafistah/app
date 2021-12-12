@@ -2,7 +2,18 @@
 <mat-toolbar >
   <mat-toolbar-row>
     <span class="lthn-brand">Blockchain Explorer</span>
+
     <span class="flex-spacer"></span>
+      <ng-container *ngIf="chainInfo | ngrxPush as info">
+          <div> <span class="lthn-brand">{{'plugin.lthn.chain.words.height' | translate }}:</span> {{info.height | number }}</div>
+
+          <div><span class="lthn-brand">{{'plugin.lthn.chain.words.target_height' | translate }}:</span> {{info.target_height | number}}</div>
+          <div><span class="lthn-brand">{{'plugin.lthn.chain.words.grey_peerlist_size' | translate }}:</span> {{info.grey_peerlist_size | number}}</div>
+
+          <span class="flex-spacer"></span>
+      </ng-container>
+
+
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
       <mat-icon>view_column</mat-icon>
     </button>
