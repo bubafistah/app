@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {rpcBody} from '@service/json-rpc';
+import {ChainSetGetInfo} from '@plugin/lthn/chain/data';
+import {Store} from '@ngrx/store';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class BlockchainService {
-	constructor(private http: HttpClient) {}
+	constructor(private http: HttpClient, private store: Store) {}
 
 	startDaemon() {
 		const options = {
@@ -89,5 +91,11 @@ export class BlockchainService {
 	chainRpc(method: string, params: any) {
 		return this.http
 			.post<any>('https://localhost:36911/daemon/chain/json_rpc', JSON.stringify(rpcBody(method)(params)));
+	}
+
+	getInfo(){
+		this.chainRpc('get_info', '').subscribe((data) => {
+			this.store.dispatch(ChainSetGetInfo({info: data.result}))
+		})
 	}
 }
