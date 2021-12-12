@@ -1,21 +1,7 @@
-<ng-container *ngIf="!hasCLI">
-    <div style="padding: 16px;">
-    <mat-card >
-        <mat-card-title>{{ 'words.states.not_installed' | translate }}</mat-card-title>
-        <mat-card-content>
-            <p>{{ 'words.states.not_installed_desc' | translate }}</p>
-            <button (click)="downloadCLI()" color="accent" mat-button>{{ 'button.install-blockchain' | translate }}</button>
-            <ng-container *ngIf="downloadingCLI ">
-                <lthn-app-console attach="update-cli"></lthn-app-console>
-            </ng-container>
-        </mat-card-content>
-    </mat-card>
-    </div>
+<div class="container-fluid p-2" fxLayoutGap="8px">
 
-</ng-container>
 
-    <div class="container-fluid p-2" fxLayoutGap="8px">
-        <mat-card fxFlex="25">
+        <mat-card fxFlex="30">
 
             <ng-container *ngIf="!hasCLI">
                 <mat-card-title *ngIf="!downloadingCLI">{{ 'words.states.not_installed' | translate }}</mat-card-title>
@@ -94,7 +80,7 @@
             </ng-container>
         </mat-card>
 
-        <mat-card fxFlex="70">
+        <mat-card fxFlex="69">
             <mat-card-title>Recent Blocks</mat-card-title>
             <mat-card-content>
                 <ngx-datatable
@@ -102,10 +88,11 @@
                         [rows]="(blocks | ngrxPush)?.headers"
                         [loadingIndicator]="true"
                         [columnMode]="ColumnMode.force"
-                        [headerHeight]="50"
+                        [headerHeight]="30"
+                        [virtualization]="true"
                         [footerHeight]="50"
                         [rowHeight]="25"
-                        [limit]="25"
+                        [limit]="10"
                         [trackByProp]="'timestamp'"
                         [sorts]="[{ prop: 'timestamp', dir: 'desc' }]"
                 >
