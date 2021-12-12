@@ -17,11 +17,16 @@ export class LoginComponent {
 	}
 
 	async submit() {
-		await this.authService.login(this.username.value, this.password.value);
-		if (this.authService.getAuthStatus()) {
-			this.router.navigateByUrl('/');
-		} else {
+		this.authService.login(this.username.value, this.password.value)
+		.then(() => {
+			if (this.authService.getAuthStatus()) {
+				this.router.navigateByUrl('/');
+			} else {
+				this.error = 'Login Failed, try again.';
+			}
+		})
+		.catch(() => {
 			this.error = 'Login Failed, try again.';
-		}
+		})
 	}
 }
