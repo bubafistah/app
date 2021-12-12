@@ -16,6 +16,11 @@ export class LoginComponent {
 	constructor(private authService: AuthService, private router: Router) {
 	}
 
+	inputChanged(){
+		// Reset error after inputs are changed
+		this.error = '';
+	}
+
 	async submit() {
 		this.authService.login(this.username.value, this.password.value)
 		.then(() => {
