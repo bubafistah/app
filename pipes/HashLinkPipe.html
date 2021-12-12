@@ -42,7 +42,7 @@
 
 <ol class="breadcrumb">
   <li>Pipes</li>
-  <li >TimeAgoPipe</li>
+  <li >HashLinkPipe</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -61,7 +61,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/pipes/date/timeAgo.pipe.ts</code>
+            <code>src/app/pipes/crypto/hashLink.pipe.ts</code>
         </p>
 
 
@@ -73,7 +73,7 @@
                 <tbody>
                     <tr>
                         <td class="col-md-3">Name</td>
-                        <td class="col-md-9">timeAgo</td>
+                        <td class="col-md-9">hashLink</td>
                     </tr>
                 </tbody>
             </table>
@@ -88,6 +88,82 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="cutMiddle"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>cutMiddle</b></span>
+                        <a href="#cutMiddle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>cutMiddle(string, maxLength)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="15"
+                            class="link-to-prism">src/app/pipes/crypto/hashLink.pipe.ts:15</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>string</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>maxLength</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="transform"></a>
                     <span class="name">
                         <span ><b>transform</b></span>
@@ -97,15 +173,15 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>transform(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+<code>transform(content, type: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="10"
-                            class="link-to-prism">src/app/pipes/date/timeAgo.pipe.ts:10</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="7"
+                            class="link-to-prism">src/app/pipes/crypto/hashLink.pipe.ts:7</a></div>
                 </td>
             </tr>
 
@@ -122,19 +198,36 @@
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Default value</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>value</td>
+                                    <td>content</td>
                                     <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
                                     </td>
 
                                     <td>
                                         No
                                     </td>
 
+                                    <td>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>type</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>&#x27;txn&#x27;</code>
+                                    </td>
 
                                 </tr>
                             </tbody>
@@ -159,53 +252,32 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Pipe, PipeTransform } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Pipe, PipeTransform } from &quot;@angular/core&quot;;
 
-@Pipe({
-	name: &#x27;timeAgo&#x27;,
-	pure: false
-})
-export class TimeAgoPipe implements PipeTransform {
-	constructor() {}
+@Pipe({ name: &quot;hashLink&quot;, pure: false })
+export class HashLinkPipe implements PipeTransform {
+  constructor() {}
 
-	transform(value: number) {
-		const d &#x3D; new Date(value * 1000);
-		const now &#x3D; new Date();
-		const seconds &#x3D; Math.round(
-			Math.abs((now.getTime() - d.getTime()) / 1000)
-		);
-		const minutes &#x3D; Math.round(Math.abs(seconds / 60));
-		const hours &#x3D; Math.round(Math.abs(minutes / 60));
-		const days &#x3D; Math.round(Math.abs(hours / 24));
-		const months &#x3D; Math.round(Math.abs(days / 30.416));
-		const years &#x3D; Math.round(Math.abs(days / 365));
-		if (Number.isNaN(seconds)) {
-			return &#x27;&#x27;;
-		} else if (seconds &lt;&#x3D; 45) {
-			return &#x27;a few seconds ago&#x27;;
-		} else if (seconds &lt;&#x3D; 90) {
-			return &#x27;a minute ago&#x27;;
-		} else if (minutes &lt;&#x3D; 45) {
-			return minutes + &#x27; minutes ago&#x27;;
-		} else if (minutes &lt;&#x3D; 90) {
-			return &#x27;an hour ago&#x27;;
-		} else if (hours &lt;&#x3D; 22) {
-			return hours + &#x27; hours ago&#x27;;
-		} else if (hours &lt;&#x3D; 36) {
-			return &#x27;a day ago&#x27;;
-		} else if (days &lt;&#x3D; 25) {
-			return days + &#x27; days ago&#x27;;
-		} else if (days &lt;&#x3D; 45) {
-			return &#x27;a month ago&#x27;;
-		} else if (days &lt;&#x3D; 345) {
-			return months + &#x27; months ago&#x27;;
-		} else if (days &lt;&#x3D; 545) {
-			return &#x27;a year ago&#x27;;
-		} else {
-			// (days &gt; 545)
-			return years + &#x27; years ago&#x27;;
-		}
-	}
+  transform(content, type: string &#x3D; &#x27;txn&#x27;) {
+    let url &#x3D; &#x60;/chain/explorer/${type}/${content}&#x60;;
+
+    return content &#x3D;&#x3D;&#x3D; undefined
+      ? &quot;¯\\_(ツ)_/¯&quot;
+      : &#x60;&lt;a class&#x3D;&quot;lthn-brand&quot; href&#x3D;&quot;${url}&quot;&gt;${this.cutMiddle(content, 16)}&lt;/a&gt;&#x60;;
+  }
+
+  private cutMiddle(string, maxLength) {
+    if (!string) return string;
+    if (maxLength &lt; 1) return string;
+    if (string.length &lt;&#x3D; maxLength) return string;
+    if (maxLength &#x3D;&#x3D;&#x3D; 1) return string.substring(0, 1) + &quot;...&quot;;
+
+    const midpoint &#x3D; Math.ceil(string.length / 2);
+    const toremove &#x3D; string.length - maxLength;
+    const lstrip &#x3D; Math.ceil(toremove / 2);
+    const rstrip &#x3D; toremove - lstrip;
+    return &#x60;${string.substring(0, midpoint - lstrip)}...${string.substring(midpoint + rstrip)}&#x60;;
+  }
 }
 </code></pre>
     </div>
@@ -246,7 +318,7 @@ export class TimeAgoPipe implements PipeTransform {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'pipe';
-            var COMPODOC_CURRENT_PAGE_URL = 'TimeAgoPipe.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'HashLinkPipe.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

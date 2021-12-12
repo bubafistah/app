@@ -182,7 +182,7 @@ import { DomSanitizer } from &#x27;@angular/platform-browser&#x27;;
 
 @Pipe({ name: &#x27;hashrate&#x27;, pure: false })
 export class HashRatePipe implements PipeTransform {
-	constructor(private sanitizer: DomSanitizer) {}
+	constructor() {}
 
 	transform(content: number | string &#x3D; 0, decorator?: boolean) {
 		if (typeof content &#x3D;&#x3D; &#x27;string&#x27; || content &#x3D;&#x3D;&#x3D; null) {
@@ -197,7 +197,7 @@ export class HashRatePipe implements PipeTransform {
 		if (decorator &#x3D;&#x3D;&#x3D; false) {
 			return content.toFixed(2);
 		} else {
-			return &#x60;${content.toFixed(2)} ${units[i]}H/s&#x60;;
+			return &#x60;${content.toFixed(2)} ${units[i]}H&#x60;;
 		}
 	}
 }

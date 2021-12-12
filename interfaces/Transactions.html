@@ -46,7 +46,7 @@
   <li>Interfaces</li>
   <li
   >
-  Response</li>
+  Transactions</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -64,7 +64,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/services/json-rpc.ts</code>
+            <code>src/app/plugins/lthn/chain/interfaces/props/transactions.ts</code>
         </p>
 
 
@@ -83,21 +83,30 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                        <a href="#id" 
+                                            <span class="modifier">Optional</span>
+                                        <a href="#missed_tx" 
 >
-                                            id
+                                            missed_tx
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#jsonrpc" 
+                                        <a href="#status" 
 >
-                                            jsonrpc
+                                            status
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#result" 
+                                            <span class="modifier">Optional</span>
+                                        <a href="#txs_as_hex" 
 >
-                                            result
+                                            txs_as_hex
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#txs_as_json" 
+>
+                                            txs_as_json
                                         </a>
                                 </li>
                             </ul>
@@ -115,9 +124,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="id"></a>
-                                        <span class="name "><b>id</b>
-                                            <a href="#id">
+                                        <a name="missed_tx"></a>
+                                        <span class="name "><b>missed_tx</b>
+                                            <a href="#missed_tx">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -125,7 +134,45 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>id:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>missed_tx:     <code>string[]</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>string[]</code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="status"></a>
+                                        <span class="name "><b>status</b>
+                                            <a href="#status">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>status:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -148,9 +195,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="jsonrpc"></a>
-                                        <span class="name "><b>jsonrpc</b>
-                                            <a href="#jsonrpc">
+                                        <a name="txs_as_hex"></a>
+                                        <span class="name "><b>txs_as_hex</b>
+                                            <a href="#txs_as_hex">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -158,7 +205,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>jsonrpc:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>txs_as_hex:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -171,6 +218,11 @@
                                         </td>
                                     </tr>
 
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
 
 
 
@@ -181,9 +233,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="result"></a>
-                                        <span class="name "><b>result</b>
-                                            <a href="#result">
+                                        <a name="txs_as_json"></a>
+                                        <span class="name "><b>txs_as_json</b>
+                                            <a href="#txs_as_json">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -191,7 +243,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>result:         <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                        <code>txs_as_json:         <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -204,6 +256,11 @@
                                         </td>
                                     </tr>
 
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
 
 
 
@@ -215,31 +272,11 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export const rpcBody &#x3D; (method) &#x3D;&gt; (params) &#x3D;&gt; ({
-	jsonrpc: &#x27;2.0&#x27;,
-	id: &#x27;0&#x27;,
-	method: method,
-	params: params
-});
-const axios &#x3D; require(&#x27;axios&#x27;).default;
-export const request &#x3D;
-	(url) &#x3D;&gt;
-	 (method, params &#x3D; {}) &#x3D;&gt;
-		 axios.post(url, JSON.stringify(rpcBody(method)(params))).then((data) &#x3D;&gt; {
-			 console.log(data)
-			 if(data[&#x27;data&#x27;].error){
-				return data[&#x27;data&#x27;]
-			 } else if(data[&#x27;data&#x27;]) {
-				 return data[&#x27;data&#x27;].result
-			 }else{
-				 return data
-			 }
-		 });
-
-interface Response {
-	id: string;
-	jsonrpc: string;
-	result: any;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface Transactions {
+	status: string,
+	txs_as_hex?: string,
+	txs_as_json?: any,
+	missed_tx?: string[];
 }
 </code></pre>
     </div>
@@ -277,7 +314,7 @@ interface Response {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'Response.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'Transactions.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
