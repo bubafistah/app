@@ -20,6 +20,12 @@ export const getChainInfo = createSelector(selectChainState, (state) => {
 
 });
 
+export const getChainBlocks = createSelector(selectChainState, (state) => {
+
+		return state.blocks;
+
+});
+
 
 
 

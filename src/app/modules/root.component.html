@@ -14,7 +14,7 @@
 
 </ng-container>
 
-    <div class="container-fluid p-2">
+    <div class="container-fluid p-2" fxLayoutGap="8px">
         <mat-card fxFlex="25">
 
             <ng-container *ngIf="!hasCLI">
@@ -90,9 +90,53 @@
                             <div mat-line> {{info.white_peerlist_size }} </div>
                         </div>
                     </div>
-
-
                 </mat-card-content>
             </ng-container>
+        </mat-card>
+
+        <mat-card fxFlex="70">
+            <mat-card-title>Recent Blocks</mat-card-title>
+            <mat-card-content>
+                <ngx-datatable
+                        class="material"
+                        [rows]="(blocks | ngrxPush)?.headers"
+                        [loadingIndicator]="true"
+                        [columnMode]="ColumnMode.force"
+                        [headerHeight]="50"
+                        [footerHeight]="50"
+                        [rowHeight]="25"
+                        [limit]="25"
+                        [trackByProp]="'timestamp'"
+                        [sorts]="[{ prop: 'timestamp', dir: 'desc' }]"
+                >
+                    <ngx-datatable-column name="Height"></ngx-datatable-column>
+                    <ngx-datatable-column name="Difficulty">
+                        <ng-template let-value="value" ngx-datatable-cell-template>
+                            {{ value | hashrate:true}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Hash">
+                        <ng-template let-value="value"  ngx-datatable-cell-template>
+                            <span [innerHTML]="value | hashLink:'txn' | keepHtml"></span>
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Orphan Status">
+                        <ng-template let-value="value" ngx-datatable-cell-template>
+                            <mat-icon style="color: green" *ngIf="!value">done</mat-icon>
+                            <mat-icon style="color: red" *ngIf="value">close</mat-icon>
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Reward">
+                        <ng-template let-value="value" ngx-datatable-cell-template>
+                            {{ value | toCoin | number:'1.0-8'}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Timestamp">
+                        <ng-template let-value="value" ngx-datatable-cell-template>
+                            {{ value | timeAgo }}
+                        </ng-template>
+                    </ngx-datatable-column>
+                </ngx-datatable>
+            </mat-card-content>
         </mat-card>
     </div>

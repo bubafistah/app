@@ -11,6 +11,14 @@ const chainReducer = createReducer(
 		...state,
 		info
 	})),
+	on(ChainActions.ChainSetTransactions, (state: any, { transactions }) => ({
+		...state,
+		transactions
+	})),
+	on(ChainActions.ChainSetBlocks, (state: any, { blocks }) => ({
+		...state,
+		blocks
+	})),
 
 
 

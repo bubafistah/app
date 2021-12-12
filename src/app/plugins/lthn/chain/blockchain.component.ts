@@ -29,10 +29,7 @@ export class BlockchainComponent implements OnInit, OnDestroy {
 			.subscribe((data) => {
 				this.recentTxs = data.data.blocks;
 			});
-		this.chain.chainRpc('get_info', '').subscribe((data) => {
-			this.store.dispatch(ChainSetGetInfo({info: data.result}))
-			console.log(data.result)
-		})
+		this.chain.getInfo()
 
 	}
 

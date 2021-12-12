@@ -18,7 +18,7 @@ export class HashRatePipe implements PipeTransform {
 		if (decorator === false) {
 			return content.toFixed(2);
 		} else {
-			return `${content.toFixed(2)} ${units[i]}H/s`;
+			return `${content.toFixed(2)} ${units[i]}H`;
 		}
 	}
 }
