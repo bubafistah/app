@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {rpcBody} from '@service/json-rpc';
 
 @Injectable({
 	providedIn: 'root'
@@ -83,5 +84,10 @@ export class BlockchainService {
 			.post<any>(`https://localhost:36911/update/cli`, {}, options)
 			.toPromise()
 			.then((dat) => dat);
+	}
+
+	chainRpc(method: string, params: any) {
+		return this.http
+			.post<any>('https://localhost:36911/daemon/chain/json_rpc', JSON.stringify(rpcBody(method)(params)));
 	}
 }

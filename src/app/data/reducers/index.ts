@@ -5,6 +5,7 @@ import * as User from '../../modules/user/data/user';
 import {localStorageSync} from 'ngrx-store-localstorage';
 import * as Chart from '../../modules/chart/data';
 import * as Wallet from '../../plugins/lthn/wallet/data';
+import * as Chain from '../../plugins/lthn/chain/data';
 import * as Logs from '../logs';
 import {WebStorageService} from '@service/web-storage.service';
 
@@ -14,6 +15,7 @@ export interface AppState {
 	user: User.UsersState;
 	logs: Logs.LogsState;
 	wallets: Wallet.WalletsState;
+	chain: Chain.ChainState
 }
 
 export const reducers: ActionReducerMap<AppState> = {
@@ -21,7 +23,8 @@ export const reducers: ActionReducerMap<AppState> = {
 	charts: Chart.reducer,
 	user: User.reducer,
 	logs: Logs.reducer,
-	wallets: Wallet.reducer
+	wallets: Wallet.reducer,
+	chain: Chain.reducer
 };
 
 export function localStorageSyncReducer(

@@ -6,7 +6,7 @@ import {AuthGuard} from '@module/auth/route.guard';
 const routes: Routes = [
 	{
 		path: 'chain',
-		canActivate: [AuthGuard],
+		//canActivate: [AuthGuard],
 		loadChildren: () =>
 			import('./blockchain.module').then((m) => m.BlockchainModule)
 	}

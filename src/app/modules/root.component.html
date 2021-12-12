@@ -13,27 +13,86 @@
     </div>
 
 </ng-container>
-<ng-container *ngIf="hasCLI">
-    <div style="padding: 16px;">
-        <mat-tab-group animationDuration="100ms">
-            <mat-tab label="{{ 'plugin.lthn.daemons.letheand' | translate }}">
-                <lthn-app-console attach="daemon:letheand"></lthn-app-console>
-            </mat-tab>
-            <mat-tab label="{{ 'plugin.lthn.daemons.lethean-wallet-rpc' | translate }}">
-                <lthn-app-console attach="daemon:lethean-wallet-rpc"></lthn-app-console>
-            </mat-tab>
-            <mat-tab label="{{ 'plugin.lthn.daemons.lethean-wallet-cli' | translate }}">
-                <lthn-app-console attach="daemon:lethean-wallet-cli"></lthn-app-console>
-            </mat-tab>
-            <mat-tab label="{{ 'plugin.lthn.daemons.lethean-wallet-vpn-rpc' | translate }}">
-                <lthn-app-console attach="daemon:lethean-wallet-vpn-rpc"></lthn-app-console>
-            </mat-tab>
-            <mat-tab label="{{ 'plugin.lthn.daemons.lethean-blockchain-export' | translate }}">
-                <lthn-app-console attach="daemon:lethean-blockchain-export"></lthn-app-console>
-            </mat-tab>
-            <mat-tab label="{{ 'plugin.lthn.daemons.lethean-blockchain-import' | translate }}">
-                <lthn-app-console attach="daemon:lethean-blockchain-import"></lthn-app-console>
-            </mat-tab>
-        </mat-tab-group>
+
+    <div class="container-fluid p-2">
+        <mat-card fxFlex="25">
+
+            <ng-container *ngIf="!hasCLI">
+                <mat-card-title *ngIf="!downloadingCLI">{{ 'words.states.not_installed' | translate }}</mat-card-title>
+                <mat-card-title *ngIf="downloadingCLI">{{ 'words.states.installing' | translate }}</mat-card-title>
+                <mat-card-content>
+                    <p *ngIf="!downloadingCLI">{{ 'words.states.not_installed_desc' | translate }}</p>
+                    <p *ngIf="downloadingCLI">{{ 'words.states.installing_desc' | translate }}</p>
+                    <button *ngIf="!downloadingCLI" (click)="downloadCLI()" color="accent" mat-button>{{ 'button.install-blockchain' | translate }}</button>
+                    <mat-progress-spinner *ngIf="downloadingCLI" color="accent" mode="indeterminate"></mat-progress-spinner>
+
+
+                </mat-card-content>
+            </ng-container>
+            <ng-container *ngIf="hasCLI">
+                <mat-card-title>Lethean Blockchain</mat-card-title>
+                <mat-card-content  *ngIf="chainInfo | ngrxPush as info">
+                    <div fxLayout="column, wrap" fxLayoutGap="18px">
+                        <div fxFlex="33">
+                            <div mat-line>{{'plugin.lthn.chain.words.height' | translate }}</div>
+                            <div mat-line> {{info.height | number }} </div>
+                        </div>
+                        <div fxFlex="50">
+                            <div mat-line>{{'plugin.lthn.chain.words.tx_pool' | translate }}</div>
+                            <div mat-line> {{info.tx_pool_size }} </div>
+                        </div>
+                        <div fxFlex="33">
+                            <div mat-line>{{'plugin.lthn.chain.words.alt_blocks' | translate }}</div>
+                            <div mat-line> {{info.alt_blocks_count }} </div>
+                        </div>
+                        <div fxFlex="33">
+                            <div mat-line>{{'plugin.lthn.chain.words.difficulty' | translate }}</div>
+                            <div mat-line> {{info.difficulty | number }} </div>
+                        </div>
+                        <div fxFlex="33">
+                            <div mat-line>{{'plugin.lthn.chain.words.grey_peerlist_size' | translate }}</div>
+                            <div mat-line> {{info.grey_peerlist_size }} </div>
+                        </div>
+                        <div fxFlex="33">
+                            <div mat-line>{{'plugin.lthn.chain.words.incoming_connections_count' | translate }}</div>
+                            <div mat-line> {{info.incoming_connections_count }} </div>
+                        </div>
+                        <div fxFlex="33">
+                            <div mat-line>{{'plugin.lthn.chain.words.outgoing_connections_count' | translate }}</div>
+                            <div mat-line> {{info.outgoing_connections_count }} </div>
+                        </div>
+                        <div fxFlex="33">
+                            <div mat-line>{{'plugin.lthn.chain.words.status' | translate }}</div>
+                            <div mat-line> {{info.status }} </div>
+                        </div>
+                        <div fxFlex="33">
+                            <div mat-line>{{'plugin.lthn.chain.words.target' | translate }}</div>
+                            <div mat-line> {{info.target }} </div>
+                        </div>
+                        <div fxFlex="33">
+                            <div mat-line>{{'plugin.lthn.chain.words.target_height' | translate }}</div>
+                            <div mat-line> {{info.target_height | number}} </div>
+                        </div>
+                        <div fxFlex="33">
+                            <div mat-line>{{'plugin.lthn.chain.words.testnet' | translate }}</div>
+                            <div mat-line> {{info.testnet }} </div>
+                        </div>
+                        <div fxFlex="33">
+                            <div mat-line>{{'plugin.lthn.chain.words.top_block_hash' | translate }}</div>
+                            <div mat-line [innerHTML]="info.top_block_hash | hashLink | keepHtml" > </div>
+                        </div>
+                        <div fxFlex="33">
+                            <div mat-line>{{'plugin.lthn.chain.words.tx_count' | translate }}</div>
+                            <div mat-line> {{info.tx_count | number }} </div>
+                        </div>
+                        <div fxFlex="33">
+                            <div mat-line>{{'plugin.lthn.chain.words.white_peerlist_size' | translate }}</div>
+                            <div mat-line> {{info.white_peerlist_size }} </div>
+                        </div>
+                    </div>
+
+
+                </mat-card-content>
+            </ng-container>
+        </mat-card>
     </div>
-</ng-container>
