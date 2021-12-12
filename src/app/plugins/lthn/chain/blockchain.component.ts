@@ -2,6 +2,11 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ChartService} from '@module/chart/chart.service';
 import {APP_CONFIG} from '@env/environment';
+import {rpcBody} from '@service/json-rpc';
+import {ChainGetInfo} from '@plugin/lthn/chain/interfaces/props/get_info';
+import {BlockchainService} from '@plugin/lthn/chain/blockchain.service';
+import {Store} from '@ngrx/store';
+import {ChainSetGetInfo} from '@plugin/lthn/chain/data';
 
 @Component({
 	selector: 'lthn-chain',
@@ -13,18 +18,9 @@ export class BlockchainComponent implements OnInit, OnDestroy {
 	public recentTxs: any;
 	public buildType: string;
 
-	constructor(private http: HttpClient) {
+	constructor(private http: HttpClient, private store: Store, private chain: BlockchainService) {
 	}
 
-	public get isWeb() {
-		return (
-			APP_CONFIG.environment === 'WEB' || APP_CONFIG.environment === 'DEV'
-		);
-	}
-
-	public get isApp() {
-		return APP_CONFIG.environment === 'APP';
-	}
 
 	ngOnInit(): void {
 		// https://lethean.hashvault.pro/explorer/api/transactions
@@ -33,6 +29,11 @@ export class BlockchainComponent implements OnInit, OnDestroy {
 			.subscribe((data) => {
 				this.recentTxs = data.data.blocks;
 			});
+		this.chain.chainRpc('get_info', '').subscribe((data) => {
+			this.store.dispatch(ChainSetGetInfo({info: data.result}))
+			console.log(data.result)
+		})
+
 	}
 
 	ngOnDestroy(): void {

@@ -9,6 +9,10 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {WalletModule} from '@plugin/lthn/wallet/wallet.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatListModule} from '@angular/material/list';
+import {ReactiveComponentModule} from '@ngrx/component';
+import {PipesModule} from 'app/pipes/pipes.module';
 
 @NgModule({
 	declarations: [RootComponent],
@@ -23,7 +27,11 @@ import {MatDividerModule} from '@angular/material/divider';
 		WalletModule,
 		TranslateModule,
 		MatDividerModule,
-		ConsoleModule
+		ConsoleModule,
+		MatProgressSpinnerModule,
+		MatListModule,
+		ReactiveComponentModule,
+		PipesModule
 	]
 })
 export class RootModule {

@@ -5,6 +5,10 @@ import {FileSystemService} from '@service/filesystem/file-system.service';
 import {BlockchainService} from '@plugin/lthn/chain/blockchain.service';
 import {WalletService} from '@plugin/lthn/wallet/wallet.service';
 import { isPlatformServer} from '@angular/common';
+import {select, Store} from '@ngrx/store';
+import {ChainSetGetInfo, getChainInfo} from '@plugin/lthn/chain/data';
+import {ChainGetInfo} from '@plugin/lthn/chain/interfaces/props/get_info';
+import {Observable} from 'rxjs';
 
 @Component({
 	selector: 'lthn-root',
@@ -17,11 +21,13 @@ export class RootComponent implements OnInit {
 	public downloadingCLI: boolean;
 	@Inject(PLATFORM_ID) platformId: Object
 	public disableConsole = true
+	public chainInfo: Observable<ChainGetInfo>;
 	constructor(
 		private router: Router,
 		private fileSystem: FileSystemService,
 		private chain: BlockchainService,
-		private wallet: WalletService
+		private wallet: WalletService,
+		private store: Store
 	) {
 		this.disableConsole = isPlatformServer(this.platformId)
 	}
@@ -36,10 +42,15 @@ export class RootComponent implements OnInit {
 		});
 		this.fileSystem.listFiles('/cli').then((dat: any) => {
 			this.hasCLI = dat.length > 0;
+			this.chain.chainRpc('get_info', '').subscribe((data) => {
+				this.store.dispatch(ChainSetGetInfo({info: data.result}))
+			})
 		});
 	}
 
 	renderAppView() {
+
+		this.chainInfo = this.store.pipe(select(getChainInfo))
 	}
 
 	renderFirstRunView() {
