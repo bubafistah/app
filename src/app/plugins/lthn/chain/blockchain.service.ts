@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {rpcBody} from '@service/json-rpc';
-import {ChainSetGetInfo} from '@plugin/lthn/chain/data';
+import {ChainSetBlocks, ChainSetGetInfo, ChainSetTransactions} from '@plugin/lthn/chain/data';
 import {Store} from '@ngrx/store';
 
 @Injectable({
@@ -96,6 +96,24 @@ export class BlockchainService {
 	getInfo(){
 		this.chainRpc('get_info', '').subscribe((data) => {
 			this.store.dispatch(ChainSetGetInfo({info: data.result}))
+		})
+	}
+
+	getTransactions(txsHashes: string[], decodeAsJson: boolean = true){
+
+		this.chainRpc('get_transaction', { txs_hashes: txsHashes, decode_as_json: decodeAsJson }).subscribe((data) => {
+			if (decodeAsJson && data.hasOwnProperty("txs_as_json")) {
+				data.txs_as_json = JSON.parse(data.txs_as_json);
+			}
+			this.store.dispatch(ChainSetTransactions({transactions: data.result}))
+		})
+	}
+
+	getBlocks(start_height: number, end_height: number){
+
+		this.chainRpc('getblockheadersrange', {start_height:start_height,end_height:end_height}).subscribe((data) => {
+
+			this.store.dispatch(ChainSetBlocks({blocks: data.result}))
 		})
 	}
 }

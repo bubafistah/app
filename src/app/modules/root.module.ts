@@ -13,6 +13,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatListModule} from '@angular/material/list';
 import {ReactiveComponentModule} from '@ngrx/component';
 import {PipesModule} from 'app/pipes/pipes.module';
+import {NgxDatatableModule} from '@swimlane/ngx-datatable';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
 	declarations: [RootComponent],
@@ -31,7 +33,9 @@ import {PipesModule} from 'app/pipes/pipes.module';
 		MatProgressSpinnerModule,
 		MatListModule,
 		ReactiveComponentModule,
-		PipesModule
+		PipesModule,
+		NgxDatatableModule,
+		MatIconModule
 	]
 })
 export class RootModule {

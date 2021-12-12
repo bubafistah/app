@@ -6,9 +6,11 @@ import {BlockchainService} from '@plugin/lthn/chain/blockchain.service';
 import {WalletService} from '@plugin/lthn/wallet/wallet.service';
 import { isPlatformServer} from '@angular/common';
 import {select, Store} from '@ngrx/store';
-import {ChainSetGetInfo, getChainInfo} from '@plugin/lthn/chain/data';
+import {ChainSetGetInfo, getChainBlocks, getChainInfo} from '@plugin/lthn/chain/data';
 import {ChainGetInfo} from '@plugin/lthn/chain/interfaces/props/get_info';
 import {interval, Observable} from 'rxjs';
+import { ColumnMode } from '@swimlane/ngx-datatable';
+import {BlockHeader} from '@plugin/lthn/chain/interfaces/types/blockHeader';
 
 @Component({
 	selector: 'lthn-root',
@@ -22,6 +24,9 @@ export class RootComponent implements OnInit {
 	@Inject(PLATFORM_ID) platformId: Object
 	public disableConsole = true
 	public chainInfo: Observable<ChainGetInfo>;
+	ColumnMode = ColumnMode;
+	public blocks: Observable<{ headers: BlockHeader[]}>;
+
 	constructor(
 		private router: Router,
 		private fileSystem: FileSystemService,
@@ -46,6 +51,10 @@ export class RootComponent implements OnInit {
 			interval(15000).subscribe(n => this.chain.getInfo());
 
 		});
+
+		this.store.pipe(select(getChainInfo)).subscribe((data) => {
+			if(data) this.chain.getBlocks(data.height-25, data.height-1)
+		})
 	}
 
 
@@ -53,6 +62,7 @@ export class RootComponent implements OnInit {
 	renderAppView() {
 
 		this.chainInfo = this.store.pipe(select(getChainInfo))
+		this.blocks = this.store.pipe(select(getChainBlocks))
 	}
 
 	renderFirstRunView() {
