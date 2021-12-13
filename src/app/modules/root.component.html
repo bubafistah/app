@@ -1,127 +1,131 @@
 <div class="container-fluid p-2" fxLayout="column" fxLayoutGap="8px">
 
+    <ng-container *ngIf="chainInfo | ngrxPush as info">
+        Loading
+    </ng-container>
 
-        <mat-card fxFlex="100">
-
-            <ng-container *ngIf="!hasCLI">
-                <mat-card-title *ngIf="!downloadingCLI">{{ 'words.states.not_installed' | translate }}</mat-card-title>
-                <mat-card-title *ngIf="downloadingCLI">{{ 'words.states.installing' | translate }}</mat-card-title>
-                <mat-card-content>
-                    <p *ngIf="!downloadingCLI">{{ 'words.states.not_installed_desc' | translate }}</p>
-                    <p *ngIf="downloadingCLI">{{ 'words.states.installing_desc' | translate }}</p>
-                    <button *ngIf="!downloadingCLI" (click)="downloadCLI()" color="accent" mat-button>{{ 'button.install-blockchain' | translate }}</button>
-                    <mat-progress-spinner *ngIf="downloadingCLI" color="accent" mode="indeterminate"></mat-progress-spinner>
-
-
-                </mat-card-content>
-            </ng-container>
-            <ng-container *ngIf="hasCLI">
-                <mat-card-title>Lethean Blockchain</mat-card-title>
-                <mat-card-content  *ngIf="chainInfo | ngrxPush as info">
-                    <div fxLayout="column, wrap" fxLayoutGap="18px">
-                        <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
-                            <h5 >{{'plugin.lthn.chain.words.height' | translate }}</h5>
-                            <div > {{info.height | number }} </div>
-                        </div>
-                        <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
-                            <h5 >{{'plugin.lthn.chain.words.tx_pool' | translate }}</h5>
-                            <div > {{info.tx_pool_size }} </div>
-                        </div>
-                        <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
-                            <h5 >{{'plugin.lthn.chain.words.alt_blocks' | translate }}</h5>
-                            <div > {{info.alt_blocks_count }} </div>
-                        </div>
-                        <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
-                            <h5 >{{'plugin.lthn.chain.words.difficulty' | translate }}</h5>
-                            <div > {{info.difficulty | number }} </div>
-                        </div>
-                        <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
-                            <h5 >{{'plugin.lthn.chain.words.grey_peerlist_size' | translate }}</h5>
-                            <div > {{info.grey_peerlist_size }} </div>
-                        </div>
-                        <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
-                            <h5 >{{'plugin.lthn.chain.words.incoming_connections_count' | translate }}</h5>
-                            <div > {{info.incoming_connections_count }} </div>
-                        </div>
-                        <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
-                            <h5 >{{'plugin.lthn.chain.words.outgoing_connections_count' | translate }}</h5>
-                            <div > {{info.outgoing_connections_count }} </div>
-                        </div>
-                        <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
-                            <h5 >{{'plugin.lthn.chain.words.status' | translate }}</h5>
-                            <div  class="lthn-brand"> {{info.status }} </div>
-                        </div>
-                        <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
-                            <h5 >{{'plugin.lthn.chain.words.target' | translate }}</h5>
-                            <div  class="lthn-brand"> {{info.target }} </div>
-                        </div>
-                        <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
-                            <h5>{{'plugin.lthn.chain.words.target_height' | translate }}:</h5>
-                            <div  class="lthn-brand"> {{info.target_height | number}} </div>
-                        </div>
-                        <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
-                            <h5 >{{'plugin.lthn.chain.words.testnet' | translate }}</h5>
-                            <div  class="lthn-brand"> {{info.testnet }} </div>
-                        </div>
-
-                        <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
-                            <h5 >{{'plugin.lthn.chain.words.tx_count' | translate }}</h5>
-                            <div > {{info.tx_count | number }} </div>
-                        </div>
-                        <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
-                            <h5 >{{'plugin.lthn.chain.words.white_peerlist_size' | translate }}</h5>
-                            <div > {{info.white_peerlist_size }} </div>
-                        </div>
-                        <div fxFlex="40" fxLayout="row" fxLayoutAlign="space-between">
-                            <h5 >{{'plugin.lthn.chain.words.top_block_hash' | translate }}</h5>
-                            <div  [innerHTML]="info.top_block_hash | hashLink | keepHtml" > </div>
-                        </div>
-                    </div>
-                </mat-card-content>
-            </ng-container>
-        </mat-card>
-
-        <mat-card fxFlex="100">
-            <mat-card-title>Recent Blocks</mat-card-title>
+    <mat-card fxFlex="100">
+        <ng-container *ngIf="!hasCLI">
+            <mat-card-title *ngIf="!downloadingCLI">{{ 'words.states.not_installed' | translate }}</mat-card-title>
+            <mat-card-title *ngIf="downloadingCLI">{{ 'words.states.installing' | translate }}</mat-card-title>
             <mat-card-content>
-                <ngx-datatable
-                        class="material"
-                        [rows]="(blocks | ngrxPush)?.headers"
-                        [loadingIndicator]="true"
-                        [columnMode]="ColumnMode.force"
-                        [headerHeight]="30"
-                        [rowHeight]="25"
-                        [trackByProp]="'timestamp'"
-                        [sorts]="[{ prop: 'timestamp', dir: 'desc' }]"
-                >
-                    <ngx-datatable-column name="Height"></ngx-datatable-column>
-                    <ngx-datatable-column name="Difficulty">
-                        <ng-template let-value="value" ngx-datatable-cell-template>
-                            {{ value | hashrate:true}}
-                        </ng-template>
-                    </ngx-datatable-column>
-                    <ngx-datatable-column name="Hash">
-                        <ng-template let-value="value"  ngx-datatable-cell-template>
-                            <span [innerHTML]="value | hashLink:'txn' | keepHtml"></span>
-                        </ng-template>
-                    </ngx-datatable-column>
-                    <ngx-datatable-column name="Orphan Status">
-                        <ng-template let-value="value" ngx-datatable-cell-template>
-                            <mat-icon style="color: green" *ngIf="!value">done</mat-icon>
-                            <mat-icon style="color: red" *ngIf="value">close</mat-icon>
-                        </ng-template>
-                    </ngx-datatable-column>
-                    <ngx-datatable-column name="Reward">
-                        <ng-template let-value="value" ngx-datatable-cell-template>
-                            {{ value | toCoin | number:'1.0-8'}}
-                        </ng-template>
-                    </ngx-datatable-column>
-                    <ngx-datatable-column name="Timestamp">
-                        <ng-template let-value="value" ngx-datatable-cell-template>
-                            {{ value | timeAgo }}
-                        </ng-template>
-                    </ngx-datatable-column>
-                </ngx-datatable>
+                <p *ngIf="!downloadingCLI">{{ 'words.states.not_installed_desc' | translate }}</p>
+                <p *ngIf="downloadingCLI">{{ 'words.states.installing_desc' | translate }}</p>
+                <button *ngIf="!downloadingCLI" (click)="downloadCLI()" color="accent"
+                        mat-button>{{ 'button.install-blockchain' | translate }}</button>
+                <mat-progress-spinner *ngIf="downloadingCLI" color="accent" mode="indeterminate"></mat-progress-spinner>
+
+
             </mat-card-content>
-        </mat-card>
-    </div>
+        </ng-container>
+        <ng-container *ngIf="hasCLI">
+            <mat-card-title>Lethean Blockchain</mat-card-title>
+            <mat-card-content *ngIf="chainInfo | ngrxPush as info">
+                <div fxLayout="column, wrap" fxLayoutGap="18px">
+                    <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
+                        <h5>{{'plugin.lthn.chain.words.height' | translate }}</h5>
+                        <div class="lthn-brand"> {{info.height | number }} </div>
+                    </div>
+                    <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
+                        <h5>{{'plugin.lthn.chain.words.tx_pool' | translate }}</h5>
+                        <div class="lthn-brand"> {{info.tx_pool_size }} </div>
+                    </div>
+                    <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
+                        <h5>{{'plugin.lthn.chain.words.alt_blocks' | translate }}</h5>
+                        <div class="lthn-brand"> {{info.alt_blocks_count }} </div>
+                    </div>
+                    <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
+                        <h5>{{'plugin.lthn.chain.words.difficulty' | translate }}</h5>
+                        <div class="lthn-brand"> {{info.difficulty | number }} </div>
+                    </div>
+                    <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
+                        <h5>{{'plugin.lthn.chain.words.grey_peerlist_size' | translate }}</h5>
+                        <div class="lthn-brand"> {{info.grey_peerlist_size }} </div>
+                    </div>
+                    <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
+                        <h5>{{'plugin.lthn.chain.words.incoming_connections_count' | translate }}</h5>
+                        <div class="lthn-brand"> {{info.incoming_connections_count }} </div>
+                    </div>
+                    <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
+                        <h5>{{'plugin.lthn.chain.words.outgoing_connections_count' | translate }}</h5>
+                        <div class="lthn-brand"> {{info.outgoing_connections_count }} </div>
+                    </div>
+                    <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
+                        <h5>{{'plugin.lthn.chain.words.status' | translate }}</h5>
+                        <div class="lthn-brand"> {{info.status }} </div>
+                    </div>
+                    <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
+                        <h5>{{'plugin.lthn.chain.words.target' | translate }}</h5>
+                        <div class="lthn-brand"> {{info.target }} </div>
+                    </div>
+                    <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
+                        <h5>{{'plugin.lthn.chain.words.target_height' | translate }}:</h5>
+                        <div class="lthn-brand"> {{info.target_height | number}} </div>
+                    </div>
+                    <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
+                        <h5>{{'plugin.lthn.chain.words.testnet' | translate }}</h5>
+                        <div class="lthn-brand"> {{info.testnet }} </div>
+                    </div>
+
+                    <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
+                        <h5>{{'plugin.lthn.chain.words.tx_count' | translate }}</h5>
+                        <div class="lthn-brand"> {{info.tx_count | number }} </div>
+                    </div>
+                    <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
+                        <h5>{{'plugin.lthn.chain.words.white_peerlist_size' | translate }}</h5>
+                        <div class="lthn-brand"> {{info.white_peerlist_size }} </div>
+                    </div>
+                    <div fxFlex="40" fxLayout="row" fxLayoutAlign="space-between">
+                        <h5>{{'plugin.lthn.chain.words.top_block_hash' | translate }}</h5>
+                        <div [innerHTML]="info.top_block_hash | hashLink | keepHtml"></div>
+                    </div>
+                </div>
+            </mat-card-content>
+        </ng-container>
+    </mat-card>
+
+    <mat-card fxFlex="100">
+        <mat-card-title>Recent Blocks</mat-card-title>
+        <mat-card-content>
+            <ngx-datatable
+                    class="material"
+                    [rows]="(blocks | ngrxPush)?.headers"
+                    [loadingIndicator]="true"
+                    [columnMode]="ColumnMode.force"
+                    [headerHeight]="30"
+                    [rowHeight]="25"
+                    [trackByProp]="'timestamp'"
+                    [sorts]="[{ prop: 'timestamp', dir: 'desc' }]"
+            >
+                <ngx-datatable-column name="Height"></ngx-datatable-column>
+                <ngx-datatable-column name="Difficulty">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{ value | hashrate:true}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Hash">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        <span [innerHTML]="value | hashLink:'txn' | keepHtml"></span>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Orphan Status">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        <mat-icon style="color: green" *ngIf="!value">done</mat-icon>
+                        <mat-icon style="color: red" *ngIf="value">close</mat-icon>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Reward">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{ value | toCoin | number:'1.0-8'}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Timestamp">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{ value | timeAgo }}
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+        </mat-card-content>
+    </mat-card>
+
+</div>

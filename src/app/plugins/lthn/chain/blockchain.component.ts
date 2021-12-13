@@ -7,7 +7,7 @@ import {ChainGetInfo} from '@plugin/lthn/chain/interfaces/props/get_info';
 import {BlockchainService} from '@plugin/lthn/chain/blockchain.service';
 import {select, Store} from '@ngrx/store';
 import {ChainSetGetInfo, getChainBlocks, getChainInfo} from '@plugin/lthn/chain/data';
-import {interval, Observable} from 'rxjs';
+import {interval, Observable, Subscription} from 'rxjs';
 import {BlockHeader} from '@plugin/lthn/chain/interfaces/types/blockHeader';
 import { ColumnMode } from '@swimlane/ngx-datatable';
 import {FileSystemService} from '@service/filesystem/file-system.service';
@@ -44,6 +44,7 @@ export class BlockchainComponent implements OnInit, OnDestroy {
 
 	public recentTxs: any;
 	public buildType: string;
+	private sub: Subscription;
 
 	constructor(private fileSystem: FileSystemService, private store: Store, private chain: BlockchainService,
 				public pipeHashrate: HashRatePipe) {
@@ -71,7 +72,7 @@ export class BlockchainComponent implements OnInit, OnDestroy {
 
 		});
 
-		this.store.pipe(select(getChainInfo)).subscribe((data) => {
+		this.sub = this.store.pipe(select(getChainInfo)).subscribe((data) => {
 			if(data) this.chain.getBlocks(data.height-25, data.height-1)
 		})
 		this.chainInfo = this.store.pipe(select(getChainInfo))
@@ -100,6 +101,7 @@ export class BlockchainComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy(): void {
+		this.sub.unsubscribe()
 		console.log('BlockchainComponent DESTROY');
 	}
 }
