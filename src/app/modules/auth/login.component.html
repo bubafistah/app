@@ -5,11 +5,11 @@
             <div *ngIf="error.length > 0">{{error}}</div>
             <mat-form-field appearance="standard">
                 <mat-label>Username</mat-label>
-                <input [formControl]="username" matInput type="text">
+                <input [formControl]="username" (keyup)="inputChanged()" matInput type="text">
             </mat-form-field>
             <mat-form-field appearance="standard">
                 <mat-label>Password</mat-label>
-                <input [formControl]="password" matInput type="password">
+                <input [formControl]="password" (keyup)="inputChanged()" matInput type="password">
             </mat-form-field>
 
             <button (click)="submit()" mat-button>Login</button>

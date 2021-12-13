@@ -16,12 +16,22 @@ export class LoginComponent {
 	constructor(private authService: AuthService, private router: Router) {
 	}
 
+	inputChanged(){
+		// Reset error after inputs are changed
+		this.error = '';
+	}
+
 	async submit() {
-		await this.authService.login(this.username.value, this.password.value);
-		if (this.authService.getAuthStatus()) {
-			this.router.navigateByUrl('/');
-		} else {
+		this.authService.login(this.username.value, this.password.value)
+		.then(() => {
+			if (this.authService.getAuthStatus()) {
+				this.router.navigateByUrl('/');
+			} else {
+				this.error = 'Login Failed, try again.';
+			}
+		})
+		.catch(() => {
 			this.error = 'Login Failed, try again.';
-		}
+		})
 	}
 }
