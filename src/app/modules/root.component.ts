@@ -53,7 +53,7 @@ export class RootComponent implements OnInit {
 		});
 
 		this.store.pipe(select(getChainInfo)).subscribe((data) => {
-			if(data) this.chain.getBlocks(data.height-25, data.height-1)
+			if(data) this.chain.getBlocks(data.height-10, data.height-1)
 		})
 	}
 

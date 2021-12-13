@@ -1,6 +1,6 @@
 <mat-sidenav-container class="main-container">
     <mat-sidenav #sidenav [(opened)]="menu"
-                 mode="side">
+                 mode="over">
         <div fxLayout="row">
             <a [routerLink]="['/']">
                 <img alt="Lethean Logo" class="logo" src="../assets/images/logo.png"/>
@@ -12,8 +12,8 @@
 
         <mat-divider></mat-divider>
         <mat-nav-list>
-            <a [routerLink]="['/'] " mat-list-item>{{ 'menu.text.dashboard' | translate }}</a>
-            <a [routerLink]="['chain'] " mat-list-item>{{ 'menu.text.blockchain' | translate }}</a>
+            <a [routerLink]="['/'] " mat-list-item (click)="toggleMenu()">{{ 'menu.text.dashboard' | translate }}</a>
+            <a [routerLink]="['chain'] " mat-list-item (click)="toggleMenu()">{{ 'menu.text.blockchain' | translate }}</a>
 <!--            <a [routerLink]="['wallets'] " mat-list-item>{{ 'menu.text.wallet' | translate }}</a>-->
 <!--            <a [routerLink]="['settings'] " mat-list-item>{{ 'menu.text.settings' | translate }}</a>-->
         </mat-nav-list>
@@ -67,9 +67,8 @@
                     </ng-template>
                 </mat-menu>
 
-                <button [matMenuTriggerData]="{auth: 'dave'}" [matMenuTriggerFor]="appMenu"
-                        mat-icon-button
-                        matTooltip="Click Me!">
+                <button [matMenuTriggerFor]="appMenu"
+                        mat-icon-button>
                     <img src="assets/flags/1x1/{{ this.currentLanguage }}.svg" width="24">
                 </button>
             </mat-toolbar-row>
