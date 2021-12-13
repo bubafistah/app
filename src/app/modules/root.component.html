@@ -17,7 +17,7 @@
                     </mat-card-content>
                 </ng-container>
                 <ng-container *ngIf="hasCLI">
-                    <mat-card-title>Lethean Blockchain</mat-card-title>
+                    <mat-card-title>{{ 'plugin.lthn.chain.table.title.chain-status' | translate }}</mat-card-title>
                     <mat-card-content *ngIf="chainInfo | ngrxPush as info">
                         <div fxLayout="column, wrap" fxLayoutGap="18px">
                             <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
@@ -83,7 +83,7 @@
             </mat-card>
 
             <mat-card fxFlex="100">
-                <mat-card-title>Recent Blocks</mat-card-title>
+                <mat-card-title>{{ 'plugin.lthn.chain.table.title.recent-blocks' | translate }}</mat-card-title>
                 <mat-card-content>
                     <ngx-datatable
                             class="material"
@@ -95,29 +95,29 @@
                             [trackByProp]="'timestamp'"
                             [sorts]="[{ prop: 'timestamp', dir: 'desc' }]"
                     >
-                        <ngx-datatable-column name="Height"></ngx-datatable-column>
-                        <ngx-datatable-column name="Difficulty">
+                        <ngx-datatable-column prop="height" name="{{ 'plugin.lthn.chain.table.th.height' | translate }}"></ngx-datatable-column>
+                        <ngx-datatable-column prop="difficulty" name="{{ 'plugin.lthn.chain.table.th.difficulty' | translate }}">
                             <ng-template let-value="value" ngx-datatable-cell-template>
                                 {{ value | hashrate:true}}
                             </ng-template>
                         </ngx-datatable-column>
-                        <ngx-datatable-column name="Hash">
+                        <ngx-datatable-column prop="hash" name="{{ 'plugin.lthn.chain.table.th.hash' | translate }}">
                             <ng-template let-value="value" ngx-datatable-cell-template>
                                 <span [innerHTML]="value | hashLink:'txn' | keepHtml"></span>
                             </ng-template>
                         </ngx-datatable-column>
-                        <ngx-datatable-column name="Orphan Status">
+                        <ngx-datatable-column prop="orphan_status" name="{{ 'plugin.lthn.chain.table.th.orphan_status' | translate }}">
                             <ng-template let-value="value" ngx-datatable-cell-template>
                                 <mat-icon style="color: green" *ngIf="!value">done</mat-icon>
                                 <mat-icon style="color: red" *ngIf="value">close</mat-icon>
                             </ng-template>
                         </ngx-datatable-column>
-                        <ngx-datatable-column name="Reward">
+                        <ngx-datatable-column prop="reward" name="{{ 'plugin.lthn.chain.table.th.reward' | translate }}">
                             <ng-template let-value="value" ngx-datatable-cell-template>
                                 {{ value | toCoin | number:'1.0-8'}}
                             </ng-template>
                         </ngx-datatable-column>
-                        <ngx-datatable-column name="Timestamp">
+                        <ngx-datatable-column prop="timestamp" name="{{ 'plugin.lthn.chain.table.th.timestamp' | translate }}">
                             <ng-template let-value="value" ngx-datatable-cell-template>
                                 {{ value | timeAgo }}
                             </ng-template>
