@@ -17,14 +17,12 @@ import {FlexModule} from '@angular/flex-layout';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {AuthModule} from '@module/auth/auth.module';
-import {BlockchainService} from '@plugin/lthn/chain/blockchain.service';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {WalletService} from '@plugin/lthn/wallet/wallet.service';
-import {FileSystemService} from '@service/filesystem/file-system.service';
 import {ConsoleModule} from '@plugin/console/console.module';
 import {PluginsModule} from '@plugin/plugins.module';
 import {NotifierModule} from 'angular-notifier';
+import {BlockUIModule} from 'ng-block-ui';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
@@ -33,8 +31,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
 	declarations: [AppComponent],
 	imports: [
+		CommonModule,
 		BrowserModule.withServerTransition({appId: 'lthn-data-sync'}),
-		BrowserTransferStateModule,
 		BrowserAnimationsModule,
 		HttpClientModule,
 		TranslateModule.forRoot({
@@ -46,7 +44,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 			}
 		}),
 		AppRoutingModule,
-		CommonModule,
+
 		DataModule,
 		StatusModule,
 		MatSidenavModule,
@@ -64,6 +62,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		NotifierModule.withConfig({
 			// Custom options in here
 		}),
+		BlockUIModule.forRoot()
 
 	],
 	providers: [],
@@ -75,23 +74,4 @@ export function HttpLoaderFactory(http: HttpClient) {
  * Application shell/bootstrap
  */
 export class AppModule {
-
-	/**
-	 * Start blockchain & wallet service automatically on start
-	 *
-	 * @param fs
-	 * @param {BlockchainService} chain
-	 * @param {WalletRpcService} wallet
-	 */
-	constructor(private fs: FileSystemService, private chain: BlockchainService, private wallet: WalletService) {
-		this.fs.listFiles('/cli').then((dat: any) => {
-			if(dat.length > 2){
-				this.chain.startDaemon().then((data) => {
-					console.log("blockchain started")
-					this.wallet.startWallet().then((data) => console.log('wallet started'))
-				})
-			}
-
-		});
-	}
 }

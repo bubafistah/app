@@ -24,7 +24,7 @@ export class RootComponent implements OnInit, OnDestroy {
 	public chainInfo: Observable<ChainGetInfo>;
 	ColumnMode = ColumnMode;
 	public blocks: Observable<{ headers: BlockHeader[]}>;
-	private sub: Subscription[];
+	private sub: Subscription[] = [];
 
 	constructor(
 		private router: Router,
