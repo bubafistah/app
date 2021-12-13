@@ -1,11 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {PostRoutingModule} from '@plugin/hive/post/post-routing.module';
 import {BlockchainRoutingModule} from '@plugin/lthn/chain/blockchain-routing.module';
-import {UserRoutingModule} from '@module/user/user-routing.module';
 import {RootRoutingModule} from '@module/root-routing.module';
-import {SettingsRoutingModule} from '@module/settings/settings-routing.module';
-import {WalletRoutingModule} from '@plugin/lthn/wallet/wallet-routing.module';
 import {LoginComponent} from '@module/auth/login.component';
 
 const routes: Routes = [
@@ -25,11 +21,11 @@ const routes: Routes = [
 @NgModule({
 	imports: [
 		RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy', initialNavigation: 'enabledBlocking' }),
-		PostRoutingModule,
+		//PostRoutingModule,
 		BlockchainRoutingModule,
-		UserRoutingModule,
-		SettingsRoutingModule,
-		WalletRoutingModule,
+		//UserRoutingModule,
+		//SettingsRoutingModule,
+		//WalletRoutingModule,
 		// Make sure Root is the last in the list, it has a catch all
 		RootRoutingModule
 	],
