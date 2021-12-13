@@ -1,7 +1,7 @@
 <div class="container-fluid p-2" fxLayoutGap="8px">
 <mat-toolbar >
   <mat-toolbar-row>
-    <span class="lthn-brand">Blockchain Explorer</span>
+    <span class="lthn-brand">{{ 'plugin.lthn.chain.table.title.blockchain-explorer' | translate }}</span>
 
     <span class="flex-spacer"></span>
       <ng-container *ngIf="chainInfo | ngrxPush as info">
@@ -19,8 +19,8 @@
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item *ngFor="let col of allColumns" (click)="toggle(col)">
-        <input type="checkbox" [id]="col.name" (click)="toggle(col)" [checked]="isChecked(col)" disabled/>&nbsp;
-        <label [attr.for]="col.name">{{ col.name }}</label>
+        <input type="checkbox" [id]="col.prop" (click)="toggle(col)" [checked]="isChecked(col)" disabled/>&nbsp;
+        <label [attr.for]="col.prop">{{ col.name | translate }}</label>
       </button>
     </mat-menu>
 
@@ -30,7 +30,7 @@
 <div class="container-fluid p-2">
 
     <mat-card>
-        <mat-card-title>Recent Blocks</mat-card-title>
+        <mat-card-title>{{ 'plugin.lthn.chain.table.title.recent-blocks' | translate }}</mat-card-title>
         <mat-card-content>
             <ngx-datatable
                     class="material"
@@ -44,7 +44,7 @@
                     [limit]="10"
                     [sorts]="[{ prop: 'timestamp', dir: 'desc' }]"
             >
-                <ngx-datatable-column *ngFor="let col of columns" [name]="col.name">
+                <ngx-datatable-column *ngFor="let col of columns" [prop]="col.prop" [name]="col.name | translate">
 
                         <ng-template   let-value="value" ngx-datatable-cell-template>
                           <span  *ngIf="col.prop === 'difficulty'">{{ value | hashrate}}</span>
@@ -71,56 +71,3 @@
         </mat-card-content>
     </mat-card>
 </div>
-
-
-<!--<div fxLayout="column">-->
-<!--  <div fxFlex="100" style="padding: 12px 12px 3px 12px;">-->
-<!--    <div fxLayout="row">-->
-<!--      <mat-card fxFlex="100">-->
-<!--        <mat-card-title>{{ 'charts.network-hashrate.title' | translate }}</mat-card-title>-->
-<!--        <mat-card-subtitle>-->
-<!--          {{ 'charts.network-hashrate.subtitle' | translate }} <a color="accent" href="https://hashvault.pro" mat-button>HashVault-->
-<!--         {{ 'names.mining-pool' | translate }}</a>-->
-<!--        </mat-card-subtitle>-->
-<!--        <mat-card-content>-->
-<!--          <div lthnChart="networkDifficulty"></div>-->
-<!--        </mat-card-content>-->
-<!--      </mat-card>-->
-
-<!--    </div>-->
-<!--    <mat-divider></mat-divider>-->
-<!--    <div>-->
-<!--      <mat-card>-->
-<!--        <mat-card-title>{{ 'plugin.lthn.chain.table.recent-blocks.title' | translate }}</mat-card-title>-->
-<!--        <mat-card-content>-->
-<!--          <table *ngIf="recentTxs" style="width: 100%;">-->
-<!--            <thead>-->
-<!--            <tr>-->
-<!--              <th>{{ 'plugin.lthn.chain.table.recent-blocks.headings.age' | translate }}</th>-->
-<!--              <th>{{ 'plugin.lthn.chain.table.recent-blocks.headings.hash' | translate }}</th>-->
-<!--              <th>{{ 'plugin.lthn.chain.table.recent-blocks.headings.height' | translate }}</th>-->
-<!--              <th>{{ 'plugin.lthn.chain.table.recent-blocks.headings.time' | translate }}</th>-->
-<!--            </tr>-->
-<!--            </thead>-->
-
-<!--            <tbody>-->
-<!--            <tr *ngFor="let block of recentTxs">-->
-<!--              <td>{{block.age}}</td>-->
-<!--              <td>-->
-<!--                <a color="accent" href="https://lethean.hashvault.pro/explorer/block/{{block.hash}}"-->
-<!--                   mat-button-->
-<!--                   rel="nofollow">{{block.hash}}</a>-->
-<!--              </td>-->
-<!--              <td>-->
-<!--                {{block.height}}</td>-->
-<!--              <td>{{block.timestamp * 1000 | date: 'dd/MM/yyyy @ HH:mm:ss'}}</td>-->
-<!--            </tr>-->
-<!--            </tbody>-->
-<!--          </table>-->
-<!--        </mat-card-content>-->
-<!--      </mat-card>-->
-<!--    </div>-->
-
-<!--  </div>-->
-<!--</div>-->
-
