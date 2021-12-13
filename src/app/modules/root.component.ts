@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit, PLATFORM_ID} from '@angular/core';
 import {Client} from '@hiveio/dhive';
 import {Router} from '@angular/router';
 import {FileSystemService} from '@service/filesystem/file-system.service';
@@ -8,7 +8,7 @@ import { isPlatformServer} from '@angular/common';
 import {select, Store} from '@ngrx/store';
 import {ChainSetGetInfo, getChainBlocks, getChainInfo} from '@plugin/lthn/chain/data';
 import {ChainGetInfo} from '@plugin/lthn/chain/interfaces/props/get_info';
-import {interval, Observable} from 'rxjs';
+import {interval, Observable, Subscription} from 'rxjs';
 import { ColumnMode } from '@swimlane/ngx-datatable';
 import {BlockHeader} from '@plugin/lthn/chain/interfaces/types/blockHeader';
 
@@ -16,16 +16,15 @@ import {BlockHeader} from '@plugin/lthn/chain/interfaces/types/blockHeader';
 	selector: 'lthn-root',
 	templateUrl: './root.component.html'
 })
-export class RootComponent implements OnInit {
+export class RootComponent implements OnInit, OnDestroy {
 	public posts: any = [];
 
 	public hasCLI: boolean;
 	public downloadingCLI: boolean;
-	@Inject(PLATFORM_ID) platformId: Object
-	public disableConsole = true
 	public chainInfo: Observable<ChainGetInfo>;
 	ColumnMode = ColumnMode;
 	public blocks: Observable<{ headers: BlockHeader[]}>;
+	private sub: Subscription[];
 
 	constructor(
 		private router: Router,
@@ -34,10 +33,14 @@ export class RootComponent implements OnInit {
 		private wallet: WalletService,
 		private store: Store
 	) {
-		this.disableConsole = isPlatformServer(this.platformId)
+
 	}
 
-	async ngOnInit() {
+	public ngOnDestroy() {
+		this.sub.forEach((s) => s.unsubscribe())
+	}
+
+	ngOnInit() {
 		this.fileSystem.listFiles('/users').then((dat: any) => {
 			if (dat.length > 0) {
 				this.renderAppView();
@@ -48,12 +51,12 @@ export class RootComponent implements OnInit {
 		this.fileSystem.listFiles('/cli').then((dat: any) => {
 			this.hasCLI = dat.length > 0;
 			this.chain.getInfo()
-			interval(15000).subscribe(n => this.chain.getInfo());
+			this.sub['interval'] = interval(1000).subscribe(n => this.chain.getInfo());
 
 		});
 
-		this.store.pipe(select(getChainInfo)).subscribe((data) => {
-			if(data) this.chain.getBlocks(data.height-25, data.height-1)
+		this.sub['info'] = this.store.pipe(select(getChainInfo)).subscribe((data) => {
+			if(data) this.chain.getBlocks(data.height-10, data.height-1)
 		})
 	}
 
