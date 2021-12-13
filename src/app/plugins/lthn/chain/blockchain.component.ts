@@ -24,14 +24,14 @@ export class BlockchainComponent implements OnInit, OnDestroy {
 	columns: any = []
 
 	public allColumns = [
-		{ prop: 'height', name: 'Height', default: true},
-		{ prop: 'difficulty', name: 'Difficulty', default: true },
-		{ prop: 'hash', name: 'Hash', default: true  },
-		{ prop: 'orphan_status', name: 'Valid', default: true },
-		{ prop: 'reward', name: 'Reward', default: true },
-		{ prop: 'timestamp', name: 'Timestamp', default: true },
+		{ prop: 'height', name: 'plugin.lthn.chain.table.th.height', default: true},
+		{ prop: 'difficulty', name: 'plugin.lthn.chain.table.th.difficulty', default: true },
+		{ prop: 'hash', name: 'plugin.lthn.chain.table.th.hash', default: true  },
+		{ prop: 'orphan_status', name: 'plugin.lthn.chain.table.th.orphan_status', default: true },
+		{ prop: 'reward', name: 'plugin.lthn.chain.table.th.reward', default: true },
+		{ prop: 'timestamp', name: 'plugin.lthn.chain.table.th.timestamp', default: true },
 	//	{ prop: 'block_size', name: 'Block Size', default: true },
-		{ prop: 'depth', name: 'Depth', default: true },
+		{ prop: 'depth', name: 'plugin.lthn.chain.table.th.depth', default: true },
 		//{ prop: 'major_version', name: 'Block Major Version', default: true },
 	//	{ prop: 'minor_version', name: 'Block Minor Version', default: false },
 	//	{ prop: 'nonce', name: 'Block Nonce', default: false },
