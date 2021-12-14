@@ -20,6 +20,7 @@ export class RootComponent implements OnInit, OnDestroy {
 	public posts: any = [];
 
 	public hasCLI: boolean;
+	public loaded: boolean = false;
 	public downloadingCLI: boolean;
 	public chainInfo: Observable<ChainGetInfo>;
 	ColumnMode = ColumnMode;
@@ -51,12 +52,15 @@ export class RootComponent implements OnInit, OnDestroy {
 		this.fileSystem.listFiles('/cli').then((dat: any) => {
 			this.hasCLI = dat.length > 0;
 			this.chain.getInfo()
-			this.sub['interval'] = interval(1000).subscribe(n => this.chain.getInfo());
+			this.sub['interval'] = interval(5000).subscribe(n => this.chain.getInfo());
 
 		});
 
 		this.sub['info'] = this.store.pipe(select(getChainInfo)).subscribe((data) => {
-			if(data) this.chain.getBlocks(data.height-10, data.height-1)
+			if(data) {
+				this.loaded = true;
+				this.chain.getBlocks(data.height-10, data.height-1)
+			}
 		})
 	}
 

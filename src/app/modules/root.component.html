@@ -1,22 +1,29 @@
 <div class="container-fluid p-2" fxLayout="column" fxLayoutGap="8px">
+<ng-container *ngIf="!loaded">
+    <mat-card  *ngIf="hasCLI">
+        <mat-card-title>{{ 'plugin.lthn.chain.words.loading-data' | translate }}</mat-card-title>
+        <mat-card-content>
+            <mat-progress-spinner color="accent" mode="indeterminate"></mat-progress-spinner>
+        </mat-card-content>
+    </mat-card>
+    <ng-container *ngIf="!hasCLI">
+        <mat-card-title *ngIf="!downloadingCLI">{{ 'words.states.not_installed' | translate }}</mat-card-title>
+        <mat-card-title *ngIf="downloadingCLI">{{ 'words.states.installing' | translate }}</mat-card-title>
+        <mat-card-content>
+            <p *ngIf="!downloadingCLI">{{ 'words.states.not_installed_desc' | translate }}</p>
+            <p *ngIf="downloadingCLI">{{ 'words.states.installing_desc' | translate }}</p>
+            <button *ngIf="!downloadingCLI" (click)="downloadCLI()" color="accent"
+                    mat-button>{{ 'plugin.lthn.chain.words.install-blockchain' | translate }}</button>
+            <mat-progress-spinner *ngIf="downloadingCLI" color="accent" mode="indeterminate"></mat-progress-spinner>
 
+
+        </mat-card-content>
+    </ng-container>
+</ng-container>
     <ng-container *ngIf="chainInfo | ngrxPush as info">
         <ng-container *ngIf="info.height">
             <mat-card fxFlex="100">
-                <ng-container *ngIf="!hasCLI">
-                    <mat-card-title *ngIf="!downloadingCLI">{{ 'words.states.not_installed' | translate }}</mat-card-title>
-                    <mat-card-title *ngIf="downloadingCLI">{{ 'words.states.installing' | translate }}</mat-card-title>
-                    <mat-card-content>
-                        <p *ngIf="!downloadingCLI">{{ 'words.states.not_installed_desc' | translate }}</p>
-                        <p *ngIf="downloadingCLI">{{ 'words.states.installing_desc' | translate }}</p>
-                        <button *ngIf="!downloadingCLI" (click)="downloadCLI()" color="accent"
-                                mat-button>{{ 'button.install-blockchain' | translate }}</button>
-                        <mat-progress-spinner *ngIf="downloadingCLI" color="accent" mode="indeterminate"></mat-progress-spinner>
 
-
-                    </mat-card-content>
-                </ng-container>
-                <ng-container *ngIf="hasCLI">
                     <mat-card-title>{{ 'plugin.lthn.chain.table.title.chain-status' | translate }}</mat-card-title>
                     <mat-card-content *ngIf="chainInfo | ngrxPush as info">
                         <div fxLayout="column, wrap" fxLayoutGap="18px">
@@ -79,7 +86,7 @@
                             </div>
                         </div>
                     </mat-card-content>
-                </ng-container>
+
             </mat-card>
 
             <mat-card fxFlex="100">
