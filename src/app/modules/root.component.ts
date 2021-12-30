@@ -22,6 +22,7 @@ export class RootComponent implements OnInit, OnDestroy {
 	public hasCLI: boolean;
 	public loaded: boolean = false;
 	public downloadingCLI: boolean;
+	public block_timestamp;
 	public chainInfo: Observable<ChainGetInfo>;
 	ColumnMode = ColumnMode;
 	public blocks: Observable<{ headers: BlockHeader[]}>;
@@ -70,6 +71,10 @@ export class RootComponent implements OnInit, OnDestroy {
 
 		this.chainInfo = this.store.pipe(select(getChainInfo))
 		this.blocks = this.store.pipe(select(getChainBlocks))
+
+		this.blocks.subscribe((blocks) => {
+			this.block_timestamp = blocks.headers[0].timestamp
+		})
 	}
 
 	renderFirstRunView() {

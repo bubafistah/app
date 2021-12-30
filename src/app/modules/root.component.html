@@ -91,6 +91,7 @@
 
             <mat-card fxFlex="100">
                 <mat-card-title>{{ 'plugin.lthn.chain.table.title.recent-blocks' | translate }}</mat-card-title>
+                <mat-card-subtitle>{{ 'plugin.lthn.chain.words.last_block_time' | translate }} {{ block_timestamp*1000 | date}}</mat-card-subtitle>
                 <mat-card-content>
                     <ngx-datatable
                             class="material"

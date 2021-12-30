@@ -5,6 +5,7 @@
     "baseUrl": "./src",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
     "strict": true,
     "noImplicitOverride": false,
     "strictPropertyInitialization": false,
@@ -19,15 +20,10 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2017",
+    "target": "es2015",
     "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ],
-    "typeRoots": [
-      "../node_modules/@types"
-    ],
+    "lib": ["es2018", "dom"],
+    "typeRoots": ["node_modules/@types"],
     "paths": {
       "@service/*": [
         "app/services/*"
