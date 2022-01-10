@@ -1,10 +1,10 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({ name: 'removeTrailingZero', pure: true })
 export class RemoveTrailingZerosPipe implements PipeTransform {
 	constructor() {}
 
-	transform(value, valid?: boolean) {
+	transform(value) {
 		value = value.toString();
 		if (value.indexOf('.') === -1) {
 			return parseInt(value);

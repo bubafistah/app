@@ -1,9 +1,5 @@
 import {Injectable} from '@angular/core';
-
-
-import {APP_CONFIG} from '@env/environment';
 import {ConfigIniParser} from 'config-ini-parser';
-import {FileSystemService} from '@service/filesystem/file-system.service';
 
 @Injectable({
 	providedIn: 'root'

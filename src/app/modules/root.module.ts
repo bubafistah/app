@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RootComponent} from './root.component';
-import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {FlexModule} from '@angular/flex-layout';
 import {ConsoleModule} from '@plugin/console/console.module';
@@ -12,9 +11,10 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatListModule} from '@angular/material/list';
 import {ReactiveComponentModule} from '@ngrx/component';
-import {PipesModule} from 'app/pipes/pipes.module';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {MatIconModule} from '@angular/material/icon';
+import {PipesModule} from '@pipe/pipes.module';
+import {CardModule} from '@swimlane/ngx-ui';
 
 @NgModule({
 	declarations: [RootComponent],
@@ -22,7 +22,7 @@ import {MatIconModule} from '@angular/material/icon';
 	],
 	imports: [
 		CommonModule,
-		MatCardModule,
+		CardModule,
 		MatButtonModule,
 		FlexModule,
 		MatTabsModule,

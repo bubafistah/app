@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Client } from '@hiveio/dhive';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Client} from '@hiveio/dhive';
+import {Router} from '@angular/router';
 
 @Component({
 	selector: 'lthn-app-post',

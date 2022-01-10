@@ -106,6 +106,7 @@ export class ChartService {
 		this.chartSubscriptions[name] = this.chartData$[name].subscribe(
 			(response) => {
 				if (response != undefined) {
+					//@ts-ignore
 					this.chartInstances[name].data.datasets.map((item, i) => {
 						this.chartInstances[name].data.datasets[i].data =
 							this.chartMeta[name].dataMap(response, i);
@@ -117,7 +118,7 @@ export class ChartService {
 				}
 			},
 			(error) => {
-				//console.log(error);
+				console.log(error);
 			}
 		);
 	}

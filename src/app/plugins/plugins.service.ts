@@ -15,7 +15,7 @@ export class PluginsService {
   showAsElement(message: string) {
     // Create element
     const popupEl: NgElement & WithProperties<WalletComponent> = document.createElement('lthn-app-wallet') as any;
-
+console.log(message)
     // Listen to the close event
    // popupEl.addEventListener('closed', () => document.body.removeChild(popupEl));
 
@@ -29,7 +29,7 @@ export class PluginsService {
   showAsComponent(message: string) {
     // Create element
     const popup = document.createElement('lthn-app-wallet');
-
+console.log(message)
     // Create the component and wire it up with the element
     const factory = this.componentFactoryResolver.resolveComponentFactory(WalletComponent);
     const popupComponentRef = factory.create(this.injector, [], popup);

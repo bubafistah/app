@@ -1,29 +1,29 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { WalletComponent } from './wallet.component';
-import { MatCardModule } from '@angular/material/card';
-import { FlexModule } from '@angular/flex-layout';
-import { MatListModule } from '@angular/material/list';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { RouterModule, Routes } from '@angular/router';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatTabsModule } from '@angular/material/tabs';
-import { NewComponent } from './components/new.component';
-import { RestoreComponent } from './components/restore.component';
-import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {WalletComponent} from './wallet.component';
+import {MatCardModule} from '@angular/material/card';
+import {FlexModule} from '@angular/flex-layout';
+import {MatListModule} from '@angular/material/list';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {RouterModule, Routes} from '@angular/router';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatTabsModule} from '@angular/material/tabs';
+import {NewComponent} from './components/new.component';
+import {RestoreComponent} from './components/restore.component';
+import {MatInputModule} from '@angular/material/input';
+import {ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
 import {OpenComponent} from '@plugin/lthn/wallet/components/open.component';
 import {ModalModule} from '@service/ui/modal/modal.module';
 import {TransactionsComponent} from '@plugin/lthn/wallet/components/transactions.component';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {MatSelectModule} from '@angular/material/select';
-import {AddComponent} from './components/add.component'
-import {PipesModule} from 'app/pipes/pipes.module';
+import {AddComponent} from './components/add.component';
+import {PipesModule} from '@pipe/pipes.module';
 
 
 const routes: Routes = [

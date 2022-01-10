@@ -1,15 +1,14 @@
-import {Component, Inject, OnDestroy, OnInit, PLATFORM_ID} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Client} from '@hiveio/dhive';
 import {Router} from '@angular/router';
 import {FileSystemService} from '@service/filesystem/file-system.service';
 import {BlockchainService} from '@plugin/lthn/chain/blockchain.service';
 import {WalletService} from '@plugin/lthn/wallet/wallet.service';
-import { isPlatformServer} from '@angular/common';
 import {select, Store} from '@ngrx/store';
-import {ChainSetGetInfo, getChainBlocks, getChainInfo} from '@plugin/lthn/chain/data';
+import {getChainBlocks, getChainInfo} from '@plugin/lthn/chain/data';
 import {ChainGetInfo} from '@plugin/lthn/chain/interfaces/props/get_info';
 import {interval, Observable, Subscription} from 'rxjs';
-import { ColumnMode } from '@swimlane/ngx-datatable';
+import {ColumnMode} from '@swimlane/ngx-datatable';
 import {BlockHeader} from '@plugin/lthn/chain/interfaces/types/blockHeader';
 
 @Component({
@@ -27,6 +26,7 @@ export class RootComponent implements OnInit, OnDestroy {
 	ColumnMode = ColumnMode;
 	public blocks: Observable<{ headers: BlockHeader[]}>;
 	private sub: Subscription[] = [];
+
 
 	constructor(
 		private router: Router,
@@ -53,7 +53,7 @@ export class RootComponent implements OnInit, OnDestroy {
 		this.fileSystem.listFiles('/cli').then((dat: any) => {
 			this.hasCLI = dat.length > 0;
 			this.chain.getInfo()
-			this.sub['interval'] = interval(5000).subscribe(n => this.chain.getInfo());
+			this.sub['interval'] = interval(5000).subscribe(() => this.chain.getInfo());
 
 		});
 
@@ -84,7 +84,7 @@ export class RootComponent implements OnInit, OnDestroy {
 	async downloadCLI() {
 		this.downloadingCLI = true
 		await new Promise(f => setTimeout(f, 1000));
-		this.chain.downloadCLI().then((data) => {
+		this.chain.downloadCLI().then(() => {
 			this.downloadingCLI = false;
 			this.router.navigateByUrl('/chain')
 		});

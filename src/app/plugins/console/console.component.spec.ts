@@ -1,8 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ConsoleComponent } from './console.component';
+import {ConsoleComponent} from './console.component';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import * as NgTerminal from 'ng-terminal';
 
 describe('ConsoleComponent', () => {
 	let component: ConsoleComponent;

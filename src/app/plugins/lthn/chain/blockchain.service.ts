@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {rpcBody} from '@service/json-rpc';
 import {ChainSetBlocks, ChainSetGetInfo, ChainSetTransactions} from '@plugin/lthn/chain/data';
 import {Store} from '@ngrx/store';

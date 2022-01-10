@@ -1,9 +1,10 @@
 import Big from 'big.js';
 import {Destination} from './types/destination';
 import {MakeUriIn} from './dto/makeUriIn';
+import Random from 'random-js';
 
 export const generatePaymentId = (length: 16 | 64) =>
-	'Random.hex(false)(Random.engines.nativeMath, length)';
+	Random.hex(false)(Random.nativeMath, length);
 
 export class LTHN extends Big {
 	toAtomic = (): Atomic => new Atomic(this.times(1e8));

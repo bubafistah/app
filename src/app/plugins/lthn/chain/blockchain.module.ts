@@ -10,12 +10,12 @@ import {FlexModule} from '@angular/flex-layout';
 import {TranslateModule} from '@ngx-translate/core';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {ReactiveComponentModule} from '@ngrx/component';
-import {PipesModule} from 'app/pipes/pipes.module';
 import {MatIconModule} from '@angular/material/icon';
-import {HashRatePipe} from 'app/pipes/crypto/hashrate.pipe';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatMenuModule} from '@angular/material/menu';
+import {PipesModule} from '@pipe/pipes.module';
+import {HashRatePipe} from '@pipe/crypto/hashrate.pipe';
 
 const routes: Routes = [
 	{

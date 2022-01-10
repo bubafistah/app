@@ -2,53 +2,60 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./src",
+    "rootDir": ".",
+    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
-    "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "noImplicitOverride": false,
-    "strictPropertyInitialization": false,
-    "noPropertyAccessFromIndexSignature": true,
-    "noImplicitReturns": true,
-    "noImplicitAny": false,
-    "noFallthroughCasesInSwitch": true,
-    "sourceMap": true,
-    "declaration": false,
-    "downlevelIteration": true,
-    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "sourceMap": true,
+    "strict": false,
+    "declaration": false,
     "moduleResolution": "node",
     "importHelpers": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
     "target": "es2015",
     "module": "es2020",
-    "lib": ["es2018", "dom"],
-    "typeRoots": ["node_modules/@types"],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "paths": {
       "@service/*": [
-        "app/services/*"
+        "src/app/services/*"
       ],
       "@module/*": [
-        "app/modules/*"
+        "src/app/modules/*"
       ],
       "@plugin/*": [
-        "app/plugins/*"
+        "src/app/plugins/*"
       ],
       "@interface/*": [
-        "app/interfaces/*"
+        "src/app/interfaces/*"
       ],
       "@data/*": [
-        "app/data/*"
+        "src/app/data/*"
+      ],
+      "@pipe/*": [
+        "src/app/pipes/*"
       ],
       "@env/*": [
-        "environments/*"
+        "src/environments/*"
       ]
     }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictInjectionParameters": false,
+    "strictInputAccessModifiers": false,
+    "strictTemplates": false,
+    "preserveWhitespaces": true,
+    "resolveJsonModule": true,
+    "enableIvy": true
   }
 }

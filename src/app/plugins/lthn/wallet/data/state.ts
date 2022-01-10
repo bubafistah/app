@@ -1,5 +1,5 @@
 import {PaginatorOptions} from '@data/interface/pagination';
-import {GetTransfersOut, Transfer} from '@plugin/lthn/wallet/interfaces';
+import {GetTransfersOut} from '@plugin/lthn/wallet/interfaces';
 
 export interface WalletsState {
 	loaded_wallet: string;

@@ -1,8 +1,8 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({ name: 'shrug', pure: false })
 export class ShruggiePipe implements PipeTransform {
-	transform(content, decorator?: boolean) {
+	transform(content) {
 		if (content === null || content === '') {
 			return '¯\\_(ツ)_/¯';
 		}

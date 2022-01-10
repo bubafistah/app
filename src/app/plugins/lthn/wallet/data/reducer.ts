@@ -1,8 +1,7 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import {createReducer, on} from '@ngrx/store';
 import {Wallet, WalletsState, WalletState} from './state';
 
 import * as WalletActions from './actions';
-import {WalletLoaded, WalletTransfers} from './actions';
 
 export const initialState: WalletsState = new WalletState
 
@@ -18,7 +17,7 @@ const walletReducer = createReducer(
 			...state.wallets, [address]: new Wallet(address)
 		}
 	})),
-	on(WalletActions.openWallet, (state: any, {address, password}) => ({
+	on(WalletActions.openWallet, (state: any, {address}) => ({
 		...state,
 		loaded_wallet: address,
 		known_wallets: [

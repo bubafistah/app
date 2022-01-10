@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {WalletRpcService} from '@service/wallet.rpc.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {WalletService} from '@plugin/lthn/wallet/wallet.service';
-import {nameNotTakenValidator} from '../validators'
+import {nameNotTakenValidator} from '../validators';
 
 @Component({
 	selector: 'lthn-wallet-restore',

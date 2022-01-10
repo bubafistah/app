@@ -1,5 +1,5 @@
-import { Action, createReducer, on } from '@ngrx/store';
-import { Plugins } from './state';
+import {createReducer, on} from '@ngrx/store';
+import {Plugins} from './state';
 
 import * as PluginActions from './actions';
 // here you can configure initial state of your app

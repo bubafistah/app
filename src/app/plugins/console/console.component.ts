@@ -17,7 +17,6 @@ export class ConsoleComponent implements OnInit, AfterViewInit {
 
 	@Input() attach  = 'lethean-wallet-rpc';
 	private command: string[] = []
-	private sub$;
 	constructor(private ws: WebsocketService, private ref: ChangeDetectorRef) {
 		this.ref.detach()
 		setInterval(() => {
@@ -54,9 +53,7 @@ export class ConsoleComponent implements OnInit, AfterViewInit {
 			this.changeStream(this.attach)
     }
 
-	getSub(){
-		this.sub$ = this.ws.connect();
-	}
+
 
 	changeStream(channel:string){
 		this.ws.sendMessage(channel)

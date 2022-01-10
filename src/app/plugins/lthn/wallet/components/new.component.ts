@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import { FormControl } from '@angular/forms';
-import { WalletRpcService } from '@service/wallet.rpc.service';
+import {FormControl} from '@angular/forms';
+import {WalletRpcService} from '@service/wallet.rpc.service';
 
-import { nameNotTakenValidator } from '../validators'
-import { WalletService } from '../wallet.service'
+import {nameNotTakenValidator} from '../validators';
+import {WalletService} from '../wallet.service';
 
 @Component({
 	selector: 'lthn-wallet-new',

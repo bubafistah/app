@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
-export const WS_ENDPOINT = 'ws://localhost:36909';
+import {Injectable} from '@angular/core';
 import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
+
+export const WS_ENDPOINT = 'ws://localhost:36909';
 
 @Injectable({
 	providedIn: 'root'

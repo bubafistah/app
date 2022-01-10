@@ -1,8 +1,8 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import { MatSidenav } from '@angular/material/sidenav';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import { Meta, Title } from '@angular/platform-browser';
-import { filter } from 'rxjs/operators';
+import {MatSidenav} from '@angular/material/sidenav';
+import {ActivatedRoute, NavigationEnd, NavigationStart, Event, Router} from '@angular/router';
+import {Meta, Title} from '@angular/platform-browser';
+import {filter} from 'rxjs/operators';
 import {TranslateService} from '@ngx-translate/core';
 import {select, Store} from '@ngrx/store';
 import {changeLanguage, selectLanguage, selectMenuVisibility, toggleHideNavigation} from '@module/settings/data';
@@ -11,7 +11,9 @@ import {BlockUI, NgBlockUI} from 'ng-block-ui';
 import {FileSystemService} from '@service/filesystem/file-system.service';
 import {BlockchainService} from '@plugin/lthn/chain/blockchain.service';
 import {WalletService} from '@plugin/lthn/wallet/wallet.service';
-
+import {DrawerService, LoadingService} from '@swimlane/ngx-ui';
+import Prism from 'prismjs';
+import 'prismjs/plugins/custom-class/prism-custom-class';
 @Component({
 	selector: 'lthn-app',
 	templateUrl: './app.component.html',
@@ -26,7 +28,23 @@ export class AppComponent implements OnInit, AfterViewInit {
 	public currentFlag: any;
 	public currentLanguage$: Subscription;
 	public currentLanguage: string;
-	private menu$: Subscription;
+	public navExpanded: boolean = true;
+	searchValue = '';
+	filteredNavigationTree: any[];
+
+	navigationTree: any[] = [
+		{
+			name: 'menu.text.dashboard',
+			route: '',
+			icon: 'formula',
+
+		},
+		{
+			name: 'menu.text.blockchain',
+			route: 'chain',
+			icon: 'stars'
+		}
+	];
 
 	/**
 	 * Starts the Angular framework and configures system plugins
@@ -40,6 +58,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 	 * @param {FileSystemService} fs
 	 * @param {BlockchainService} chain
 	 * @param {WalletService} wallet
+	 * @param drawerMngr
+	 * @param loadingService
 	 */
 	constructor(
 		private router: Router,
@@ -51,12 +71,27 @@ export class AppComponent implements OnInit, AfterViewInit {
 		private fs: FileSystemService,
 		private chain: BlockchainService,
 		private wallet: WalletService,
+		private drawerMngr: DrawerService,
+		private loadingService: LoadingService
 	) {
 
 		translate.setDefaultLang('en');
 		let lang = translate.getBrowserLang()
 		// the lang to use, if the lang isn't available, it will use the current loader to get them
 		translate.use(lang ? lang : 'en');
+		Prism.plugins.customClass.prefix('prism--');
+
+		// Adding loading component in router
+		this.router.events.subscribe((event: Event) => {
+			if (event instanceof NavigationStart) {
+				this.loadingService.start();
+			} else if (event instanceof NavigationEnd) {
+				this.loadingService.complete();
+				this.drawerMngr.destroyAll();
+			}
+		});
+
+		this.filteredNavigationTree = this.deepCloneTree();
 	}
 
 	/**
@@ -83,7 +118,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 	 * Setup watcher for sidenav menu user setting
 	 */
 	ngAfterViewInit() {
-		this.menu$ = this.store.pipe(select(selectMenuVisibility)).subscribe((opened) => {
+		this.store.pipe(select(selectMenuVisibility)).subscribe((opened) => {
 			this.menu = opened
 			this.sidenav.toggle();
 		})
@@ -123,7 +158,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 					this.heading = data.heading;
 					if (data.description) {
 
-						this.translate.get(data.description).subscribe((res: string) => {
+						this.translate.get(data.description).subscribe(() => {
 							this.metaService.updateTag({
 								name: 'description',
 								content: data.description
@@ -156,7 +191,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 	startChain() {
 		this.fs.listFiles('/cli').then((dat: any) => {
 			if(dat.length > 2){
-				this.chain.startDaemon().then((data) => {
+				this.chain.startDaemon().then(() => {
 					this.blockUI.stop();
 					this.wallet.startWallet().then(r => r);
 				})
@@ -177,5 +212,36 @@ export class AppComponent implements OnInit, AfterViewInit {
 		} else {
 			return activatedRoute;
 		}
+	}
+
+	updateSearchValue(updatedVal: string) {
+		if (!updatedVal) {
+			this.filteredNavigationTree = this.deepCloneTree();
+		}
+
+		updatedVal = updatedVal.toLowerCase();
+		this.filteredNavigationTree = this.navigationTree.map(nav => {
+			return {
+				...nav,
+				children: nav.children?.length
+					? nav.children.filter((child: any) => child.name.toLowerCase().includes(updatedVal))
+					: undefined
+			};
+		});
+	}
+
+	trackByName(_index: number, item: any): string {
+		return item.name;
+	}
+
+	private deepCloneTree() {
+		return [
+			...this.navigationTree.map(nav => {
+				return {
+					...nav,
+					children: nav.children ? [...nav.children] : undefined
+				};
+			})
+		];
 	}
 }

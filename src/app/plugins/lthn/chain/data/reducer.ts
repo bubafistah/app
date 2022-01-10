@@ -1,4 +1,4 @@
-import {  createReducer, on } from '@ngrx/store';
+import {createReducer, on} from '@ngrx/store';
 
 import * as ChainActions from './actions';
 import {ChainState} from '@plugin/lthn/chain/interfaces/chain';

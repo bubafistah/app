@@ -1,18 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {catchError, map, switchMap, takeWhile, withLatestFrom} from 'rxjs/operators';
-import {TranslateService} from '@ngx-translate/core';
 import {WalletService} from '@plugin/lthn/wallet/wallet.service';
 import {select, Store} from '@ngrx/store';
 import * as WalletActions from './actions';
 import * as WalletSelectors from './selectors';
 import {merge, of, timer} from 'rxjs';
-import {selectOpenedWalletData, selectWalletData} from './selectors';
 import {HttpClient} from '@angular/common/http';
 import {rpcBody} from '@service/json-rpc';
 import {Balance, GetTransfersIn, GetTransfersOut} from '@plugin/lthn/wallet/interfaces';
-import {WalletTransfers} from './actions';
-import {debug} from '@data/debug.rxjs';
 
 @Injectable()
 export class WalletEffects {
@@ -30,12 +26,14 @@ export class WalletEffects {
 		{dispatch: false}
 	);
 
+
 	WalletLoadData$ =
 		createEffect(() => this.actions$.pipe(
 				// Filter action type
 				ofType(WalletActions.WalletLoadData),
 				// Get the polling interval
 				withLatestFrom(this.store.pipe(select(WalletSelectors.selectOpenedWalletData))),
+			//@ts-ignore
 				switchMap(([action, wallet]) => merge(
 							timer(0, wallet.options.pollingInterval).pipe(
 								takeWhile(() => this.isPollingActiveStats),
@@ -69,6 +67,7 @@ export class WalletEffects {
 							)
 						).pipe(
 							map((payload) => {
+								console.log(payload)
 									return WalletActions.WalletLoaded();
 								},
 								catchError((error) => {
@@ -102,6 +101,6 @@ export class WalletEffects {
 
 	private isPollingActiveStats = false;
 
-	constructor(private actions$: Actions, private http: HttpClient, private translate: TranslateService, private store: Store, private wallet: WalletService) {
+	constructor(private actions$: Actions, private http: HttpClient, private store: Store, private wallet: WalletService) {
 	}
 }

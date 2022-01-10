@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 
 import {FormControl} from '@angular/forms';
 import {WalletRpcService} from '@service/wallet.rpc.service';
-import {Observable, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 import {GetTransfersIn, GetTransfersOut} from '@plugin/lthn/wallet/interfaces';
 import {ColumnMode} from '@swimlane/ngx-datatable';
 import {select, Store} from '@ngrx/store';

@@ -1,10 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {
-	colors,
-	names,
-	starWars,
-	uniqueNamesGenerator
-} from 'unique-names-generator';
+import {Component, OnInit} from '@angular/core';
+import {colors, names, starWars, uniqueNamesGenerator} from 'unique-names-generator';
 
 @Component({
 	selector: 'lthn-user-profile',

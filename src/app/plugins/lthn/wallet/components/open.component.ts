@@ -2,8 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 
 import {FormControl} from '@angular/forms';
 import {WalletService} from '@plugin/lthn/wallet/wallet.service';
-import {NotifierService} from 'angular-notifier';
-import {addWallet, openWallet} from '@plugin/lthn/wallet/data';
+import {openWallet} from '@plugin/lthn/wallet/data';
 import {Store} from '@ngrx/store';
 
 @Component({
@@ -23,7 +22,7 @@ export class OpenComponent implements OnInit {
 	public wallets: string[];
 
 
-	constructor(private wallet: WalletService, private store: Store, private notifierService: NotifierService) {
+	constructor(private wallet: WalletService, private store: Store) {
 
 	}
 

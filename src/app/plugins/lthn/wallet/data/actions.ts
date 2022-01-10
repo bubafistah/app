@@ -1,5 +1,5 @@
-import { createAction, props } from '@ngrx/store';
-import {Balance, GetTransfersOut, Transfer} from '@plugin/lthn/wallet/interfaces';
+import {createAction, props} from '@ngrx/store';
+import {Balance, GetTransfersOut} from '@plugin/lthn/wallet/interfaces';
 
 export const addWallet = createAction(
 	'[Wallet] Adding Known Wallet',

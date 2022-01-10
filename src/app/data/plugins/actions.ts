@@ -1,4 +1,4 @@
-import { createAction, props } from '@ngrx/store';
+import {createAction, props} from '@ngrx/store';
 import {PluginDefinition} from '@data/plugins/state';
 
 export const addPlugin = createAction(

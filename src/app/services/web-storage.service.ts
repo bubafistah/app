@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {atob, btoa} from 'bytebuffer';
 
 @Injectable({
 	providedIn: 'root'

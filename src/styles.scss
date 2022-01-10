@@ -5,6 +5,19 @@
 /* Google Material Icons */
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Raleway&display=swap');
+/* You can add global styles to this file, and also import other style files */
+@import '~@swimlane/ngx-ui/index.css';
+
+
+.appearance-table {
+	width: 100%;
+
+	td,
+	th {
+		padding: 10px;
+	}
+}
+
 body {    overscroll-behavior: none;}
 /* You can add global styles to this file, and also import other style files */
 html, body {

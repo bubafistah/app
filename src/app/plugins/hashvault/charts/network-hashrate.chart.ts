@@ -119,7 +119,7 @@ export class NetworkHashrateChart
 	}
 
 	setupCallbacks() {
-		const vm = this;
+
 		// this.options.scales.y.ticks.callback = function (value, index, values) {
 		//     return vm.hashratePipe.transform(value);
 		// };
@@ -129,8 +129,7 @@ export class NetworkHashrateChart
 		// };
 	}
 
-	dataMap(data, i) {
-		const vm = this;
+	dataMap(data) {
 		return data.map((n: any) => ({
 			x: n.ts,
 			y: Math.floor(n.diff / 120)

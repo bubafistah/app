@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
+import { CanActivate, Router} from '@angular/router';
 import {AuthService} from './auth.service';
 import {FileSystemService} from '@service/filesystem/file-system.service';
-import {APP_CONFIG} from '@env/environment';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -32,8 +31,7 @@ export class AuthGuard implements CanActivate {
 	 * @returns {boolean | Promise<boolean>}
 	 */
 	canActivate(
-		route: ActivatedRouteSnapshot,
-		state: RouterStateSnapshot
+
 	): boolean | Promise<boolean> {
 		let isAuthenticated = this.authService.getAuthStatus();
 		if (!isAuthenticated) {

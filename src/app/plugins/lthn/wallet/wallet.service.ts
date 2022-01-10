@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {WalletRpcService} from '@service/wallet.rpc.service';
 import {Balance, GetTransfersIn, OpenWallet, RestoreWallet} from '@plugin/lthn/wallet/interfaces';
 import {FileSystemService} from '@service/filesystem/file-system.service';
-import {Observable} from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'

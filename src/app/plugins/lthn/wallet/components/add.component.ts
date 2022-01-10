@@ -1,10 +1,10 @@
-import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
 	selector: 'lthn-wallet-add',
 	templateUrl: './add.component.html'
 })
-export class AddComponent implements OnInit, OnChanges {
+export class AddComponent implements OnInit {
 	@Input() targetAddForm: string = 'open';
 	targetTabIndex: number = 0;
 
@@ -24,8 +24,6 @@ export class AddComponent implements OnInit, OnChanges {
 		}
 	}
 
-	ngOnChanges(changes: SimpleChanges) {
-		this.setTargetTabIndex();
-	}
+
 
 }

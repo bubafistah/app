@@ -1,6 +1,5 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import {createFeatureSelector, createSelector} from '@ngrx/store';
 import {ChainState} from '@plugin/lthn/chain/interfaces/chain';
-import {ChainGetInfo} from '@plugin/lthn/chain/interfaces/props/get_info';
 
 /**
  * Wallet Datastore feature name

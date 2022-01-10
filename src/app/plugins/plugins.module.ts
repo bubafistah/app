@@ -1,8 +1,7 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { PluginsComponent } from 'app/plugins/plugins.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {PluginsService} from '@plugin/plugins.service';
-
+import {PluginsComponent} from '@plugin/plugins.component';
 
 
 @NgModule({

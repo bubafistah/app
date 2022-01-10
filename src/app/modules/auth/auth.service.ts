@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {CryptService} from '@service/crypt.service';
 import {FileSystemService} from '@service/filesystem/file-system.service';
-import {APP_CONFIG} from '@env/environment';
 
 @Injectable({
 	providedIn: 'root'
@@ -59,5 +58,13 @@ export class AuthService {
 	 */
 	logout() {
 		this.user = '';
+	}
+
+	getId(){
+		return this.id;
+	}
+
+	getUser(){
+		return this.user;
 	}
 }

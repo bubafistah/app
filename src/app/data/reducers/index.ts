@@ -7,7 +7,6 @@ import * as Chart from '../../modules/chart/data';
 import * as Wallet from '../../plugins/lthn/wallet/data';
 import * as Chain from '../../plugins/lthn/chain/data';
 import * as Logs from '../logs';
-import {WebStorageService} from '@service/web-storage.service';
 
 export interface AppState {
 	settings: Settings.SettingsState;

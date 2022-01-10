@@ -1,4 +1,4 @@
-import { createReducer, on} from '@ngrx/store';
+import {createReducer, on} from '@ngrx/store';
 import * as SettingsActions from './settings.actions';
 import {SettingsState} from './settingsState';
 

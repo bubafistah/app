@@ -1,17 +1,14 @@
-import {Component, OnDestroy, OnInit, PipeTransform} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ChartService} from '@module/chart/chart.service';
-import {APP_CONFIG} from '@env/environment';
-import {rpcBody} from '@service/json-rpc';
 import {ChainGetInfo} from '@plugin/lthn/chain/interfaces/props/get_info';
 import {BlockchainService} from '@plugin/lthn/chain/blockchain.service';
 import {select, Store} from '@ngrx/store';
-import {ChainSetGetInfo, getChainBlocks, getChainInfo} from '@plugin/lthn/chain/data';
+import {getChainBlocks, getChainInfo} from '@plugin/lthn/chain/data';
 import {interval, Observable, Subscription} from 'rxjs';
 import {BlockHeader} from '@plugin/lthn/chain/interfaces/types/blockHeader';
-import { ColumnMode } from '@swimlane/ngx-datatable';
+import {ColumnMode} from '@swimlane/ngx-datatable';
 import {FileSystemService} from '@service/filesystem/file-system.service';
-import {HashRatePipe} from 'app/pipes/crypto/hashrate.pipe';
+import {HashRatePipe} from '@pipe/crypto/hashrate.pipe';
 
 @Component({
 	selector: 'lthn-chain',
@@ -64,9 +61,9 @@ export class BlockchainComponent implements OnInit, OnDestroy {
 
 		this.chain.getInfo()
 
-		this.fileSystem.listFiles('/cli').then((dat: any) => {
+		this.fileSystem.listFiles('/cli').then(() => {
 			this.chain.getInfo()
-			interval(15000).subscribe(n => {
+			interval(15000).subscribe(() => {
 				this.chain.getInfo()
 			});
 

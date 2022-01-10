@@ -52,6 +52,7 @@ export class ChartsEffects {
 				RxJsLoggingLevel.DEBUG,
 				'RxJs Option: selectHashrateMinersOptions'
 			),
+			//@ts-ignore
 			switchMap(([action, options]) =>
 				// Start polling
 				timer(0, options.pollingInterval).pipe(

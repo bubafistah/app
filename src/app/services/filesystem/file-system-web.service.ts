@@ -13,7 +13,7 @@ export class FileSystemWebService implements FileSystemInterface {
 	}
 
 	public exists(pathname): boolean {
-		return false;
+		return pathname;
 	}
 
 	public async list(dirname) {
@@ -30,9 +30,11 @@ export class FileSystemWebService implements FileSystemInterface {
 	}
 
 	public mkdir(dirname): void {
+		console.log(dirname)
 	}
 
 	public path(filename) {
+		console.log(filename)
 	}
 
 
@@ -62,8 +64,7 @@ export class FileSystemWebService implements FileSystemInterface {
 				{path: filename, data: btoa(data)},
 				options
 			)
-			.toPromise()
-			.then((dat) => console.log('e'));
+			.toPromise();
 	}
 
 

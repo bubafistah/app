@@ -142,6 +142,7 @@ export class CryptService {
 				message,
 				decryptionKeys: privateKey
 			});
+		console.log(signatures)
 		// Leave nothing to chance
 		privateKey = null
 		encryptionKey = ''

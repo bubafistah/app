@@ -1,5 +1,5 @@
-import { Action, createReducer, on } from '@ngrx/store';
-import { LogsState } from './state';
+import {createReducer, on} from '@ngrx/store';
+import {LogsState} from './state';
 
 import * as LogsActions from './actions';
 // here you can configure initial state of your app

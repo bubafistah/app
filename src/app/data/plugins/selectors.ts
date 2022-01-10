@@ -1,5 +1,5 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { Plugins } from './state';
+import {createFeatureSelector, createSelector} from '@ngrx/store';
+import {Plugins} from './state';
 
 export const selectLogsState = createFeatureSelector<Plugins>('plugins');
 

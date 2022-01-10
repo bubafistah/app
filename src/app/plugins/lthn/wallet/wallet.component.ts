@@ -1,12 +1,10 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {WalletService} from '@plugin/lthn/wallet/wallet.service';
-import {ModalComponent} from '@service/ui/modal/modal.component';
 import {Balance} from '@plugin/lthn/wallet/interfaces';
 import {PluginDefinition, PluginStatus} from '@data/plugins';
 import {select, Store} from '@ngrx/store';
 import * as WalletActions from '@plugin/lthn/wallet/data';
 import {Subscription} from 'rxjs';
-import {getWalletData} from '@plugin/lthn/wallet/data';
 
 @Component({
 	selector: 'lthn-app-wallet',
@@ -25,7 +23,6 @@ export class WalletComponent implements OnInit, OnDestroy, AfterViewInit {
 
 	public wallets: string[] = [];
 
-	@ViewChild('modal') private modalComponent: ModalComponent
 	public openedWallet: string = '';
 	public showtx: boolean = false;
 	public txnSelection: any = {

@@ -19,8 +19,3 @@ export const request =
 			 }
 		 });
 
-interface Response {
-	id: string;
-	jsonrpc: string;
-	result: any;
-}

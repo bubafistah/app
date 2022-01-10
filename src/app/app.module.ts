@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {BrowserModule, BrowserTransferStateModule} from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {DataModule} from '@data/data.module';
@@ -23,6 +23,7 @@ import {ConsoleModule} from '@plugin/console/console.module';
 import {PluginsModule} from '@plugin/plugins.module';
 import {NotifierModule} from 'angular-notifier';
 import {BlockUIModule} from 'ng-block-ui';
+import {NgxUIModule} from '@swimlane/ngx-ui';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
@@ -44,7 +45,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 			}
 		}),
 		AppRoutingModule,
-
+		NgxUIModule,
 		DataModule,
 		StatusModule,
 		MatSidenavModule,
@@ -62,7 +63,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		NotifierModule.withConfig({
 			// Custom options in here
 		}),
-		BlockUIModule.forRoot()
+		BlockUIModule.forRoot(),
 
 	],
 	providers: [],

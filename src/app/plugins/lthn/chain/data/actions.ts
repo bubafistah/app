@@ -1,8 +1,6 @@
-import { createAction, props } from '@ngrx/store';
-import {Balance, GetTransfersOut, Transfer} from '@plugin/lthn/wallet/interfaces';
+import {createAction, props} from '@ngrx/store';
 import {ChainGetInfo} from '@plugin/lthn/chain/interfaces/props/get_info';
 import {Transactions} from '@plugin/lthn/chain/interfaces/props/transactions';
-
 
 
 export const ChainLoadData = createAction('[Chain] Load Requested' );

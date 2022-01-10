@@ -1,15 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {request} from '@service/json-rpc';
-import {AddAddressBook, Address, Balance, CreateWallet, GetAddressBookOut, GetBulkPaymentsIn,
-	GetBulkPaymentsOut, GetPaymentsIn, GetPaymentsOut, GetTransfersIn, GetTransfersOut, Height, IncomingTransfersIn,
-	IncomingTransfersOut, IntegratedAddress, MakeIntegratedAddressIn, MakeUriIn, OpenWallet, QueryKeyIn, QueryKeyOut,
-	SplitIntegratedAddressOut, StoreOut, SweepAllIn, SweepAllOut, Transfer, TransferIn, TransferOut, TransferSplitIn,
-	TransferSplitOut, Uri} from '@plugin/lthn/wallet/interfaces';
+import {AddAddressBook, Address, Balance, CreateWallet, GetAddressBookOut, GetBulkPaymentsIn, GetBulkPaymentsOut, GetPaymentsIn, GetPaymentsOut, GetTransfersIn, GetTransfersOut, Height, IncomingTransfersIn, IncomingTransfersOut, IntegratedAddress, MakeIntegratedAddressIn, MakeUriIn, OpenWallet, QueryKeyIn, QueryKeyOut, SplitIntegratedAddressOut, StoreOut, SweepAllIn, SweepAllOut, Transfer, TransferIn, TransferOut, TransferSplitIn, TransferSplitOut, Uri} from '@plugin/lthn/wallet/interfaces';
 import {RestoreWallet} from '@plugin/lthn/wallet/interfaces/requests/restoreWallet';
-import {Observable} from 'rxjs';
-import { from } from 'rxjs';
-const axios = require('axios').default;
+
 
 @Injectable({
 	providedIn: 'root'
@@ -105,7 +99,7 @@ export class WalletRpcService {
 	 * @returns {Promise<SweepAllOut>}
 	 */
 	sweepAll(x: SweepAllIn): Promise<SweepAllOut> {
-		return request(this.url)('sweep_all');
+		return request(this.url)('sweep_all', x);
 	}
 
 	/**
