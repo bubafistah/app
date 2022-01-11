@@ -13,7 +13,6 @@ import {HashRatePipe} from '@pipe/crypto/hashrate.pipe';
 @Component({
 	selector: 'lthn-chain',
 	templateUrl: './blockchain.component.html',
-	styleUrls: ['./blockchain.component.scss'],
 	providers: [ChartService]
 })
 export class BlockchainComponent implements OnInit, OnDestroy {

@@ -1,73 +1,67 @@
-<div class="container-fluid p-2" fxLayoutGap="8px">
-<mat-toolbar >
-  <mat-toolbar-row>
-    <span class="lthn-brand">{{ 'plugin.lthn.chain.table.title.blockchain-explorer' | translate }}</span>
+<ngx-toolbar
+        [mainTitle]="'plugin.lthn.chain.table.title.blockchain-explorer' | translate"
+>
+    <ngx-toolbar-content *ngIf="chainInfo | ngrxPush as info">
+        <ul class="horizontal-list">
+            <li>{{'plugin.lthn.chain.words.height' | translate }}: {{info.height | number }}</li>
+            <li>{{'plugin.lthn.chain.words.target_height' | translate }}: {{info.target_height | number }}</li>
+            <li>{{'plugin.lthn.chain.words.grey_peerlist_size' | translate }}
+                : {{info.grey_peerlist_size | number }}</li>
+            <li>
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <mat-icon>view_column</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item *ngFor="let col of allColumns" (click)="toggle(col)">
+                        <input type="checkbox" [id]="col.prop" (click)="toggle(col)" [checked]="isChecked(col)"
+                               disabled/>&nbsp;
+                        <label [attr.for]="col.prop">{{ col.name | translate }}</label>
+                    </button>
+                </mat-menu>
+            </li>
+        </ul>
+    </ngx-toolbar-content>
+</ngx-toolbar>
 
-    <span class="flex-spacer"></span>
-      <ng-container *ngIf="chainInfo | ngrxPush as info">
-          <div> <span class="lthn-brand">{{'plugin.lthn.chain.words.height' | translate }}:</span> {{info.height | number }}</div>
+<ngx-section
+        [sectionCollapsible]="false"
+>
+    <ngx-datatable
+            class="material"
+            [rows]="(blocks | ngrxPush)?.headers"
+            [loadingIndicator]="false"
+            [columns]="columns"
+            [columnMode]="ColumnMode.force"
+            [headerHeight]="30"
+            [footerHeight]="50"
+            rowHeight="auto"
+            [limit]="10"
+            [sorts]="[{ prop: 'timestamp', dir: 'desc' }]"
+    >
+        <ngx-datatable-column *ngFor="let col of columns" [prop]="col.prop" [name]="col.name | translate">
 
-          <div><span class="lthn-brand">{{'plugin.lthn.chain.words.target_height' | translate }}:</span> {{info.target_height | number}}</div>
-          <div><span class="lthn-brand">{{'plugin.lthn.chain.words.grey_peerlist_size' | translate }}:</span> {{info.grey_peerlist_size | number}}</div>
-
-          <span class="flex-spacer"></span>
-      </ng-container>
-
-
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-      <mat-icon>view_column</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item *ngFor="let col of allColumns" (click)="toggle(col)">
-        <input type="checkbox" [id]="col.prop" (click)="toggle(col)" [checked]="isChecked(col)" disabled/>&nbsp;
-        <label [attr.for]="col.prop">{{ col.name | translate }}</label>
-      </button>
-    </mat-menu>
-
-  </mat-toolbar-row>
-</mat-toolbar>
-</div>
-<div class="container-fluid p-2">
-
-    <mat-card>
-        <mat-card-title>{{ 'plugin.lthn.chain.table.title.recent-blocks' | translate }}</mat-card-title>
-        <mat-card-content>
-            <ngx-datatable
-                    class="material"
-                    [rows]="(blocks | ngrxPush)?.headers"
-                    [loadingIndicator]="false"
-                    [columns]="columns"
-                    [columnMode]="ColumnMode.force"
-                    [headerHeight]="30"
-                    [footerHeight]="50"
-                    rowHeight="auto"
-                    [limit]="10"
-                    [sorts]="[{ prop: 'timestamp', dir: 'desc' }]"
-            >
-                <ngx-datatable-column *ngFor="let col of columns" [prop]="col.prop" [name]="col.name | translate">
-
-                        <ng-template   let-value="value" ngx-datatable-cell-template>
-                          <span  *ngIf="col.prop === 'difficulty'">{{ value | hashrate}}</span>
-                          <span  *ngIf="col.prop === 'height'">{{ value | number }}</span>
-                          <span  *ngIf="col.prop === 'hash'" [innerHTML]="value | hashLink:'txn' | keepHtml"></span>
-                          <span  *ngIf="col.prop === 'orphan_status'" >
+            <ng-template let-value="value" ngx-datatable-cell-template>
+                <span *ngIf="col.prop === 'difficulty'">{{ value | hashrate}}</span>
+                <span *ngIf="col.prop === 'height'">{{ value | number }}</span>
+                <span *ngIf="col.prop === 'hash'" [innerHTML]="value | hashLink:'txn' | keepHtml"></span>
+                <span *ngIf="col.prop === 'orphan_status'">
                             <mat-icon style="color: green" *ngIf="!value">done</mat-icon>
                             <mat-icon style="color: red" *ngIf="value">close</mat-icon>
                           </span>
-                          <span  *ngIf="col.prop === 'reward'">{{ value | toCoin }}</span>
-                          <span  *ngIf="col.prop === 'timestamp'">{{ value | timeAgo }}</span>
-                          <span  *ngIf="col.prop === 'block_size'">{{ value | number }}</span>
-                          <span  *ngIf="col.prop === 'depth'">{{ value | number }}</span>
-                          <span  *ngIf="col.prop === 'major_version'">{{ value  }}</span>
-                          <span  *ngIf="col.prop === 'minor_version'">{{ value | number }}</span>
-                          <span  *ngIf="col.prop === 'nonce'">{{ value  }}</span>
-                          <span  *ngIf="col.prop === 'num_txes'">{{ value | number }}</span>
-                          <span  *ngIf="col.prop === 'prev_hash'">{{ value }}</span>
-                        </ng-template>
+                <span *ngIf="col.prop === 'reward'">{{ value | toCoin }}</span>
+                <span *ngIf="col.prop === 'timestamp'">{{ value | timeAgo }}</span>
+                <span *ngIf="col.prop === 'block_size'">{{ value | number }}</span>
+                <span *ngIf="col.prop === 'depth'">{{ value | number }}</span>
+                <span *ngIf="col.prop === 'major_version'">{{ value  }}</span>
+                <span *ngIf="col.prop === 'minor_version'">{{ value | number }}</span>
+                <span *ngIf="col.prop === 'nonce'">{{ value  }}</span>
+                <span *ngIf="col.prop === 'num_txes'">{{ value | number }}</span>
+                <span *ngIf="col.prop === 'prev_hash'">{{ value }}</span>
+            </ng-template>
 
-                </ngx-datatable-column>
+        </ngx-datatable-column>
 
-            </ngx-datatable>
-        </mat-card-content>
-    </mat-card>
-</div>
+    </ngx-datatable>
+</ngx-section>
+
+
