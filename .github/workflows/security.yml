@@ -25,7 +25,7 @@ jobs:
       - name: Unicode bidi attack check
         run: npx anti-trojan-source --files='/runner/work/gui-interface/gui-interface/dist/**/*.js'
       - name: run auditjs
-        run: npx --loglevel=error auditjs@beta ossi || true
+        run: npx --loglevel=error auditjs@beta ossi --json > auditjs.json || exit 0
       - name: Sensitive File Check
         run: npx ban-sensitive-files -- --all
 
