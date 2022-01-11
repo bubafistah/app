@@ -26,6 +26,8 @@ jobs:
       - name: run auditjs
         run: |
           npx auditjs@beta ossi --json > file.json
+      - name: Sensitive File Check
+        run: npm run ban -- --all
 
 
 
