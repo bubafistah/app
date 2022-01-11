@@ -6,7 +6,7 @@ import {RootModule} from '@module/root.module';
 
 const routes: Routes = [
 	{
-		path: '',
+		path: 'dashboard',
 		component: RootComponent,
 		//canActivate: [AuthGuard],
 		pathMatch: 'full',
@@ -16,7 +16,11 @@ const routes: Routes = [
 			description: 'view.dashboard.description',
 			robots: true
 		}
+	},
+	{
+		path: "", redirectTo: 'dashboard'
 	}
+
 ];
 
 @NgModule({

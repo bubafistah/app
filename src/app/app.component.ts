@@ -35,14 +35,19 @@ export class AppComponent implements OnInit, AfterViewInit {
 	navigationTree: any[] = [
 		{
 			name: 'menu.text.dashboard',
-			route: '',
-			icon: 'formula',
+			route: 'dashboard',
+			icon: 'circles',
 
 		},
 		{
 			name: 'menu.text.blockchain',
 			route: 'chain',
-			icon: 'stars'
+			icon: 'assets'
+		},
+		{
+			name: 'menu.text.wallet',
+			route: 'wallet',
+			icon: 'circuit-board'
 		}
 	];
 
