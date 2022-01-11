@@ -14,5 +14,5 @@ jobs:
       with:
         node-version: 16.x
     - run: npm install --legacy-peer-deps
-    - run: npm audit fix
+    - run: npm audit fix --legacy-peer-deps
     - run: npm run build
