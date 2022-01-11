@@ -1,5 +1,4 @@
 export * from './content/html.pipe';
-export * from './content/markdown.pipe';
 export * from './content/shruggie.pipe';
 export * from './crypto/effort.pipe';
 export * from './crypto/hashLink.pipe';

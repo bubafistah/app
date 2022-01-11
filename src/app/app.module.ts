@@ -19,7 +19,6 @@ import {AppRoutingModule} from './app-routing.module';
 import {AuthModule} from '@module/auth/auth.module';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {PluginsModule} from '@plugin/plugins.module';
 import {NgxUIModule} from '@swimlane/ngx-ui';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -54,8 +53,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		MatButtonModule,
 		MatTooltipModule,
 		FlexModule,
-		AuthModule,
-		PluginsModule
+		AuthModule
 
 	],
 	providers: [],
