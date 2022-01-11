@@ -25,7 +25,7 @@ jobs:
         run: npx anti-trojan-source --files='/runner/work/gui-interface/gui-interface/dist/**/*.js'
       - name: run auditjs
         run: |
-          npx auditjs@beta ossi
+          npx auditjs@beta ossi --json > file.json
 
 
 
