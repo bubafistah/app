@@ -18,7 +18,10 @@
     "be:serve": "cd lthn && $HOME/.deno/bin/deno run --allow-net --allow-env --allow-run --allow-read --allow-write --unstable src/server.ts backend start",
     "dev:ssr": "ng run lethean-workstation:serve-ssr",
     "build:ssr": "ng build && ng run lethean-workstation:server",
-    "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points"
+    "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
+    "sec:scan": "run-p sec:auditjs",
+    "sec:auditjs": "npx auditjs@beta ossi",
+    "sec:bidi": "npx anti-trojan-source --files='./dist/**/*.js'"
   },
   "main": "src/app/main.ts",
   "private": true,
@@ -66,6 +69,8 @@
     "@swimlane/ngx-ui": "^36.1.0",
     "ajv": "^6.12.6",
     "angular-notifier": "^9.1.0",
+    "anti-trojan-source": "^1.4.0",
+    "auditjs": "^4.0.1-beta.33",
     "axios": "^0.24.0",
     "big.js": "^6.1.1",
     "chart.js": "^3.6.0",
@@ -90,6 +95,7 @@
     "rxjs": "~7.4.0",
     "tslib": "^2.3.1",
     "web-animations-js": "^2.3.2",
+    "xmldom": "^0.6.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
