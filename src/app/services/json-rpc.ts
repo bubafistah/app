@@ -1,10 +1,11 @@
+import axios from 'axios';
+
 export const rpcBody = (method) => (params) => ({
 	jsonrpc: '2.0',
 	id: '0',
 	method: method,
 	params: params
 });
-const axios = require('axios').default;
 export const request =
 	(url) =>
 	 (method, params = {}) =>

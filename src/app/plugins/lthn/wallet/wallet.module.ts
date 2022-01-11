@@ -18,7 +18,6 @@ import {MatInputModule} from '@angular/material/input';
 import {ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
 import {OpenComponent} from '@plugin/lthn/wallet/components/open.component';
-import {ModalModule} from '@service/ui/modal/modal.module';
 import {TransactionsComponent} from '@plugin/lthn/wallet/components/transactions.component';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {MatSelectModule} from '@angular/material/select';
@@ -66,7 +65,6 @@ const routes: Routes = [
 		MatTooltipModule,
 		MatInputModule,
 		TranslateModule,
-		ModalModule,
 		NgxDatatableModule,
 		MatSelectModule,
 		MatTabsModule,

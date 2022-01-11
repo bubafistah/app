@@ -15,8 +15,7 @@ export class AppService {
 
 	constructor() {
 
-			this.openpgp = require('openpgp');
-			this.crypto = require('crypto-js');
+
 
 	}
 

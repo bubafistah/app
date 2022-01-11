@@ -19,10 +19,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AuthModule} from '@module/auth/auth.module';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {ConsoleModule} from '@plugin/console/console.module';
 import {PluginsModule} from '@plugin/plugins.module';
-import {NotifierModule} from 'angular-notifier';
-import {BlockUIModule} from 'ng-block-ui';
 import {NgxUIModule} from '@swimlane/ngx-ui';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -58,12 +55,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		MatTooltipModule,
 		FlexModule,
 		AuthModule,
-		ConsoleModule,
-		PluginsModule,
-		NotifierModule.withConfig({
-			// Custom options in here
-		}),
-		BlockUIModule.forRoot(),
+		PluginsModule
 
 	],
 	providers: [],

@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Client} from '@hiveio/dhive';
 import {Router} from '@angular/router';
 import {FileSystemService} from '@service/filesystem/file-system.service';
 import {BlockchainService} from '@plugin/lthn/chain/blockchain.service';
@@ -99,17 +98,17 @@ export class RootComponent implements OnInit, OnDestroy {
 	}
 
 	renderWebView() {
-		const client = new Client([
-			'https://api.hive.blog',
-			'https://api.hivekings.com',
-			'https://anyx.io',
-			'https://api.openhive.network'
-		]);
-		const that = this;
-		client.database
-			.getDiscussions('trending', {tag: 'dvpn', limit: 5})
-			.then(function (discussions) {
-				that.posts = discussions;
-			});
+//		const client = new Client([
+//			'https://api.hive.blog',
+//			'https://api.hivekings.com',
+//			'https://anyx.io',
+//			'https://api.openhive.network'
+//		]);
+//		const that = this;
+//		client.database
+//			.getDiscussions('trending', {tag: 'dvpn', limit: 5})
+//			.then(function (discussions) {
+//				that.posts = discussions;
+//			});
 	}
 }

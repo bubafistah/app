@@ -7,7 +7,6 @@ import {TranslateService} from '@ngx-translate/core';
 import {select, Store} from '@ngrx/store';
 import {changeLanguage, selectLanguage, selectMenuVisibility, toggleHideNavigation} from '@module/settings/data';
 import {Subscription} from 'rxjs';
-import {BlockUI, NgBlockUI} from 'ng-block-ui';
 import {FileSystemService} from '@service/filesystem/file-system.service';
 import {BlockchainService} from '@plugin/lthn/chain/blockchain.service';
 import {WalletService} from '@plugin/lthn/wallet/wallet.service';
@@ -23,7 +22,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 	public menu: boolean;
 	public heading = '';
 
-	@BlockUI() blockUI: NgBlockUI;
 	@ViewChild('sidenav') public sidenav: MatSidenav;
 	public currentFlag: any;
 	public currentLanguage$: Subscription;
@@ -106,9 +104,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 	 */
 	ngOnInit(): void {
 
-		this.translate.get('words.states.loading').subscribe((res: string) => {
-			this.blockUI.start(res);
-		});
+//		this.translate.get('words.states.loading').subscribe((res: string) => {
+//			//this.blockUI.start(res);
+//		});
 
 		// setup language watcher
 		this.currentLanguage$ = this.store.pipe(select(selectLanguage)).subscribe((lang) => {
@@ -197,7 +195,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 		this.fs.listFiles('/cli').then((dat: any) => {
 			if(dat.length > 2){
 				this.chain.startDaemon().then(() => {
-					this.blockUI.stop();
+					//this.blockUI.stop();
 					this.wallet.startWallet().then(r => r);
 				})
 			}
