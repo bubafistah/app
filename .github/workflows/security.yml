@@ -27,7 +27,7 @@ jobs:
       - name: run auditjs
         run: npx --loglevel=error auditjs@beta ossi || true
       - name: Sensitive File Check
-        run: npm run ban -- --all
+        run: npx ban-sensitive-files -- --all
 
   semgrep:
     name: SemGrep Scan
