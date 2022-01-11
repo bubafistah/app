@@ -14,7 +14,7 @@ import {ReactiveComponentModule} from '@ngrx/component';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {MatIconModule} from '@angular/material/icon';
 import {PipesModule} from '@pipe/pipes.module';
-import {CardModule} from '@swimlane/ngx-ui';
+import {ButtonModule, CardModule, ProgressSpinnerModule, SectionModule} from '@swimlane/ngx-ui';
 
 @NgModule({
 	declarations: [RootComponent],
@@ -35,7 +35,10 @@ import {CardModule} from '@swimlane/ngx-ui';
 		ReactiveComponentModule,
 		PipesModule,
 		NgxDatatableModule,
-		MatIconModule
+		MatIconModule,
+		SectionModule,
+		ButtonModule,
+		ProgressSpinnerModule
 	]
 })
 export class RootModule {

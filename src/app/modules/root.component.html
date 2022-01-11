@@ -1,22 +1,18 @@
-<ng-container *ngIf="!loaded">
-    <ng-container *ngIf="!hasCLI">
-        <ngx-card>
-            <ngx-card-title *ngIf="!downloadingCLI">{{ 'words.states.not_installed' | translate }}</ngx-card-title>
-            <ngx-card-title *ngIf="downloadingCLI">{{ 'words.states.installing' | translate }}</ngx-card-title>
-            <ngx-card-section>
-                <p *ngIf="!downloadingCLI">{{ 'words.states.not_installed_desc' | translate }}</p>
-                <p *ngIf="downloadingCLI">{{ 'words.states.installing_desc' | translate }}</p>
-                <button *ngIf="!downloadingCLI" (click)="downloadCLI()" color="accent"
-                        mat-button>{{ 'plugin.lthn.chain.words.install-blockchain' | translate }}</button>
-                <mat-progress-spinner *ngIf="downloadingCLI" color="accent" mode="indeterminate"></mat-progress-spinner>
+<ngx-section
+        *ngIf="!hasCLI"
+        class="shadow"
+        [sectionTitle]="'words.states.not_installed' | translate"
+        [sectionCollapsible]="false"
+>
+    <p *ngIf="!downloadingCLI">{{ 'words.states.not_installed_desc' | translate }}</p>
+    <p *ngIf="downloadingCLI">{{ 'words.states.installing_desc' | translate }}</p>
+    <ngx-button *ngIf="!downloadingCLI" (click)="downloadCLI()">{{ 'plugin.lthn.chain.words.install-blockchain' | translate }}</ngx-button>
+    <ngx-progress-spinner
+            *ngIf="downloadingCLI"
+            appearance="icon"
+    ></ngx-progress-spinner>
+</ngx-section>
 
-
-            </ngx-card-section>
-        </ngx-card>
-
-    </ng-container>
-
-</ng-container>
 
 <div class="ngx-flex--wrap-fluid">
     <ngx-card class="box" [orientation]="'vertical'">
@@ -82,7 +78,7 @@
                     <div [innerHTML]="info.top_block_hash | hashLink | keepHtml"></div>
                 </div>
             </div>
-            <div  *ngIf="!info.height" fxLayout="column, wrap" fxLayoutGap="18px">
+            <div *ngIf="!info.height" fxLayout="column, wrap" fxLayoutGap="18px">
                 <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
                     <h5>{{'plugin.lthn.chain.words.height' | translate }}</h5>
                     <ngx-card-placeholder></ngx-card-placeholder>
@@ -207,9 +203,9 @@
 
     </ngx-card>
 
-    <ngx-card class="box" [orientation]="'vertical'" >
+    <ngx-card class="box" [orientation]="'vertical'">
         <ngx-card-title>{{ 'plugin.lthn.chain.table.title.recent-blocks' | translate }}</ngx-card-title>
-        <ngx-card-subtitle>{{ 'plugin.lthn.chain.words.last_block_time' | translate }} {{ block_timestamp*1000 | date}}</ngx-card-subtitle>
+        <ngx-card-subtitle>{{ 'plugin.lthn.chain.words.last_block_time' | translate }} {{ block_timestamp * 1000 | date}}</ngx-card-subtitle>
         <ngx-card-section>
             <ngx-datatable
                     class="material"
@@ -221,8 +217,10 @@
                     [trackByProp]="'timestamp'"
                     [sorts]="[{ prop: 'timestamp', dir: 'desc' }]"
             >
-                <ngx-datatable-column prop="height" name="{{ 'plugin.lthn.chain.table.th.height' | translate }}"></ngx-datatable-column>
-                <ngx-datatable-column prop="difficulty" name="{{ 'plugin.lthn.chain.table.th.difficulty' | translate }}">
+                <ngx-datatable-column prop="height"
+                                      name="{{ 'plugin.lthn.chain.table.th.height' | translate }}"></ngx-datatable-column>
+                <ngx-datatable-column prop="difficulty"
+                                      name="{{ 'plugin.lthn.chain.table.th.difficulty' | translate }}">
                     <ng-template let-value="value" ngx-datatable-cell-template>
                         {{ value | hashrate:true}}
                     </ng-template>
@@ -232,7 +230,8 @@
                         <span [innerHTML]="value | hashLink:'txn' | keepHtml"></span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column prop="orphan_status" name="{{ 'plugin.lthn.chain.table.th.orphan_status' | translate }}">
+                <ngx-datatable-column prop="orphan_status"
+                                      name="{{ 'plugin.lthn.chain.table.th.orphan_status' | translate }}">
                     <ng-template let-value="value" ngx-datatable-cell-template>
                         <mat-icon style="color: green" *ngIf="!value">done</mat-icon>
                         <mat-icon style="color: red" *ngIf="value">close</mat-icon>
