@@ -67,6 +67,7 @@
     "@swimlane/ng2-file-upload": "^1.1.0",
     "@swimlane/ngx-datatable": "^20.0.0",
     "@swimlane/ngx-ui": "^36.1.0",
+    "@xmldom/xmldom": "^0.8.0",
     "ajv": "^6.12.6",
     "angular-notifier": "^9.1.0",
     "anti-trojan-source": "^1.4.0",
@@ -95,7 +96,6 @@
     "rxjs": "~7.4.0",
     "tslib": "^2.3.1",
     "web-animations-js": "^2.3.2",
-    "xmldom": "^0.6.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
