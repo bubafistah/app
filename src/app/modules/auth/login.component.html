@@ -1,20 +1,20 @@
-<div style="padding: 16px;">
-    <mat-card>
-        <mat-card-title>Login</mat-card-title>
-        <mat-card-content>
-            <div *ngIf="error.length > 0">{{error}}</div>
-            <mat-form-field appearance="standard">
-                <mat-label>Username</mat-label>
-                <input [formControl]="username" (keyup)="inputChanged()" matInput type="text">
-            </mat-form-field>
-            <mat-form-field appearance="standard">
-                <mat-label>Password</mat-label>
-                <input [formControl]="password" (keyup)="inputChanged()" matInput type="password">
-            </mat-form-field>
-
-            <button (click)="submit()" mat-button>Login</button>
+<ngx-section
+        [sectionTitle]="'login' | translate"
+        [sectionCollapsible]="false"
+>
 
 
-        </mat-card-content>
-    </mat-card>
-</div>
+    <div *ngIf="error.length > 0">{{error}}</div>
+    <mat-form-field appearance="standard">
+        <mat-label>Username</mat-label>
+        <input [formControl]="username" (keyup)="inputChanged()" matInput type="text">
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+        <mat-label>Password</mat-label>
+        <input [formControl]="password" (keyup)="inputChanged()" matInput type="password">
+    </mat-form-field>
+
+    <ngx-button (click)="submit()">Login</ngx-button>
+
+</ngx-section>
+

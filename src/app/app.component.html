@@ -32,7 +32,7 @@
                             class="nav-item"
                             ngx-tooltip
                             tooltipPlacement="right"
-                            [tooltipTitle]="item.name"
+                            [tooltipTitle]="item.name | translate"
                             routerLink="{{ item.route }}"
                             routerLinkActive="active"
                     >
@@ -87,7 +87,6 @@
                     </ul>
                 </li>
             </ul>
-            <lthn-app-status></lthn-app-status>
         </ngx-nav-menu>
     </div>
 

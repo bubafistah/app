@@ -6,3 +6,4 @@ node_modules
 /lthn
 /coverage
 out-tsc
+package-lock.json

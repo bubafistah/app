@@ -1,6 +1,6 @@
 {
-  "name": "lethean-app",
-  "version": "0.0.1",
+  "name": "lethean-workstation",
+  "version": "0.0.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -16,8 +16,8 @@
     "doc:serve": "npx @compodoc/compodoc -s",
     "ng:serve": "ng serve -c development -o ",
     "be:serve": "cd lthn && $HOME/.deno/bin/deno run --allow-net --allow-env --allow-run --allow-read --allow-write --unstable src/server.ts backend start",
-    "dev:ssr": "ng run lethean-app:serve-ssr",
-    "build:ssr": "ng build && ng run lethean-app:server",
+    "dev:ssr": "ng run lethean-workstation:serve-ssr",
+    "build:ssr": "ng build && ng run lethean-workstation:server",
     "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points"
   },
   "main": "src/app/main.ts",

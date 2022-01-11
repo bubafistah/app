@@ -5,6 +5,8 @@ import {MatCardModule} from '@angular/material/card';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import {ButtonModule, SectionModule} from '@swimlane/ngx-ui';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
 	declarations: [LoginComponent],
@@ -13,7 +15,10 @@ import {MatButtonModule} from '@angular/material/button';
 		MatCardModule,
 		ReactiveFormsModule,
 		MatInputModule,
-		MatButtonModule
+		MatButtonModule,
+		SectionModule,
+		TranslateModule,
+		ButtonModule
 	]
 })
 export class AuthModule {
