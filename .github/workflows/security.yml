@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: 16.x
       - run: npm install --legacy-peer-deps
-      - run: npm audit fix --legacy-peer-deps
+      - run: npm audit --legacy-peer-deps
       - run: npm run build
       - run: npm install anti-trojan-source
       - name: Unicode bidi attack check
