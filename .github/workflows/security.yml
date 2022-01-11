@@ -29,10 +29,6 @@ jobs:
       - name: Sensitive File Check
         run: npm run ban -- --all
 
-
-
-
-
   semgrep:
     name: SemGrep Scan
     runs-on: ubuntu-latest
