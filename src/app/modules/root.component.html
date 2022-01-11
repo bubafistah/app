@@ -14,10 +14,12 @@
 </ngx-section>
 
 
-<div class="ngx-flex--wrap-fluid">
-    <ngx-card class="box" [orientation]="'vertical'">
+<ngx-section
+        *ngIf="hasCLI"
+        class="shadow"
+        [sectionTitle]="'plugin.lthn.chain.table.title.chain-status' | translate"
+        [sectionCollapsible]="false">
 
-        <ngx-card-title>{{ 'plugin.lthn.chain.table.title.chain-status' | translate }}</ngx-card-title>
         <ngx-card-section *ngIf="chainInfo | ngrxPush as info">
             <div *ngIf="info.height" fxLayout="column, wrap" fxLayoutGap="18px">
                 <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
@@ -138,77 +140,16 @@
                 </div>
             </div>
         </ngx-card-section>
-        <ngx-card-section *ngIf="!chainInfo">
-            <div fxLayout="column, wrap" fxLayoutGap="18px">
-                <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
-                    <h5>{{'plugin.lthn.chain.words.height' | translate }}</h5>
-                    <ngx-card-placeholder></ngx-card-placeholder>
-                </div>
-                <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
-                    <h5>{{'plugin.lthn.chain.words.tx_pool' | translate }}</h5>
-                    <ngx-card-placeholder></ngx-card-placeholder>
-                </div>
-                <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
-                    <h5>{{'plugin.lthn.chain.words.alt_blocks' | translate }}</h5>
-                    <ngx-card-placeholder></ngx-card-placeholder>
-                </div>
-                <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
-                    <h5>{{'plugin.lthn.chain.words.difficulty' | translate }}</h5>
-                    <ngx-card-placeholder></ngx-card-placeholder>
-                </div>
-                <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
-                    <h5>{{'plugin.lthn.chain.words.grey_peerlist_size' | translate }}</h5>
-                    <ngx-card-placeholder></ngx-card-placeholder>
-                </div>
-                <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
-                    <h5>{{'plugin.lthn.chain.words.incoming_connections_count' | translate }}</h5>
-                    <ngx-card-placeholder></ngx-card-placeholder>
-                </div>
-                <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
-                    <h5>{{'plugin.lthn.chain.words.outgoing_connections_count' | translate }}</h5>
-                    <ngx-card-placeholder></ngx-card-placeholder>
-                </div>
-                <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
-                    <h5>{{'plugin.lthn.chain.words.status' | translate }}</h5>
-                    <ngx-card-placeholder></ngx-card-placeholder>
-                </div>
-                <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
-                    <h5>{{'plugin.lthn.chain.words.target' | translate }}</h5>
-                    <ngx-card-placeholder></ngx-card-placeholder>
-                </div>
-                <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
-                    <h5>{{'plugin.lthn.chain.words.target_height' | translate }}:</h5>
-                    <ngx-card-placeholder></ngx-card-placeholder>
-                </div>
-                <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
-                    <h5>{{'plugin.lthn.chain.words.testnet' | translate }}</h5>
-                    <ngx-card-placeholder></ngx-card-placeholder>
-                </div>
 
-                <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
-                    <h5>{{'plugin.lthn.chain.words.tx_count' | translate }}</h5>
-                    <ngx-card-placeholder></ngx-card-placeholder>
-                </div>
-                <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between">
-                    <h5>{{'plugin.lthn.chain.words.white_peerlist_size' | translate }}</h5>
-                    <ngx-card-placeholder></ngx-card-placeholder>
-                </div>
-                <div fxFlex="40" fxLayout="row" fxLayoutAlign="space-between">
-                    <h5>{{'plugin.lthn.chain.words.top_block_hash' | translate }}</h5>
-                    <ngx-card-placeholder></ngx-card-placeholder>
-                </div>
-            </div>
-        </ngx-card-section>
+    </ngx-section>
 
-
-    </ngx-card>
-
-    <ngx-card class="box" [orientation]="'vertical'">
-        <ngx-card-title>{{ 'plugin.lthn.chain.table.title.recent-blocks' | translate }}</ngx-card-title>
-        <ngx-card-subtitle>{{ 'plugin.lthn.chain.words.last_block_time' | translate }} {{ block_timestamp * 1000 | date}}</ngx-card-subtitle>
-        <ngx-card-section>
+<ngx-section
+        *ngIf="hasCLI"
+        class="shadow"
+        [sectionTitle]="'plugin.lthn.chain.table.title.recent-blocks' | translate"
+        [sectionCollapsible]="false">
             <ngx-datatable
-                    class="material"
+                    class="shadow"
                     [rows]="(blocks | ngrxPush)?.headers"
                     [loadingIndicator]="true"
                     [columnMode]="ColumnMode.force"
@@ -248,9 +189,7 @@
                     </ng-template>
                 </ngx-datatable-column>
             </ngx-datatable>
-        </ngx-card-section>
-    </ngx-card>
-</div>
+    </ngx-section>
 
 
 
