@@ -22,7 +22,7 @@ jobs:
       - run: npm run build
       - run: npm install anti-trojan-source
       - name: Unicode bidi attack check
-        run: npx anti-trojan-source --files='dist/**/*.js'
+        run: npx anti-trojan-source --files='/runner/work/gui-interface/gui-interface/dist/**/*.js'
 
 
 
