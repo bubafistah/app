@@ -1,9 +1,20 @@
-# Lethean Desktop Interface
-[![Doc Coverage](https://letheanvpn.github.io/gui-interface/images/coverage-badge-documentation.svg "Doc Coverage")](https://letheanvpn.github.io/app)
-[![Build Status](https://github.com/letheanVPN/app/actions/workflows/angular-build.yml/badge.svg)](https://github.com/letheanVPN/app/actions/workflows/angular-build.yml)
+# PWA Desktop Interface
+* [How Wails Interacts with WebView2](https://wails.io/docs/howdoesitwork)
+* [GoLang to Browser Integration](https://wails.io/docs/reference/runtime/intro)
+* [CLI Reference](https://wails.io/docs/reference/cli)
+* [CLI Remote Templates](https://wails.io/docs/reference/cli#remote-templates)
+* [CLI: Install Check](https://wails.io/docs/reference/cli#doctor)
+* [CLI: Build](https://wails.io/docs/reference/cli#build)
+* [CLI: Dev](https://wails.io/docs/reference/cli#dev)
+* [CLI: Update](https://wails.io/docs/reference/cli#update)
+* [Window Options](https://wails.io/docs/reference/options)
+* [Menu Options](https://wails.io/docs/reference/menus)
+* [Project Config](https://wails.io/docs/reference/project-config)
 
-This is the application that is run within the lethean desktop, the API refrence for the HTTPS endpoints is here:
-
+## About Wails
+* [About Wails.io](https://wails.io/docs/about)
+* [Wails GitHub](https://github.com/wailsapp/wails)
+* [Sponsor Wails](https://github.com/sponsors/leaanthony)
 ## Development Build
 
 ```shell
