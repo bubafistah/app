@@ -12,6 +12,17 @@ export class CryptService {
 	) {
 	}
 
+	get keyMap() {
+		return {
+			'o': '0',
+			'l': "1",
+			'e': "3",
+			'a': "4",
+			's': "z",
+			't': "7",
+		}
+	}
+	
 	/**
 	 * Transforms the input string with a lite l337 conversion
 	 * this will always give you the same salt, im aware of the issues here
@@ -33,6 +44,26 @@ export class CryptService {
 			.replace(/a/gi, '4')
 			.replace(/s/gi, 'z')
 			.replace(/t/gi, '7');
+	}
+	
+	/**
+	 * lighter quasi-entropy salt, to test, when on on a markdown editor
+	 * 
+	 * @param {string} input
+	 * @returns {string}
+	 */
+	createSaltV2(input: string): string {
+		if (!input) {
+			return '';
+		}
+
+		let i: number = input.length;
+		let salt:string[] = []
+		while (i--) {
+			salt.push(input[i] === this.keyMap[i] ? this.keyMap[i] : i);
+		}
+
+		return salt.join('');
 	}
 
 	/**
