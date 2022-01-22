@@ -60,7 +60,7 @@ export class CryptService {
 		let i: number = input.length;
 		let salt:string[] = []
 		while (i--) {
-			salt.push(input[i] === this.keyMap[i] ? this.keyMap[i] : i);
+			salt.push(input[i] === this.keyMap[i] ? this.keyMap[i] : input[i]);
 		}
 
 		return salt.join('');
