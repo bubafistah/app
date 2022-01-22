@@ -3,8 +3,14 @@ name: Gui Build
 on:
   push:
     branches: [ main ]
+    paths:
+      - Dockerfile
+      - .github/workflows/angular-build.yml
   pull_request:
     branches: [ main ]
+    paths:
+      - Dockerfile
+      - .github/workflows/angular-build.yml
 jobs:
   build:
     runs-on: ubuntu-latest
